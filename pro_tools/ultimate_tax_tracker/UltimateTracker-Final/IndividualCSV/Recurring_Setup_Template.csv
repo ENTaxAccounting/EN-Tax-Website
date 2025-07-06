@@ -1,0 +1,16 @@
+Recurring ID,Description,Vendor/Payee,Category,Amount,Business %,Day of Month,Active Status,Target Sheet,Start Month,End Month,Notes
+1,Office 365 Business,Microsoft,Equipment & Software, $22.00 ,100%,25,Active,Business Expenses,1,12,Monthly subscription automatically renewed
+2,QuickBooks Subscription,QuickBooks,Equipment & Software, $25.00 ,100%,5,Active,Business Expenses,1,12,Accounting software monthly billing
+3,Business Phone Bill,AT&T,Utilities (Business Portion), $125.00 ,80%,1,Active,Business Expenses,1,12,Business line portion of family plan
+4,Office Space Rent,WeWork,Rent (Business Portion), $450.00 ,100%,1,Active,Business Expenses,1,12,Shared office space monthly rent
+5,Business Insurance,State Farm,Insurance (Business Portion), $156.00 ,100%,15,Active,Business Expenses,1,12,General liability insurance quarterly
+6,Zoom Pro Subscription,Zoom,Equipment & Software, $14.99 ,100%,18,Active,Business Expenses,1,12,Video conferencing monthly subscription
+7,Adobe Creative Suite,Adobe,Equipment & Software, $52.99 ,100%,22,Active,Business Expenses,1,12,Design software monthly subscription
+8,Website Hosting,GoDaddy,Marketing & Advertising, $12.99 ,100%,12,Active,Business Expenses,1,12,Business website hosting
+9,Professional Association,CPA Society,Conference & Training, $275.00 ,100%,1,Active,Business Expenses,1,1,Annual membership dues
+10,Trade Publication,Tax Advisor Magazine,Subscriptions & Memberships, $39.99 ,100%,15,Active,Business Expenses,1,12,Monthly industry magazine
+11,Business Bank Fees,Chase Business,Bank Fees, $12.00 ,100%,30,Active,Business Expenses,1,12,Monthly account maintenance fee
+12,Parking Pass,Downtown Garage,Other Business Expenses, $85.00 ,100%,1,Active,Business Expenses,1,12,Monthly parking for client meetings
+13,Cloud Storage,Dropbox Business,Equipment & Software, $15.00 ,100%,20,Active,Investment & Financial,1,12,Document backup and sharing
+14,Security Monitoring,ADT Business,Professional Services, $45.00 ,100%,10,Active,Home Office,1,12,Office security system monthly
+15,Internet Service,Comcast Business,Utilities (Business Portion), $89.99 ,75%,28,Active,Charitable Contributions,1,12,High-speed internet for office

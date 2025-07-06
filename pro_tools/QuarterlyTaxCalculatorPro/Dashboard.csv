@@ -1,0 +1,28 @@
+QUARTERLY TAX CALCULATOR PRO 2024,,,,,,
+© 2024 E&N Tax & Accounting,,,,,,
+,,,,,,
+KEY METRICS,,,,,,
+Total Annual Tax Due:,0,,,,,
+Safe Harbor Amount:,0,,,,,
+Payments Made YTD:,All Paid,,,,,
+Next Payment Due:,0,,,,,
+Next Due Date:,0,,,,,
+,,,,,,
+PAYMENT STATUS,,,,,,
+Quarter,Status,Due Date,Amount Due,Amount Paid,Balance,Days Until Due
+Q1 2024,PAID,1/15/24,0,0,0,1/0/00
+Q2 2024,PAID,6/17/24,0,0,0,#REF!
+Q3 2024,PAID,9/16/24,0,0,0,#REF!
+Q4 2024,PAID,1/15/25,0,0,0,#REF!
+,,,,,,
+ALERTS & NOTIFICATIONS,,,,,,
+Safe Harbor Status:,✓ PROTECTED - Safe harbor requirements met,,,,,
+Payment Alert:,#VALUE!,,,,,
+Penalty Risk:,No penalties at this time,,,,,
+,,,,,,
+YEAR PROGRESS,,,,,,
+Year Progress:,0,,,,,
+Payments Made:,0%,,,,,
+,,,,,,
+QUICK ACTIONS,,,,,,
+[Run Setup Wizard],[Refresh Calculations],[Export Vouchers],[Generate Report],[View Help],,

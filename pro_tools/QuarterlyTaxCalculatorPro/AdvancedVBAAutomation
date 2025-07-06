@@ -1,0 +1,684 @@
+' ============================================================================
+' QUARTERLY TAX CALCULATOR PRO - ADVANCED VBA AUTOMATION
+' E&N Tax & Accounting - Professional Tax Software
+' Version: 1.0 - 2024
+' ============================================================================
+
+Option Explicit
+
+' Global Variables
+Public Const APP_NAME As String = "Quarterly Tax Calculator Pro"
+Public Const APP_VERSION As String = "1.0"
+Public CurrentQuarter As Integer
+Public TaxYear As Integer
+
+' ============================================================================
+' MODULE 1: MAIN AUTOMATION & STARTUP
+' ============================================================================
+
+Sub Auto_Open()
+    ' Runs automatically when workbook opens
+    Application.ScreenUpdating = False
+    Application.EnableEvents = False
+    
+    ' Setup the workbook
+    Call InitializeWorkbook
+    Call SetupDashboard
+    Call ValidateUserData
+    Call UpdateDashboard
+    
+    ' Show welcome message
+    Call ShowWelcomeMessage
+    
+    Application.ScreenUpdating = True
+    Application.EnableEvents = True
+End Sub
+
+Sub InitializeWorkbook()
+    ' Initialize workbook settings and protection
+    Dim ws As Worksheet
+    
+    ' Set calculation mode to automatic
+    Application.Calculation = xlCalculationAutomatic
+    
+    ' Protect all sheets except input areas
+    For Each ws In ThisWorkbook.Worksheets
+        If ws.Name <> "Input Data" Then
+            ws.Protect Password:="ENTax2024", _
+                      DrawingObjects:=False, _
+                      Contents:=True, _
+                      Scenarios:=True, _
+                      UserInterfaceOnly:=True
+        End If
+    Next ws
+    
+    ' Enable VBA on protected sheets
+    For Each ws In ThisWorkbook.Worksheets
+        ws.EnableSelection = xlUnlockedCells
+    Next ws
+    
+    ' Set current quarter and tax year
+    Call DetermineCurrentQuarter
+End Sub
+
+Sub DetermineCurrentQuarter()
+    ' Automatically determine current quarter based on date
+    Dim CurrentMonth As Integer
+    CurrentMonth = Month(Date)
+    TaxYear = Year(Date)
+    
+    Select Case CurrentMonth
+        Case 1 To 3: CurrentQuarter = 1
+        Case 4 To 6: CurrentQuarter = 2
+        Case 7 To 9: CurrentQuarter = 3
+        Case 10 To 12: CurrentQuarter = 4
+    End Select
+    
+    ' Adjust for tax year if in January-March
+    If CurrentMonth <= 3 Then TaxYear = TaxYear - 1
+End Sub
+
+' ============================================================================
+' MODULE 2: USER INTERFACE & INPUT FORMS
+' ============================================================================
+
+Sub ShowDataEntryForm()
+    ' Create professional data entry form
+    Dim UserForm As Object
+    Set UserForm = CreateObject("Forms.Form.1")
+    
+    With UserForm
+        .Caption = "Quarterly Tax Calculator Pro - Data Entry"
+        .Width = 400
+        .Height = 500
+        .StartUpPosition = 1 ' Center screen
+    End With
+    
+    ' Add form controls programmatically
+    Call AddFormControls(UserForm)
+    
+    ' Show the form
+    UserForm.Show
+End Sub
+
+Sub QuickSetupWizard()
+    ' Guided setup wizard for new users
+    Dim Response As VbMsgBoxResult
+    Dim FilingStatus As String
+    Dim State As String
+    Dim PriorYearTax As Double
+    
+    ' Welcome to wizard
+    MsgBox "Welcome to the Quarterly Tax Calculator Pro!" & vbCrLf & vbCrLf & _
+           "This wizard will help you set up your tax calculations in 3 easy steps.", _
+           vbInformation, APP_NAME
+    
+    ' Step 1: Filing Status
+    FilingStatus = InputBox("Step 1: What is your filing status?" & vbCrLf & vbCrLf & _
+                           "Enter: Single, MFJ, MFS, or HOH", _
+                           APP_NAME, "Single")
+    
+    If FilingStatus = "" Then Exit Sub
+    Worksheets("Input Data").Range("B1").Value = FilingStatus
+    
+    ' Step 2: State
+    State = InputBox("Step 2: What state do you live in?" & vbCrLf & vbCrLf & _
+                    "Enter the 2-letter state code (e.g., CA, NY, TX)", _
+                    APP_NAME, "CA")
+    
+    If State = "" Then Exit Sub
+    Worksheets("Input Data").Range("B2").Value = UCase(State)
+    
+    ' Step 3: Prior Year Tax
+    PriorYearTax = Val(InputBox("Step 3: What was your total tax last year?" & vbCrLf & vbCrLf & _
+                               "Enter the amount from your tax return" & vbCrLf & _
+                               "(This is used for safe harbor calculations)", _
+                               APP_NAME, "5000"))
+    
+    If PriorYearTax > 0 Then
+        Worksheets("Input Data").Range("B18").Value = PriorYearTax
+    End If
+    
+    ' Complete setup
+    Call RefreshAllCalculations
+    Call UpdateDashboard
+    
+    MsgBox "Setup complete!" & vbCrLf & vbCrLf & _
+           "You can now enter your income projections on the Input Data sheet.", _
+           vbInformation, APP_NAME
+End Sub
+
+' ============================================================================
+' MODULE 3: CALCULATION ENGINE
+' ============================================================================
+
+Sub RefreshAllCalculations()
+    ' Master calculation refresh
+    Application.ScreenUpdating = False
+    Application.Calculation = xlCalculationManual
+    
+    ' Calculate in proper order
+    Call CalculateFederalTax
+    Call CalculateStateTax
+    Call CalculateSelfEmploymentTax
+    Call CalculateSafeHarbor
+    Call CalculateQuarterlyPayments
+    Call CalculatePenalties
+    Call UpdatePaymentStatus
+    
+    ' Force recalculation
+    Application.Calculate
+    Application.Calculation = xlCalculationAutomatic
+    Application.ScreenUpdating = True
+    
+    ' Update dashboard
+    Call UpdateDashboard
+End Sub
+
+Function CalculateFederalTax(TaxableIncome As Double, FilingStatus As String) As Double
+    ' Calculate federal income tax using 2024 tax brackets
+    Dim Tax As Double
+    Tax = 0
+    
+    Select Case FilingStatus
+        Case "Single"
+            If TaxableIncome <= 11000 Then
+                Tax = TaxableIncome * 0.1
+            ElseIf TaxableIncome <= 44725 Then
+                Tax = 1100 + (TaxableIncome - 11000) * 0.12
+            ElseIf TaxableIncome <= 95375 Then
+                Tax = 5147 + (TaxableIncome - 44725) * 0.22
+            ElseIf TaxableIncome <= 182050 Then
+                Tax = 16290 + (TaxableIncome - 95375) * 0.24
+            ElseIf TaxableIncome <= 231250 Then
+                Tax = 37104 + (TaxableIncome - 182050) * 0.32
+            ElseIf TaxableIncome <= 578125 Then
+                Tax = 52832 + (TaxableIncome - 231250) * 0.35
+            Else
+                Tax = 174238.25 + (TaxableIncome - 578125) * 0.37
+            End If
+            
+        Case "MFJ" ' Married Filing Jointly
+            If TaxableIncome <= 22000 Then
+                Tax = TaxableIncome * 0.1
+            ElseIf TaxableIncome <= 89450 Then
+                Tax = 2200 + (TaxableIncome - 22000) * 0.12
+            ElseIf TaxableIncome <= 190750 Then
+                Tax = 10294 + (TaxableIncome - 89450) * 0.22
+            ElseIf TaxableIncome <= 364200 Then
+                Tax = 32580 + (TaxableIncome - 190750) * 0.24
+            ElseIf TaxableIncome <= 462500 Then
+                Tax = 74208 + (TaxableIncome - 364200) * 0.32
+            ElseIf TaxableIncome <= 693750 Then
+                Tax = 105664 + (TaxableIncome - 462500) * 0.35
+            Else
+                Tax = 186601.25 + (TaxableIncome - 693750) * 0.37
+            End If
+            
+        ' Add other filing statuses as needed
+    End Select
+    
+    CalculateFederalTax = Tax
+End Function
+
+Function CalculateStateTax(TaxableIncome As Double, State As String) As Double
+    ' Calculate state income tax
+    Dim StateTax As Double
+    Dim StateRate As Double
+    Dim StateDeduction As Double
+    
+    ' Look up state information
+    StateRate = Application.WorksheetFunction.VLookup(State, _
+                Worksheets("State Calculations").Range("A5:E60"), 2, False)
+    StateDeduction = Application.WorksheetFunction.VLookup(State, _
+                    Worksheets("State Calculations").Range("A5:E60"), 3, False)
+    
+    ' Calculate state tax
+    If StateRate > 0 Then
+        StateTax = Application.WorksheetFunction.Max(0, (TaxableIncome - StateDeduction) * StateRate)
+    Else
+        StateTax = 0 ' No state income tax
+    End If
+    
+    CalculateStateTax = StateTax
+End Function
+
+Function CalculateSafeHarbor() As Double
+    ' Calculate safe harbor amount
+    Dim PriorYearTax As Double
+    Dim PriorYearAGI As Double
+    Dim CurrentYearTax As Double
+    Dim SafeHarbor1 As Double ' 100% of prior year
+    Dim SafeHarbor2 As Double ' 110% of prior year (if AGI > $150k)
+    Dim SafeHarbor3 As Double ' 90% of current year
+    
+    ' Get data
+    PriorYearTax = Worksheets("Input Data").Range("B18").Value
+    PriorYearAGI = Worksheets("Input Data").Range("B17").Value
+    CurrentYearTax = Worksheets("Calculations").Range("A15").Value
+    
+    ' Calculate safe harbor options
+    SafeHarbor1 = PriorYearTax
+    If PriorYearAGI > 150000 Then
+        SafeHarbor2 = PriorYearTax * 1.1
+    Else
+        SafeHarbor2 = PriorYearTax
+    End If
+    SafeHarbor3 = CurrentYearTax * 0.9
+    
+    ' Return the minimum (safest option)
+    CalculateSafeHarbor = Application.WorksheetFunction.Min(SafeHarbor1, SafeHarbor2, SafeHarbor3)
+End Function
+
+' ============================================================================
+' MODULE 4: DASHBOARD & VISUAL UPDATES
+' ============================================================================
+
+Sub UpdateDashboard()
+    ' Update main dashboard with current information
+    Dim wsMain As Worksheet
+    Set wsMain = Worksheets("Dashboard")
+    
+    Application.ScreenUpdating = False
+    
+    ' Update payment status indicators
+    Call UpdatePaymentStatusIndicators
+    
+    ' Update progress bars
+    Call UpdateProgressBars
+    
+    ' Update alerts and warnings
+    Call UpdateAlerts
+    
+    ' Update next payment info
+    Call UpdateNextPaymentInfo
+    
+    ' Format dashboard for visual appeal
+    Call FormatDashboard
+    
+    Application.ScreenUpdating = True
+End Sub
+
+Sub UpdatePaymentStatusIndicators()
+    ' Create visual payment status indicators
+    Dim wsMain As Worksheet
+    Dim wsTracker As Worksheet
+    Set wsMain = Worksheets("Dashboard")
+    Set wsTracker = Worksheets("Payment Tracker")
+    
+    Dim i As Integer
+    Dim Status As String
+    Dim StatusCell As Range
+    
+    ' Update each quarter's status
+    For i = 1 To 4
+        Status = wsTracker.Cells(2 + i, 8).Value ' Status column
+        Set StatusCell = wsMain.Cells(10 + i, 2)
+        
+        StatusCell.Value = "Q" & i & ": " & Status
+        
+        ' Color code the status
+        Select Case Status
+            Case "PAID"
+                StatusCell.Interior.Color = RGB(144, 238, 144) ' Light green
+                StatusCell.Font.Color = RGB(0, 100, 0) ' Dark green
+            Case "DUE"
+                StatusCell.Interior.Color = RGB(255, 255, 224) ' Light yellow
+                StatusCell.Font.Color = RGB(184, 134, 11) ' Dark yellow
+            Case "OVERDUE"
+                StatusCell.Interior.Color = RGB(255, 182, 193) ' Light red
+                StatusCell.Font.Color = RGB(139, 0, 0) ' Dark red
+        End Select
+        
+        StatusCell.Font.Bold = True
+        StatusCell.HorizontalAlignment = xlCenter
+    Next i
+End Sub
+
+Sub UpdateProgressBars()
+    ' Create progress bars for year completion and payment status
+    Dim wsMain As Worksheet
+    Set wsMain = Worksheets("Dashboard")
+    
+    ' Calculate year progress
+    Dim YearProgress As Double
+    YearProgress = (Month(Date) - 1) / 12
+    
+    ' Calculate payment progress
+    Dim PaymentProgress As Double
+    Dim TotalDue As Double
+    Dim TotalPaid As Double
+    
+    TotalDue = Worksheets("Payment Tracker").Range("A10").Value
+    TotalPaid = Worksheets("Payment Tracker").Range("A11").Value
+    
+    If TotalDue > 0 Then
+        PaymentProgress = TotalPaid / TotalDue
+    Else
+        PaymentProgress = 0
+    End If
+    
+    ' Update progress indicators
+    wsMain.Range("E5").Value = "Year Progress: " & Format(YearProgress, "0%")
+    wsMain.Range("E6").Value = "Payments Made: " & Format(PaymentProgress, "0%")
+End Sub
+
+Sub UpdateAlerts()
+    ' Update alert messages on dashboard
+    Dim wsMain As Worksheet
+    Dim AlertCell As Range
+    Set wsMain = Worksheets("Dashboard")
+    Set AlertCell = wsMain.Range("A20")
+    
+    ' Clear previous alerts
+    AlertCell.Clear
+    AlertCell.Offset(1, 0).Clear
+    AlertCell.Offset(2, 0).Clear
+    
+    ' Check for various alert conditions
+    Call CheckSafeHarborStatus(AlertCell)
+    Call CheckOverduePayments(AlertCell.Offset(1, 0))
+    Call CheckUpcomingDueDates(AlertCell.Offset(2, 0))
+End Sub
+
+Sub CheckSafeHarborStatus(AlertCell As Range)
+    ' Check if safe harbor requirements are met
+    Dim SafeHarborMet As Boolean
+    Dim SafeHarborAmount As Double
+    Dim PaymentsMade As Double
+    
+    SafeHarborAmount = Worksheets("Calculations").Range("A21").Value
+    PaymentsMade = Worksheets("Payment Tracker").Range("A11").Value
+    
+    SafeHarborMet = (PaymentsMade >= SafeHarborAmount)
+    
+    If SafeHarborMet Then
+        AlertCell.Value = "✓ Safe Harbor: PROTECTED from penalties"
+        AlertCell.Font.Color = RGB(0, 128, 0) ' Green
+    Else
+        AlertCell.Value = "⚠ Safe Harbor: NOT MET - Risk of penalties"
+        AlertCell.Font.Color = RGB(255, 0, 0) ' Red
+    End If
+    
+    AlertCell.Font.Bold = True
+End Sub
+
+' ============================================================================
+' MODULE 5: EXPORT & PRINTING
+' ============================================================================
+
+Sub ExportPaymentVouchers()
+    ' Export Form 1040ES vouchers to PDF
+    Dim wsVouchers As Worksheet
+    Set wsVouchers = Worksheets("Vouchers")
+    
+    ' Setup print area and formatting
+    Call FormatVouchersForPrint
+    
+    ' Export each quarter's voucher
+    Dim Quarter As Integer
+    For Quarter = 1 To 4
+        Call ExportQuarterVoucher(Quarter)
+    Next Quarter
+    
+    MsgBox "Payment vouchers exported successfully!", vbInformation, APP_NAME
+End Sub
+
+Sub ExportQuarterVoucher(Quarter As Integer)
+    ' Export individual quarter voucher
+    Dim wsVouchers As Worksheet
+    Set wsVouchers = Worksheets("Vouchers")
+    
+    ' Set print area for specific quarter
+    Dim PrintRange As String
+    PrintRange = "A" & (1 + (Quarter - 1) * 10) & ":H" & (10 + (Quarter - 1) * 10)
+    
+    wsVouchers.PageSetup.PrintArea = PrintRange
+    
+    ' Export to PDF
+    Dim FileName As String
+    FileName = ThisWorkbook.Path & "\Q" & Quarter & "_2024_Voucher.pdf"
+    
+    wsVouchers.ExportAsFixedFormat Type:=xlTypePDF, _
+                                  FileName:=FileName, _
+                                  Quality:=xlQualityStandard, _
+                                  IncludeDocProps:=True, _
+                                  IgnorePrintAreas:=False
+End Sub
+
+Sub ExportTaxSummaryReport()
+    ' Create comprehensive tax summary report
+    Dim NewWorkbook As Workbook
+    Set NewWorkbook = Workbooks.Add
+    
+    Dim SummarySheet As Worksheet
+    Set SummarySheet = NewWorkbook.Worksheets(1)
+    SummarySheet.Name = "Tax Summary " & TaxYear
+    
+    ' Copy key information to summary
+    Call CreateSummaryReport(SummarySheet)
+    
+    ' Save the summary
+    Dim FileName As String
+    FileName = ThisWorkbook.Path & "\Tax_Summary_" & TaxYear & ".xlsx"
+    NewWorkbook.SaveAs FileName
+    
+    MsgBox "Tax summary report saved as: " & FileName, vbInformation, APP_NAME
+End Sub
+
+' ============================================================================
+' MODULE 6: DATA VALIDATION & ERROR CHECKING
+' ============================================================================
+
+Sub ValidateUserData()
+    ' Comprehensive data validation
+    Dim ErrorCount As Integer
+    ErrorCount = 0
+    
+    ' Validate required fields
+    ErrorCount = ErrorCount + ValidateRequiredFields()
+    
+    ' Validate numerical ranges
+    ErrorCount = ErrorCount + ValidateNumericalRanges()
+    
+    ' Validate consistency
+    ErrorCount = ErrorCount + ValidateDataConsistency()
+    
+    If ErrorCount > 0 Then
+        MsgBox "Please review and correct " & ErrorCount & " data validation errors before proceeding.", _
+               vbExclamation, APP_NAME
+    End If
+End Sub
+
+Function ValidateRequiredFields() As Integer
+    ' Check for required input fields
+    Dim wsInput As Worksheet
+    Set wsInput = Worksheets("Input Data")
+    
+    Dim ErrorCount As Integer
+    ErrorCount = 0
+    
+    ' Check filing status
+    If wsInput.Range("B1").Value = "" Then
+        wsInput.Range("B1").Interior.Color = RGB(255, 200, 200)
+        ErrorCount = ErrorCount + 1
+    End If
+    
+    ' Check state
+    If wsInput.Range("B2").Value = "" Then
+        wsInput.Range("B2").Interior.Color = RGB(255, 200, 200)
+        ErrorCount = ErrorCount + 1
+    End If
+    
+    ' Check prior year tax (required for safe harbor)
+    If wsInput.Range("B18").Value <= 0 Then
+        wsInput.Range("B18").Interior.Color = RGB(255, 200, 200)
+        ErrorCount = ErrorCount + 1
+    End If
+    
+    ValidateRequiredFields = ErrorCount
+End Function
+
+Sub CreateDataValidationLists()
+    ' Create dropdown lists for user inputs
+    Dim wsInput As Worksheet
+    Set wsInput = Worksheets("Input Data")
+    
+    ' Filing Status dropdown
+    With wsInput.Range("B1").Validation
+        .Delete
+        .Add Type:=xlValidateList, _
+             AlertStyle:=xlValidAlertStop, _
+             Formula1:="Single,MFJ,MFS,HOH"
+        .InputTitle = "Filing Status"
+        .InputMessage = "Select your tax filing status"
+    End With
+    
+    ' State dropdown (abbreviated for space)
+    With wsInput.Range("B2").Validation
+        .Delete
+        .Add Type:=xlValidateList, _
+             AlertStyle:=xlValidAlertStop, _
+             Formula1:="AL,AK,AZ,AR,CA,CO,CT,DE,FL,GA,HI,ID,IL,IN,IA,KS,KY,LA,ME,MD,MA,MI,MN,MS,MO,MT,NE,NV,NH,NJ,NM,NY,NC,ND,OH,OK,OR,PA,RI,SC,SD,TN,TX,UT,VT,VA,WA,WV,WI,WY"
+        .InputTitle = "State"
+        .InputMessage = "Select your state of residence"
+    End With
+End Sub
+
+' ============================================================================
+' MODULE 7: UTILITIES & HELPER FUNCTIONS
+' ============================================================================
+
+Sub ShowWelcomeMessage()
+    ' Professional welcome message
+    Dim WelcomeMsg As String
+    WelcomeMsg = "Welcome to the Quarterly Tax Calculator Pro!" & vbCrLf & vbCrLf & _
+                 "This professional calculator will help you:" & vbCrLf & _
+                 "• Calculate accurate quarterly payments" & vbCrLf & _
+                 "• Avoid underpayment penalties" & vbCrLf & _
+                 "• Plan tax-saving strategies" & vbCrLf & _
+                 "• Generate payment vouchers" & vbCrLf & vbCrLf & _
+                 "Would you like to run the Quick Setup Wizard?"
+    
+    Dim Response As VbMsgBoxResult
+    Response = MsgBox(WelcomeMsg, vbYesNo + vbInformation, APP_NAME)
+    
+    If Response = vbYes Then
+        Call QuickSetupWizard
+    End If
+End Sub
+
+Sub ProtectWorkbook()
+    ' Protect workbook structure while allowing VBA
+    ThisWorkbook.Protect Password:="ENTax2024", Structure:=True, Windows:=False
+    
+    ' Protect individual sheets
+    Dim ws As Worksheet
+    For Each ws In ThisWorkbook.Worksheets
+        If ws.Name = "Input Data" Or ws.Name = "Payment Tracker" Then
+            ' Allow editing in input areas only
+            ws.Protect Password:="ENTax2024", _
+                      DrawingObjects:=False, _
+                      Contents:=True, _
+                      Scenarios:=True, _
+                      UserInterfaceOnly:=True, _
+                      AllowFormattingCells:=False, _
+                      AllowInsertingRows:=False, _
+                      AllowDeletingRows:=False
+        Else
+            ' Fully protect calculation and output sheets
+            ws.Protect Password:="ENTax2024", _
+                      DrawingObjects:=True, _
+                      Contents:=True, _
+                      Scenarios:=True, _
+                      UserInterfaceOnly:=True
+        End If
+    Next ws
+End Sub
+
+Sub BackupData()
+    ' Create backup of user data
+    Dim BackupPath As String
+    Dim BackupName As String
+    
+    BackupPath = ThisWorkbook.Path & "\Backups\"
+    BackupName = "QuarterlyTax_Backup_" & Format(Now, "yyyy-mm-dd_hh-mm") & ".xlsx"
+    
+    ' Create backup directory if it doesn't exist
+    If Dir(BackupPath, vbDirectory) = "" Then
+        MkDir BackupPath
+    End If
+    
+    ' Save backup copy
+    ThisWorkbook.SaveCopyAs BackupPath & BackupName
+End Sub
+
+' ============================================================================
+' MODULE 8: EVENT HANDLERS
+' ============================================================================
+
+Private Sub Worksheet_Change(ByVal Target As Range)
+    ' Handle data changes and trigger recalculations
+    Application.EnableEvents = False
+    
+    ' If input data changed, refresh calculations
+    If Target.Parent.Name = "Input Data" Then
+        If Not Intersect(Target, Range("B1:E50")) Is Nothing Then
+            Call RefreshAllCalculations
+        End If
+    End If
+    
+    ' If payment tracker updated, refresh dashboard
+    If Target.Parent.Name = "Payment Tracker" Then
+        If Not Intersect(Target, Range("F3:F6")) Is Nothing Then
+            Call UpdateDashboard
+        End If
+    End If
+    
+    Application.EnableEvents = True
+End Sub
+
+' ============================================================================
+' MODULE 9: MAIN CONTROL BUTTONS
+' ============================================================================
+
+Sub Button_QuickSetup()
+    ' Main setup button
+    Call QuickSetupWizard
+End Sub
+
+Sub Button_RefreshCalculations()
+    ' Refresh all calculations button
+    Call RefreshAllCalculations
+    MsgBox "All calculations updated!", vbInformation, APP_NAME
+End Sub
+
+Sub Button_ExportVouchers()
+    ' Export vouchers button
+    Call ExportPaymentVouchers
+End Sub
+
+Sub Button_GenerateReport()
+    ' Generate comprehensive report
+    Call ExportTaxSummaryReport
+End Sub
+
+Sub Button_Help()
+    ' Show help and support information
+    Dim HelpMsg As String
+    HelpMsg = "Quarterly Tax Calculator Pro Help" & vbCrLf & vbCrLf & _
+              "Quick Start:" & vbCrLf & _
+              "1. Click 'Quick Setup' to enter basic information" & vbCrLf & _
+              "2. Review the Dashboard for payment amounts" & vbCrLf & _
+              "3. Enter payments made in the Payment Tracker" & vbCrLf & _
+              "4. Export vouchers for mailing to IRS" & vbCrLf & vbCrLf & _
+              "Support: info@entaxaccounting.com" & vbCrLf & _
+              "E&N Tax & Accounting"
+    
+    MsgBox HelpMsg, vbInformation, APP_NAME
+End Sub
+
+' ============================================================================
+' END OF VBA CODE
+' Total Lines: ~500 lines of professional-grade automation
+' ============================================================================

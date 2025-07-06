@@ -1,0 +1,62 @@
+' ADD THIS TO MODULE 1 - CUSTOM MENU SYSTEM
+' Alternative to buttons - Creates "E&N Tax Tools" menu
+
+Sub CreateCustomMenu()
+    ' Create custom menu in ribbon
+    Dim customMenu As CommandBar
+    
+    ' Delete existing menu if it exists
+    On Error Resume Next
+    Application.CommandBars("E&N Tax Tools").Delete
+    On Error GoTo 0
+    
+    ' Create new menu
+    Set customMenu = Application.CommandBars.Add("E&N Tax Tools", msoBarTop, False, True)
+    customMenu.Visible = True
+    
+    ' Add menu items
+    With customMenu.Controls.Add(msoControlButton)
+        .Caption = "Quick Navigation"
+        .OnAction = "QuickNavigation"
+    End With
+    
+    With customMenu.Controls.Add(msoControlButton)
+        .Caption = "Refresh Dashboard"
+        .OnAction = "RefreshDashboard"
+    End With
+    
+    With customMenu.Controls.Add(msoControlButton)
+        .Caption = "Add Expense Entry"
+        .OnAction = "AddExpenseEntry"
+    End With
+    
+    With customMenu.Controls.Add(msoControlButton)
+        .Caption = "Create Year-End Report"
+        .OnAction = "CreateYearEndSummary"
+    End With
+    
+    With customMenu.Controls.Add(msoControlButton)
+        .Caption = "Backup Workbook"
+        .OnAction = "BackupWorkbook"
+    End With
+End Sub
+
+Sub DeleteCustomMenu()
+    ' Remove custom menu
+    On Error Resume Next
+    Application.CommandBars("E&N Tax Tools").Delete
+    On Error GoTo 0
+End Sub
+
+' Update Auto_Open to create menu
+Sub Auto_Open()
+    Application.ScreenUpdating = False
+    Call BasicSetup
+    Call CreateCustomMenu  ' Add this line
+    Application.ScreenUpdating = True
+    
+    MsgBox "Welcome to E&N Tax & Accounting's Ultimate Tax Deduction Tracker!" & vbCrLf & vbCrLf & _
+           "✓ Custom 'E&N Tax Tools' menu added to ribbon" & vbCrLf & _
+           "✓ All formulas are ready to use" & vbCrLf & _
+           "✓ Check the Instructions sheet for guidance", vbInformation, "Tax Tracker Ready"
+End Sub

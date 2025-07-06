@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About E&N Tax & Accounting - Professional Tax Services</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="E&N Tax & Accounting provides professional tax preparation, bookkeeping, and financial services for individuals, small businesses, startups, and real estate investors. Founded in 2024.">
+    <meta name="keywords" content="tax preparation, small business accounting, startup taxes, real estate investor taxes, bookkeeping, tax planning">
+    <meta name="author" content="E&N Tax & Accounting">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="E&N Tax & Accounting - Professional Tax Services">
+    <meta property="og:description" content="Professional tax and accounting services for individuals and small businesses. Serving clients with excellence since 2024.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.entaxaccounting.com">
+    <meta property="og:image" content="https://www.entaxaccounting.com/og-image.jpg">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AccountingService",
+      "name": "E&N Tax & Accounting",
+      "description": "Professional tax preparation and accounting services for individuals and small businesses",
+      "url": "https://www.entaxaccounting.com",
+      "email": "info@entaxaccounting.com",
+      "foundingDate": "2024",
+      "areaServed": {
+        "@type": "City",
+        "name": "[Your City, State]"
+      }
+    }
+    </script>
+    
+    <style>
+        /* CSS Variables for Theme Switching */
+        :root {
+            --primary-color: #5B8A8C;
+            --secondary-color: #F4A09C;
+            --accent-color: #2C5F61;
+            --text-dark: #2C3E50;
+            --text-light: #6C757D;
+            --background-light: #FFF9F5;
+            --background-white: #FFFFFF;
+            --border-color: #E9ECEF;
+            --nav-dark: #1A4547;
+            --nav-darker: #0F2D2F;
+        }
+
+        .theme-professional {
+            --primary-color: #1E3A5F;
+            --secondary-color: #D4A574;
+            --accent-color: #0F2440;
+            --text-dark: #1A1A1A;
+            --text-light: #4A5568;
+            --background-light: #F8F9FA;
+            --background-white: #FFFFFF;
+            --border-color: #DEE2E6;
+            --nav-dark: #0A1F30;
+            --nav-darker: #051218;
+        }
+
+        .theme-corporate {
+            --primary-color: #2D3436;
+            --secondary-color: #00B894;
+            --accent-color: #1E272E;
+            --text-dark: #2C3E50;
+            --text-light: #636E72;
+            --background-light: #F5F6FA;
+            --background-white: #FFFFFF;
+            --border-color: #DFE6E9;
+            --nav-dark: #191C1E;
+            --nav-darker: #0F1214;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            background-color: var(--background-white);
+        }
+
+        /* Theme Switcher - Collapsible */
+        .theme-switcher {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--background-white);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .theme-switcher.collapsed {
+            width: 50px;
+            height: 50px;
+        }
+
+        .theme-toggle {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-content {
+            padding: 15px;
+            display: block;
+        }
+
+        .theme-switcher.collapsed .theme-content {
+            display: none;
+        }
+
+        .theme-switcher h4 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .theme-btn {
+            display: block;
+            width: 100%;
+            padding: 8px 12px;
+            margin: 5px 0;
+            border: 1px solid var(--border-color);
+            background: var(--background-white);
+            color: var(--text-dark);
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .theme-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Header Navigation */
+        header {
+            background: linear-gradient(135deg, var(--nav-darker) 0%, var(--nav-dark) 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a.active {
+            color: white;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropdown-toggle::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-toggle::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--background-white);
+            min-width: 280px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            border: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-header {
+            padding: 15px 20px 10px;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--background-light);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .dropdown-header h4 {
+            color: var(--primary-color);
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: #2C3E50 !important;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            background: transparent;
+        }
+
+        .dropdown-item:hover {
+            background: var(--background-light) !important;
+            color: var(--primary-color) !important;
+            padding-left: 25px;
+        }
+
+        .dropdown-item:last-child {
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            padding: 140px 20px 80px;
+            text-align: center;
+            margin-top: 80px;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: white;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 650px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+            line-height: 1.8;
+        }
+
+        .hero-tagline {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        /* Main Content Section */
+        .main-content {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* About Content */
+        .about-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .about-intro h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .about-intro p {
+            font-size: 18px;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+            margin-bottom: 80px;
+        }
+
+        .about-story {
+            padding: 40px;
+            background: var(--background-light);
+            border-radius: 20px;
+        }
+
+        .about-story h3 {
+            color: var(--primary-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .about-story p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .personal-note {
+            background: var(--background-white);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary-color);
+            margin-top: 25px;
+            font-style: italic;
+            color: var(--text-dark);
+        }
+
+        .family-section {
+            text-align: center;
+        }
+
+        .family-photo {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+        }
+
+        .values-box {
+            background: var(--background-white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .values-box h4 {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .values-box p {
+            color: var(--text-light);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .value-item {
+            margin: 20px 0;
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .value-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Client Focus Section */
+        .client-focus {
+            background: var(--background-white);
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 60px;
+        }
+
+        .client-focus h3 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        .client-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .client-type {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .client-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            color: white;
+        }
+
+        .client-type h4 {
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .client-type p {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary-color);
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 60px 20px 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, var(--nav-darker) 0%, var(--nav-dark) 100%);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            /* Mobile Dropdown Styles */
+            .dropdown-menu {
+                position: static;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 5px;
+                margin: 10px 0;
+                box-shadow: none;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                opacity: 0;
+                max-height: 0;
+                overflow: hidden;
+                transform: none;
+                transition: all 0.3s ease;
+            }
+
+            .dropdown.mobile-open .dropdown-menu {
+                opacity: 1;
+                max-height: 500px;
+                padding: 10px 0;
+            }
+
+            .dropdown-header {
+                background: rgba(255, 255, 255, 0.1);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 5px 5px 0 0;
+            }
+
+            .dropdown-header h4 {
+                color: rgba(255, 255, 255, 0.8);
+            }
+
+            .dropdown-item {
+                color: rgba(255, 255, 255, 0.8);
+                padding: 8px 15px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .dropdown-item:hover {
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                padding-left: 20px;
+            }
+
+            .dropdown-item:last-child {
+                border-bottom: none;
+            }
+
+            .dropdown-toggle {
+                cursor: pointer;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .theme-switcher {
+                top: auto;
+                bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Switcher - Collapsible -->
+    <div class="theme-switcher collapsed" id="themeSwitcher">
+        <button class="theme-toggle" onclick="toggleThemeSwitcher()">🎨</button>
+        <div class="theme-content">
+            <h4>Choose Theme:</h4>
+            <button class="theme-btn active" onclick="setTheme('warm')">Warm & Inviting</button>
+            <button class="theme-btn" onclick="setTheme('professional')">Professional Classic</button>
+            <button class="theme-btn" onclick="setTheme('corporate')">Modern Corporate</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="E_N-Tax-Accounting-Logo.png">
+                <span class="logo-text">E&N Tax & Accounting</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li class="dropdown">
+                    <a href="tools.html" class="dropdown-toggle">Tools & Resources</a>
+                    <div class="dropdown-menu">
+                        <a href="tools/home-office-calculator.html" class="dropdown-item">Home Office Calculator</a>
+                        <a href="tools/quarterly-tax-calculator.html" class="dropdown-item">Quarterly Tax Calculator</a>
+                        <a href="tools/tax-withholding-estimator.html" class="dropdown-item">Tax Withholding Estimator</a>
+                        <a href="tools/business-expense-tracker.html" class="dropdown-item">Business Expense Tracker</a>
+                        <a href="tools/1099-contractor-checklist.html" class="dropdown-item">1099 Contractor Checklist</a>
+                        <a href="tools/entity-selection-guide.html" class="dropdown-item">Entity Selection Guide</a>
+                        <a href="tools/rental-income-tracker.html" class="dropdown-item">Rental Income Tracker</a>
+                        <a href="tools/depreciation-schedule-tool.html" class="dropdown-item">Depreciation Schedule Tool</a>
+                        <a href="tools/rental-property-calculator.html" class="dropdown-item">Rental Property Calculator</a>
+                        <a href="tools/business-tax-checklist.html" class="dropdown-item">Business Tax Checklist</a>
+                        <a href="tools/individual-tax-organizer.html" class="dropdown-item">Individual Tax Organizer</a>
+                        <a href="tools/tax-calendar-2025.html" class="dropdown-item">Tax Calendar 2025</a>
+                    </div>
+                </li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to E&N Tax & Accounting</h1>
+        <p>Professional tax and accounting services built on family values and dedicated to helping individuals and small businesses thrive</p>
+        <p class="hero-tagline">Excellence & Nurturing in Every Service</p>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <!-- About Introduction -->
+        <div class="about-intro">
+            <h2>About E&N Tax & Accounting</h2>
+            <p>Founded in 2024, E&N Tax & Accounting brings a personal touch to professional financial services. The firm specializes in serving individuals, small businesses, startups, and small portfolio real estate investors with the care and attention they deserve.</p>
+        </div>
+
+        <!-- About Grid -->
+        <div class="about-grid">
+            <div class="about-story">
+                <h3>The E&N Story</h3>
+                <p>E&N Tax & Accounting represents more than just a business—it's a testament to family values and professional dedication. Named after twin daughters Emma and Nina, the firm embodies the care, attention, and commitment brought to every client relationship.</p>
+                <p>The founder believes that behind every tax return is a story, a family, or a dream. That's why E&N approaches each client with the same care and attention given to family. This commitment to excellence ensures that clients receive not just accurate tax services, but a trusted partner in their financial journey.</p>
+                <p>While currently focused on providing exceptional service to existing clients, E&N is building a foundation for thoughtful growth—always maintaining the personal touch that sets the firm apart.</p>
+                <div class="personal-note">
+                    "When clients work with E&N, they're not just another number. They become part of an extended family, and their success is E&N's success."
+                </div>
+            </div>
+            <div class="family-section">
+                <img src="FamilyPhotoshootPhoto.JPG" class="family-photo">
+            </div>
+        </div>
+
+        <!-- Client Focus Section -->
+        <div class="client-focus">
+            <h3>Who E&N Serves</h3>
+            <div class="client-types">
+                <div class="client-type">
+                    <div class="client-icon">👨‍👩‍👧‍👦</div>
+                    <h4>Individuals & Families</h4>
+                    <p>Personal tax preparation and financial guidance with the care and attention your family deserves</p>
+                </div>
+                <div class="client-type">
+                    <div class="client-icon">🏪</div>
+                    <h4>Small Businesses</h4>
+                    <p>Supporting businesses under $1M in revenue with comprehensive tax and accounting services</p>
+                </div>
+                <div class="client-type">
+                    <div class="client-icon">🚀</div>
+                    <h4>Startups</h4>
+                    <p>Helping new ventures establish strong financial foundations from day one</p>
+                </div>
+                <div class="client-type">
+                    <div class="client-icon">🏠</div>
+                    <h4>Small Portfolio Real Estate Investors</h4>
+                    <p>Specialized support for investors managing residential rental properties</p>
+                </div>
+                <div class="client-type">
+                    <div class="client-icon">🌅</div>
+                    <h4>Retirees</h4>
+                    <p>Strategic tax planning to help maximize retirement income and minimize tax burden</p>
+                </div>
+                <div class="client-type">
+                    <div class="client-icon">⚡</div>
+                    <h4>Gig Economy Workers & Freelancers</h4>
+                    <p>Navigating the unique tax challenges of independent contractors and multiple income streams</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h3>Ready to Experience the E&N Difference?</h3>
+            <p>While currently serving existing clients, E&N looks forward to welcoming new members to the family in the future.</p>
+            <a href="contact.html" class="cta-button">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>E&N Tax & Accounting</h4>
+                <p>Professional tax and accounting services built on family values.</p>
+                <p>Established 2024</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="services.html">Services</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="tools.html">Tools & Resources</a>
+                <a href="blog.html">Blog</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>info@entaxaccounting.com</p>
+                <p>Currently serving existing clients</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 E&N Tax & Accounting. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Switcher Functions
+        function toggleThemeSwitcher() {
+            const switcher = document.getElementById('themeSwitcher');
+            switcher.classList.toggle('collapsed');
+        }
+
+        function setTheme(theme) {
+            const body = document.body;
+            const buttons = document.querySelectorAll('.theme-btn');
+            
+            // Remove all theme classes
+            body.classList.remove('theme-professional', 'theme-corporate');
+            
+            // Remove active class from all buttons
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add appropriate theme class
+            if (theme === 'professional') {
+                body.classList.add('theme-professional');
+                buttons[1].classList.add('active');
+            } else if (theme === 'corporate') {
+                body.classList.add('theme-corporate');
+                buttons[2].classList.add('active');
+            } else {
+                // Default warm theme
+                buttons[0].classList.add('active');
+            }
+            
+            // Collapse the switcher after selection
+            document.getElementById('themeSwitcher').classList.add('collapsed');
+        }
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Mobile Dropdown Toggle
+        function toggleMobileDropdown(event) {
+            if (window.innerWidth <= 768) {
+                event.preventDefault();
+                const dropdown = event.target.closest('.dropdown');
+                dropdown.classList.toggle('mobile-open');
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const navLinks = document.getElementById('navLinks');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                // Also close any open mobile dropdowns
+                document.querySelectorAll('.dropdown.mobile-open').forEach(dropdown => {
+                    dropdown.classList.remove('mobile-open');
+                });
+            }
+        });
+
+        // Add click event to dropdown toggle for mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownToggle = document.querySelector('.dropdown-toggle');
+            if (dropdownToggle) {
+                dropdownToggle.addEventListener('click', toggleMobileDropdown);
+            }
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 25px rgba(0,0,0,0.25)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.15)';
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.client-type, .value-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.6s ease';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>

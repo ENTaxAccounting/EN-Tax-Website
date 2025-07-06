@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Individual Tax Document Organizer - E&N Tax & Accounting</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Free individual tax document organizer. Organize personal tax documents, track deductions, and ensure complete tax preparation. Perfect for families and individuals.">
+    <meta name="keywords" content="individual tax organizer, personal tax checklist, tax document organizer, individual tax preparation, family tax planning">
+    <meta name="author" content="E&N Tax & Accounting">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Individual Tax Document Organizer - E&N Tax & Accounting">
+    <meta property="og:description" content="Organize your personal tax documents and maximize deductions with our comprehensive individual tax organizer.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.entaxaccounting.com/tools/individual-tax-organizer.html">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Individual Tax Document Organizer",
+      "description": "Interactive organizer to help individuals and families gather tax documents, track deductions, and prepare for tax filing",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "E&N Tax & Accounting"
+      }
+    }
+    </script>
+    
+    <style>
+        :root {
+            /* Professional Navy & Gold Palette */
+            --primary-color: #003366; /* Navy */
+            --secondary-color: #f2b90c; /* Gold */
+            --accent-color: #1c3a53; /* Slate */
+            --text-light: #f8f9fa; /* Off-white */
+            --text-dark: #2C3E50;
+            --background-light: #F8F9FA;
+            --background-white: #FFFFFF;
+            --border-color: #DEE2E6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--text-light);
+            font-size: 16px;
+        }
+
+        /* Professional Background */
+        .main-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #024d96 60%);
+            opacity: 0.05;
+        }
+
+        /* Color Palette Toggle - Hidden */
+        .palette-toggle {
+            display: none;
+        }
+
+        /* Theme Switcher - Collapsible */
+        .theme-switcher {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--background-white);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .theme-switcher.collapsed {
+            width: 50px;
+            height: 50px;
+        }
+
+        .theme-toggle {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-content {
+            padding: 15px;
+            display: block;
+        }
+
+        .theme-switcher.collapsed .theme-content {
+            display: none;
+        }
+
+        .theme-switcher h4 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .theme-btn {
+            display: block;
+            width: 100%;
+            padding: 8px 12px;
+            margin: 5px 0;
+            border: 1px solid var(--border-color);
+            background: var(--background-white);
+            color: var(--text-dark);
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .theme-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Header Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: sticky;
+            width: 100%;
+            top: 0;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            margin: 0 auto;
+            padding: 5px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 70px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            font-size: 19px;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Add nav button to header */
+        .nav-cta {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            font-size: 19px;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropdown-toggle::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-toggle::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 280px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            border: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-header {
+            padding: 15px 20px 10px;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--background-light);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .dropdown-header h4 {
+            color: var(--primary-color);
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: #2C3E50 !important;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            background: transparent;
+        }
+
+        .dropdown-item:hover {
+            background: var(--background-light) !important;
+            color: var(--primary-color) !important;
+            padding-left: 25px;
+        }
+
+        .dropdown-item:last-child {
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .page-header {
+            height: 55vh;
+            min-height: 400px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+            background-image: url('../images/backgrounds/tools.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 51, 102, 0.7);
+            z-index: 1;
+        }
+
+        .page-header-content {
+            max-width: 960px;
+            animation: fadeInUp 1.2s ease;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 20px;
+        }
+
+        .page-header h1 {
+            font-size: 58px;
+            margin-bottom: 24px;
+            font-weight: 700;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .page-header p {
+            font-size: 29px;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            font-size: 17px;
+            backdrop-filter: blur(10px);
+        }
+
+        .breadcrumb-container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #6C757D;
+            margin: 0 10px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: transparent;
+            margin: 40px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 80px 40px;
+            max-width: 1440px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Calculator Introduction */
+        .calculator-intro {
+            text-align: center;
+            margin: 0 auto 60px;
+            background: rgba(0, 51, 102, 0.05);
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid rgba(0, 51, 102, 0.1);
+        }
+
+        .calculator-intro h2 {
+            font-size: 43px;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .calculator-intro p {
+            font-size: 22px;
+            color: #2C3E50;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        /* Calculator Section */
+        .calculator-section {
+            background: var(--background-white);
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .calculator-container {
+            margin: 0 auto;
+        }
+
+        /* Calculator Tabs */
+        .calculator-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 18px 30px;
+            font-size: 19px;
+            font-weight: 600;
+            color: #6C757D;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary-color);
+            background: var(--background-light);
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--secondary-color);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Form Styling */
+        .calculator-form {
+            background: var(--background-light);
+            padding: 40px;
+            border-radius: 15px;
+        }
+
+        .form-section h4 {
+            color: var(--text-dark);
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .method-description {
+            color: #6C757D;
+            margin-bottom: 36px;
+            font-size: 19px;
+            line-height: 1.6;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            color: var(--text-dark);
+            background: var(--background-white);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(91, 138, 140, 0.1);
+        }
+
+        .input-note {
+            display: block;
+            font-size: 14px;
+            color: #6C757D;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        .form-section h5 {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin: 30px 0 20px 0;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Calculate Button */
+        .calculate-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .calculate-btn:hover {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Result Sections */
+        .result-section {
+            background: var(--background-white);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px solid var(--secondary-color);
+        }
+
+        .result-section h5 {
+            color: var(--primary-color);
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .result-amount {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .result-details {
+            background: var(--background-light);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .result-details p {
+            margin: 10px 0;
+            color: var(--text-dark);
+            font-size: 16px;
+        }
+
+        /* Comparison Styles */
+        .comparison-section {
+            background: var(--background-light);
+            padding: 40px;
+            border-radius: 15px;
+        }
+
+        .comparison-result {
+            margin-top: 30px;
+        }
+
+        .comparison-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .method-card {
+            background: var(--background-white);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .method-card.winner {
+            border-color: var(--secondary-color);
+            background: linear-gradient(135deg, var(--background-white) 0%, var(--background-light) 100%);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .method-card h5 {
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .method-amount {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .method-details {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .recommendation {
+            background: var(--primary-color);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .recommendation h5 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .recommendation p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .savings-highlight {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .savings-highlight small {
+            display: block;
+            font-size: 12px;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
+        /* Question Group Styles for Checklist */
+        .question-group {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--background-white);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .question-label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background: var(--background-light);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: normal;
+        }
+
+        .radio-group label:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+
+        .radio-group label:has(input:checked) {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Calculator Disclaimer */
+        .calculator-disclaimer {
+            background: var(--text-light);
+            padding: 24px;
+            border-radius: 12px;
+            margin: 48px 0;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .calculator-disclaimer p {
+            color: #6C757D;
+            font-size: 17px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Disclaimer Section */
+        .disclaimer-section {
+            padding: 40px;
+            max-width: 1440px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Additional Info Section */
+        .additional-info {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 80px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .additional-info h3 {
+            text-align: center;
+            font-size: 43px;
+            color: var(--primary-color);
+            margin-bottom: 48px;
+            font-weight: 600;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 36px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 36px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 2px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .info-card h4 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+
+        .info-card p {
+            color: #6C757D;
+            line-height: 1.8;
+            font-size: 19px;
+        }
+
+        .info-card ul {
+            color: #6C757D;
+            margin: 18px 0 0 24px;
+            font-size: 19px;
+        }
+
+        .info-card li {
+            margin: 10px 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            text-align: center;
+            background: var(--primary-color);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 0;
+            border-radius: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></svg>') repeat;
+            background-size: 100px 100px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 100px); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 10;
+            margin: 0 auto;
+        }
+
+        .cta-content h3 {
+            font-size: 50px;
+            margin-bottom: 24px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .cta-content p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            opacity: 1;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 22px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #001a33;
+            color: #c6d4e1;
+            padding: 60px 20px 40px;
+            position: relative;
+            margin-top: 0;
+        }
+        
+        .footer-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-section {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        .footer-section p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 12px;
+            line-height: 1.6;
+            font-size: 19px;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+            font-size: 19px;
+        }
+
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-color);
+            padding-left: 10px;
+        }
+
+        .company-description {
+            font-style: italic;
+            opacity: 0.9;
+            border-left: 3px solid var(--secondary-color);
+            padding-left: 15px;
+            margin: 15px 0;
+        }
+
+        .established-year {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, var(--nav-darker) 0%, var(--nav-dark) 100%);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            /* Mobile Dropdown Styles */
+            .dropdown-menu {
+                position: static;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 5px;
+                margin: 10px 0;
+                box-shadow: none;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                opacity: 0;
+                max-height: 0;
+                overflow: hidden;
+                transform: none;
+                transition: all 0.3s ease;
+            }
+
+            .dropdown.mobile-open .dropdown-menu {
+                opacity: 1;
+                max-height: 500px;
+                padding: 10px 0;
+            }
+
+            .dropdown-header {
+                background: rgba(255, 255, 255, 0.1);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 5px 5px 0 0;
+            }
+
+            .dropdown-header h4 {
+                color: rgba(255, 255, 255, 0.8);
+            }
+
+            .dropdown-item {
+                color: rgba(255, 255, 255, 0.8);
+                padding: 8px 15px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .dropdown-item:hover {
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                padding-left: 20px;
+            }
+
+            .dropdown-item:last-child {
+                border-bottom: none;
+            }
+
+            .dropdown-toggle {
+                cursor: pointer;
+            }
+
+            .page-header h1 {
+                font-size: 36px;
+            }
+
+            /* Calculator Responsive */
+            .calculator-section {
+                padding: 40px 20px;
+            }
+
+            .calculator-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tab-btn {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .calculator-form {
+                padding: 30px 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .result-amount {
+                font-size: 36px;
+            }
+
+            .method-amount {
+                font-size: 28px;
+            }
+
+            .additional-info {
+                padding: 40px 20px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .theme-switcher {
+                top: auto;
+                bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Professional Background -->
+    <div class="main-bg"></div>
+    
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="../images/E_N_LOGO.png" alt="E&N Tax & Accounting Logo">
+                <span class="logo-text">E&N Tax & Accounting</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">About</a></li>
+                <li><a href="../services.html">Services</a></li>
+
+                <li class="dropdown">
+                    <a href="../tools.html">Tools & Resources</a>
+                    <div class="dropdown-menu">
+                        <a href="home-office-calculator.html" class="dropdown-item">Home Office Calculator</a>
+                        <a href="quarterly-tax-calculator.html" class="dropdown-item">Quarterly Tax Calculator</a>
+                        <a href="tax-withholding-estimator.html" class="dropdown-item">Tax Withholding Estimator</a>
+                        <a href="business-expense-tracker.html" class="dropdown-item">Business Expense Tracker</a>
+                        <a href="1099-contractor-checklist.html" class="dropdown-item">1099 Contractor Checklist</a>
+                        <a href="entity-selection-guide.html" class="dropdown-item">Entity Selection Guide</a>
+                        <a href="rental-income-tracker.html" class="dropdown-item">Rental Income Tracker</a>
+                        <a href="depreciation-schedule-tool.html" class="dropdown-item">Depreciation Schedule Tool</a>
+                        <a href="rental-property-calculator.html" class="dropdown-item">Rental Property Calculator</a>
+                        <a href="business-tax-checklist.html" class="dropdown-item">Business Tax Checklist</a>
+                        <a href="individual-tax-organizer.html" class="dropdown-item">Individual Tax Organizer</a>
+                        <a href="tax-calendar-2025.html" class="dropdown-item">Tax Calendar 2025</a>
+                    </div>
+                </li>
+                <li><a href="../shop.html">Shop</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <a href="../contact.html" class="nav-cta">Book Consultation</a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1>Individual Tax Document Organizer</h1>
+            <p>Organize documents, track deductions, and maximize your tax refund</p>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="../tools.html">Tools & Resources</a>
+            <span>></span>
+            <span>Individual Tax Document Organizer</span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="content-section">
+        <div class="main-content">
+        <!-- Calculator Introduction -->
+        <div class="calculator-intro">
+            <h2>Personal Tax Document Organization</h2>
+            <p>Successful tax preparation starts with organized documentation and understanding of available deductions and credits. This comprehensive organizer helps individuals and families gather required documents, identify potential deductions, and ensure nothing is missed during tax preparation.</p>
+            <p>Use this tool to create a personalized tax document checklist based on your specific situation and life events.</p>
+        </div>
+
+        <!-- Individual Tax Organizer Section -->
+        <div class="calculator-section">
+            <div class="calculator-container">
+                <!-- Organizer Tabs -->
+                <div class="calculator-tabs">
+                    <button class="tab-btn active" onclick="switchTab('personal-info')">Personal Information</button>
+                    <button class="tab-btn" onclick="switchTab('income-sources')">Income Sources</button>
+                    <button class="tab-btn" onclick="switchTab('deductions-credits')">Deductions & Credits</button>
+                    <button class="tab-btn" onclick="switchTab('summary')">Summary & Export</button>
+                </div>
+                
+                <!-- Personal Information Tab -->
+                <div id="personal-info-tab" class="tab-content active">
+                    <div class="calculator-form">
+                        <div class="form-section">
+                            <h4>Personal & Family Information</h4>
+                            <p class="method-description">Provide your personal information to customize your tax document organizer and identify applicable deductions and credits.</p>
+                            
+                            <h5>📋 Filing Status & Basic Information</h5>
+                            <div class="question-group">
+                                <label class="question-label">What is your filing status?</label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="filing_status" value="single"> Single</label>
+                                    <label><input type="radio" name="filing_status" value="married_joint"> Married Filing Jointly</label>
+                                    <label><input type="radio" name="filing_status" value="married_separate"> Married Filing Separately</label>
+                                    <label><input type="radio" name="filing_status" value="head_household"> Head of Household</label>
+                                    <label><input type="radio" name="filing_status" value="qualifying_widow"> Qualifying Widow(er)</label>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label>Tax Year</label>
+                                    <input type="number" id="tax_year" value="2024" min="2020" max="2025">
+                                    <span class="input-note">Enter the tax year you're preparing for</span>
+                                </div>
+                                <div class="input-group">
+                                    <label>Number of Dependents</label>
+                                    <input type="number" id="dependents_count" value="0" min="0" max="20">
+                                    <span class="input-note">Include children and other qualifying dependents</span>
+                                </div>
+                            </div>
+
+                            <h5>👥 Family & Dependents</h5>
+                            <div class="question-group">
+                                <label class="question-label">Which situations apply to you? (Check all that apply)</label>
+                                <div class="radio-group">
+                                    <label><input type="checkbox" name="family_situations" value="children_under_17"> Have children under 17 (Child Tax Credit)</label>
+                                    <label><input type="checkbox" name="family_situations" value="dependents_over_17"> Have dependents 17 or older</label>
+                                    <label><input type="checkbox" name="family_situations" value="childcare_expenses"> Paid for childcare/daycare</label>
+                                    <label><input type="checkbox" name="family_situations" value="adoption_expenses"> Adoption expenses</label>
+                                    <label><input type="checkbox" name="family_situations" value="elderly_care"> Care for elderly parents/relatives</label>
+                                </div>
+                            </div>
+
+                            <h5>🏠 Housing & Location</h5>
+                            <div class="question-group">
+                                <label class="question-label">What is your housing situation?</label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="housing_status" value="own_home"> Own primary residence</label>
+                                    <label><input type="radio" name="housing_status" value="rent_home"> Rent primary residence</label>
+                                    <label><input type="radio" name="housing_status" value="live_with_others"> Live with family/others</label>
+                                </div>
+                            </div>
+
+                            <div class="question-group">
+                                <label class="question-label">Life events in the tax year (Check all that apply)</label>
+                                <div class="radio-group">
+                                    <label><input type="checkbox" name="life_events" value="got_married"> Got married</label>
+                                    <label><input type="checkbox" name="life_events" value="got_divorced"> Got divorced</label>
+                                    <label><input type="checkbox" name="life_events" value="had_baby"> Had a baby or adopted</label>
+                                    <label><input type="checkbox" name="life_events" value="moved"> Moved to a new state/home</label>
+                                    <label><input type="checkbox" name="life_events" value="job_change"> Changed jobs</label>
+                                    <label><input type="checkbox" name="life_events" value="started_business"> Started a business/side hustle</label>
+                                    <label><input type="checkbox" name="life_events" value="bought_home"> Bought a home</label>
+                                    <label><input type="checkbox" name="life_events" value="sold_home"> Sold a home</label>
+                                    <label><input type="checkbox" name="life_events" value="retired"> Retired</label>
+                                    <label><input type="checkbox" name="life_events" value="education"> Attended college/education</label>
+                                </div>
+                            </div>
+                            
+                            <button onclick="generatePersonalChecklist()" class="calculate-btn">Generate Custom Organizer</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Income Sources Tab -->
+                <div id="income-sources-tab" class="tab-content">
+                    <div class="calculator-form">
+                        <div class="form-section">
+                            <h4>Income Sources & Documentation</h4>
+                            <p class="method-description">Track all income sources and gather required tax documents. Missing any income can result in IRS notices and penalties.</p>
+                            
+                            <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                                <div class="info-card">
+                                    <h5>💼 Employment Income</h5>
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" class="income-checkbox"> 📄 W-2 forms from all employers</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 💰 Tips income records</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 📅 Final paystub of the year</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 🎁 Employer-provided benefits summary</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 🛡️ Unemployment compensation (1099-G)</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h5>📊 Self-Employment & Business</h5>
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" class="income-checkbox"> 📄 1099-NEC forms (contractor income)</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 📄 1099-MISC forms (miscellaneous income)</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 💳 Payment processor statements (PayPal, Venmo, etc.)</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 📋 Business income records</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 💵 Cash income documentation</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h5>🏦 Bank & Investment Income</h5>
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" class="income-checkbox"> 📄 1099-INT forms (interest income)</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 📄 1099-DIV forms (dividend income)</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 📄 1099-B forms (investment sales)</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 💵 Bank statements showing interest</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 📊 Investment account statements</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h5>🏠 Real Estate & Rental</h5>
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" class="income-checkbox"> 🏠 Rental income records</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 📅 Property management statements</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 📄 1099-S forms (real estate sales)</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 📊 Home sale documentation</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h5>💼 Retirement & Benefits</h5>
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" class="income-checkbox"> 📄 1099-R forms (retirement distributions)</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 🏥 Social Security benefits (SSA-1099)</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 🔄 IRA/401k rollover documentation</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 📊 Pension income statements</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h5>📊 Other Income Sources</h5>
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" class="income-checkbox"> 🎲 Gambling winnings (W-2G)</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 💰 Alimony received documentation</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 🎓 Scholarship/grant income (1098-T)</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 📝 Jury duty pay</label>
+                                        <label><input type="checkbox" class="income-checkbox"> 💵 Other miscellaneous income</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="result-section">
+                                <h5>Income Documentation Progress</h5>
+                                <div class="result-details">
+                                    <p><strong>Income Sources Documented:</strong> <span id="income-collected">0</span> of <span id="income-total">29</span></p>
+                                    <div style="background: var(--background-light); height: 20px; border-radius: 10px; margin: 10px 0;">
+                                        <div id="income-progress-bar" style="background: var(--primary-color); height: 100%; border-radius: 10px; width: 0%; transition: width 0.3s ease;"></div>
+                                    </div>
+                                    <p id="income-progress-text">Start checking off income sources as you gather documentation!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Deductions & Credits Tab -->
+                <div id="deductions-credits-tab" class="tab-content">
+                    <div class="calculator-form">
+                        <div class="form-section">
+                            <h4>Deductions & Tax Credits Documentation</h4>
+                            <p class="method-description">Maximize your tax savings by tracking deductions and credits. Proper documentation is essential for claiming these benefits.</p>
+                            
+                            <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px;">
+                                <div class="info-card">
+                                    <h5>🏠 Homeownership Deductions</h5>
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" class="deduction-checkbox"> 📄 Mortgage interest statements (1098)</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🏠 Property tax records</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🔌 PMI (Private Mortgage Insurance) statements</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🏠 Home office expenses</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🔋 Energy efficient home improvements</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h5>🎓 Education Expenses</h5>
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" class="deduction-checkbox"> 📄 1098-T forms (tuition statements)</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🎓 Student loan interest (1098-E)</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 📚 Textbooks and supplies receipts</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 💻 Computer/equipment for education</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🚗 Education-related travel expenses</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h5>🌡️ Medical & Health</h5>
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🏥 Medical and dental expenses</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 💊 Prescription medications</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🚑 Health insurance premiums</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🚗 Medical travel expenses</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 📊 HSA/FSA contribution records</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h5>💰 Charitable Contributions</h5>
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" class="deduction-checkbox"> 📄 Charitable donation receipts</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 👕 Non-cash donation valuations</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🏃 Volunteer mileage records</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🏠 Religious organization contributions</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🎓 Educational institution donations</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h5>💼 Work-Related Expenses</h5>
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" class="deduction-checkbox"> 👕 Uniforms and work clothing</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 📋 Union dues and fees</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 📝 Professional licenses and certifications</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🎓 Job-related training and education</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🚗 Unreimbursed business travel</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h5>👶 Child & Family Credits</h5>
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" class="deduction-checkbox"> 👶 Child Tax Credit documentation</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🏠 Child and Dependent Care expenses</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 📄 Childcare provider tax ID numbers</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 📚 Dependent care flexible spending</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 👶 Adoption expense documentation</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h5>📊 State & Local Taxes</h5>
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🏦 State income tax paid</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🚗 Vehicle registration fees</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 🏠 Local property taxes</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 💰 Sales tax on major purchases</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h5>💳 Other Deductions</h5>
+                                    <div class="checkbox-list">
+                                        <label><input type="checkbox" class="deduction-checkbox"> 💰 Gambling losses (with winnings)</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 📊 Investment management fees</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 📋 Tax preparation fees</label>
+                                        <label><input type="checkbox" class="deduction-checkbox"> 💸 Alimony paid (pre-2019 divorces)</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="result-section">
+                                <h5>Deductions & Credits Progress</h5>
+                                <div class="result-details">
+                                    <p><strong>Items Documented:</strong> <span id="deduction-collected">0</span> of <span id="deduction-total">43</span></p>
+                                    <div style="background: var(--background-light); height: 20px; border-radius: 10px; margin: 10px 0;">
+                                        <div id="deduction-progress-bar" style="background: var(--secondary-color); height: 100%; border-radius: 10px; width: 0%; transition: width 0.3s ease;"></div>
+                                    </div>
+                                    <p id="deduction-progress-text">Track your deductions and credits to maximize tax savings!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Summary & Export Tab -->
+                <div id="summary-tab" class="tab-content">
+                    <div class="calculator-form">
+                        <div class="form-section">
+                            <h4>Tax Preparation Summary & Export</h4>
+                            <p class="method-description">Review your documentation progress and export your personalized tax organizer.</p>
+                            
+                            <div id="summary-content">
+                                <div class="result-section">
+                                    <h5>Overall Progress</h5>
+                                    <div class="comparison-cards">
+                                        <div class="method-card">
+                                            <h5>Income Documentation</h5>
+                                            <div class="method-amount" id="summary-income-percent">0%</div>
+                                            <div class="method-details" id="summary-income-detail">0 of 29 collected</div>
+                                        </div>
+                                        <div class="method-card">
+                                            <h5>Deductions & Credits</h5>
+                                            <div class="method-amount" id="summary-deduction-percent">0%</div>
+                                            <div class="method-details" id="summary-deduction-detail">0 of 43 collected</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="recommendation">
+                                    <h5>Next Steps</h5>
+                                    <div id="recommendation-content">
+                                        <p>Complete the Personal Information tab to generate your customized organizer, then work through the Income and Deductions tabs to track your documentation progress.</p>
+                                    </div>
+                                </div>
+                                
+                                <div style="text-align: center; margin-top: 30px;">
+                                    <button onclick="exportOrganizer()" class="calculate-btn" style="width: auto; margin: 10px;">Export Organizer</button>
+                                    <button onclick="printOrganizer()" class="calculate-btn" style="width: auto; margin: 10px; background: var(--secondary-color);">Print Organizer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </section>
+
+    <!-- Calculator Disclaimer -->
+    <section class="content-section">
+        <div class="disclaimer-section">
+            <div class="calculator-disclaimer">
+                <p><strong>Disclaimer:</strong> This organizer is for educational and organizational purposes only and should not be considered comprehensive tax advice. Tax preparation requirements vary by individual circumstances and change annually. Always consult with a qualified tax professional to ensure compliance with current tax laws and to maximize your tax benefits. E&N Tax & Accounting can provide personalized tax preparation and planning services.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Information -->
+    <section class="content-section">
+        <div class="additional-info">
+            <h3>Individual Tax Preparation Best Practices</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>Document Organization Tips</h4>
+                    <p>Stay organized throughout the tax year for easier preparation:</p>
+                    <ul>
+                        <li>Create digital and physical filing systems by category</li>
+                        <li>Save all tax-related documents in one location</li>
+                        <li>Track deductible expenses with receipts and documentation</li>
+                        <li>Use smartphone apps to photograph receipts immediately</li>
+                        <li>Set up automatic savings for important tax documents</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>Common Missed Deductions</h4>
+                    <p>Don't overlook these frequently missed tax benefits:</p>
+                    <ul>
+                        <li>State and local tax deductions (SALT)</li>
+                        <li>Student loan interest payments</li>
+                        <li>Charitable contributions (cash and non-cash)</li>
+                        <li>Medical expenses above 7.5% of AGI</li>
+                        <li>Home office deductions for remote workers</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>Filing Status & Credits</h4>
+                    <p>Optimize your tax situation with proper filing choices:</p>
+                    <ul>
+                        <li>Choose the most beneficial filing status</li>
+                        <li>Claim all eligible dependents and credits</li>
+                        <li>Consider Roth IRA conversions in low-income years</li>
+                        <li>Plan charitable giving for maximum tax benefit</li>
+                        <li>Time major purchases for optimal tax treatment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-content">
+                <h3>Ready to Take Control of Your Financial Future?</h3>
+                <p>Schedule your consultation today and discover how we can help you thrive.</p>
+                <a href="../contact.html" class="cta-button">Book Your Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>E&N Tax & Accounting</h4>
+                <p class="company-description">Building financial success through expertise and dedication.</p>
+                <p class="established-year">Established 2024</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <div class="quick-links-grid">
+                    <div>
+                        <a href="../index.html">About</a>
+                        <a href="../services.html">Services</a>
+                        <a href="../tools.html">Tools & Resources</a>
+                    </div>
+                    <div>
+                        <a href="../shop.html">Shop</a>
+                        <a href="../blog.html">Blog</a>
+                        <a href="../contact.html">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><a href="mailto:info@entaxaccounting.com" style="color: rgba(255,255,255,0.9); text-decoration: none;">info@entaxaccounting.com</a></p>
+                <p>Currently nurturing existing clients</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Switcher Functions
+        function toggleThemeSwitcher() {
+            const switcher = document.getElementById('themeSwitcher');
+            switcher.classList.toggle('collapsed');
+        }
+
+        function setTheme(theme) {
+            const body = document.body;
+            const buttons = document.querySelectorAll('.theme-btn');
+            
+            // Remove all theme classes
+            body.classList.remove('theme-professional', 'theme-corporate');
+            
+            // Remove active class from all buttons
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add appropriate theme class
+            if (theme === 'professional') {
+                body.classList.add('theme-professional');
+                buttons[1].classList.add('active');
+            } else if (theme === 'corporate') {
+                body.classList.add('theme-corporate');
+                buttons[2].classList.add('active');
+            } else {
+                // Default warm theme
+                buttons[0].classList.add('active');
+            }
+            
+            // Collapse the switcher after selection
+            document.getElementById('themeSwitcher').classList.add('collapsed');
+        }
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Mobile Dropdown Toggle
+        function toggleMobileDropdown(event) {
+            if (window.innerWidth <= 768) {
+                event.preventDefault();
+                const dropdown = event.target.closest('.dropdown');
+                dropdown.classList.toggle('mobile-open');
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const navLinks = document.getElementById('navLinks');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                // Also close any open mobile dropdowns
+                document.querySelectorAll('.dropdown.mobile-open').forEach(dropdown => {
+                    dropdown.classList.remove('mobile-open');
+                });
+            }
+        });
+
+        // Add click event to dropdown toggle for mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownToggle = document.querySelector('.dropdown-toggle');
+            if (dropdownToggle) {
+                dropdownToggle.addEventListener('click', toggleMobileDropdown);
+            }
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 25px rgba(0,0,0,0.25)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.15)';
+            }
+        });
+
+        // ===== INDIVIDUAL TAX ORGANIZER FUNCTIONS =====
+        
+        // Store personal data
+        let personalData = {
+            filingStatus: '',
+            dependents: 0,
+            familySituations: [],
+            housingStatus: '',
+            lifeEvents: [],
+            taxYear: 2024
+        };
+        
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Remove active class from all tabs and buttons
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to selected tab and button
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+            
+            // Update summary when switching to summary tab
+            if (tabName === 'summary') {
+                updateSummary();
+            }
+        }
+        
+        // Generate personal checklist based on information
+        function generatePersonalChecklist() {
+            // Collect personal information
+            const filingStatus = document.querySelector('input[name="filing_status"]:checked');
+            const dependents = document.getElementById('dependents_count').value;
+            const familySituations = Array.from(document.querySelectorAll('input[name="family_situations"]:checked')).map(cb => cb.value);
+            const housingStatus = document.querySelector('input[name="housing_status"]:checked');
+            const lifeEvents = Array.from(document.querySelectorAll('input[name="life_events"]:checked')).map(cb => cb.value);
+            const taxYear = document.getElementById('tax_year').value;
+            
+            if (!filingStatus) {
+                alert('Please select your filing status to generate a customized organizer.');
+                return;
+            }
+            
+            // Store personal data
+            personalData = {
+                filingStatus: filingStatus.value,
+                dependents: parseInt(dependents),
+                familySituations: familySituations,
+                housingStatus: housingStatus ? housingStatus.value : '',
+                lifeEvents: lifeEvents,
+                taxYear: parseInt(taxYear)
+            };
+            
+            // Update recommendation content
+            updateRecommendationContent();
+            
+            // Switch to income sources tab
+            switchTab('income-sources');
+            
+            // Initialize progress tracking
+            updateProgressTracking();
+        }
+        
+        // Update recommendation content based on personal data
+        function updateRecommendationContent() {
+            const content = document.getElementById('recommendation-content');
+            let recommendations = [];
+            
+            // Filing status specific recommendations
+            if (personalData.filingStatus === 'married_joint') {
+                recommendations.push('Gather both spouses\' W-2s and income documents');
+                recommendations.push('Consider spouse IRA contributions if eligible');
+            } else if (personalData.filingStatus === 'head_household') {
+                recommendations.push('Ensure you qualify for Head of Household status');
+                recommendations.push('Gather dependent care expenses for credits');
+            }
+            
+            // Dependent-specific recommendations
+            if (personalData.dependents > 0) {
+                recommendations.push('Collect Social Security cards for all dependents');
+                recommendations.push('Gather childcare expense receipts and provider information');
+            }
+            
+            // Family situation recommendations
+            if (personalData.familySituations.includes('children_under_17')) {
+                recommendations.push('Ensure Child Tax Credit eligibility documentation');
+            }
+            
+            if (personalData.familySituations.includes('childcare_expenses')) {
+                recommendations.push('Collect Form W-10 from childcare providers');
+            }
+            
+            // Life event recommendations
+            if (personalData.lifeEvents.includes('got_married')) {
+                recommendations.push('Consider filing status options (joint vs separate)');
+            }
+            
+            if (personalData.lifeEvents.includes('bought_home')) {
+                recommendations.push('Gather home purchase documents and mortgage interest statements');
+            }
+            
+            if (personalData.lifeEvents.includes('education')) {
+                recommendations.push('Collect 1098-T forms and education expense receipts');
+            }
+            
+            content.innerHTML = `
+                <p>Based on your personal situation, here are your key tax preparation priorities:</p>
+                <ul>
+                    ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                </ul>
+                <p><strong>Next:</strong> Work through the Income and Deductions tabs to ensure you have all required documentation.</p>
+            `;
+        }
+        
+        // Initialize progress tracking
+        function updateProgressTracking() {
+            // Set up income progress tracking
+            const incomeCheckboxes = document.querySelectorAll('.income-checkbox');
+            incomeCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateIncomeProgress);
+            });
+            
+            // Set up deduction progress tracking
+            const deductionCheckboxes = document.querySelectorAll('.deduction-checkbox');
+            deductionCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateDeductionProgress);
+            });
+            
+            // Initialize counts
+            document.getElementById('income-total').textContent = incomeCheckboxes.length;
+            document.getElementById('deduction-total').textContent = deductionCheckboxes.length;
+            
+            updateIncomeProgress();
+            updateDeductionProgress();
+        }
+        
+        // Update income progress
+        function updateIncomeProgress() {
+            const checkboxes = document.querySelectorAll('.income-checkbox');
+            const checked = document.querySelectorAll('.income-checkbox:checked');
+            const percentage = Math.round((checked.length / checkboxes.length) * 100);
+            
+            document.getElementById('income-collected').textContent = checked.length;
+            document.getElementById('income-progress-bar').style.width = percentage + '%';
+            
+            const progressText = document.getElementById('income-progress-text');
+            if (percentage === 0) {
+                progressText.textContent = 'Start checking off income sources as you gather documentation!';
+            } else if (percentage < 50) {
+                progressText.textContent = 'Good progress! Keep gathering your income documentation.';
+            } else if (percentage < 100) {
+                progressText.textContent = 'Great work! You\'re more than halfway there.';
+            } else {
+                progressText.textContent = 'Excellent! All income sources documented.';
+            }
+        }
+        
+        // Update deduction progress
+        function updateDeductionProgress() {
+            const checkboxes = document.querySelectorAll('.deduction-checkbox');
+            const checked = document.querySelectorAll('.deduction-checkbox:checked');
+            const percentage = Math.round((checked.length / checkboxes.length) * 100);
+            
+            document.getElementById('deduction-collected').textContent = checked.length;
+            document.getElementById('deduction-progress-bar').style.width = percentage + '%';
+            
+            const progressText = document.getElementById('deduction-progress-text');
+            if (percentage === 0) {
+                progressText.textContent = 'Track your deductions and credits to maximize tax savings!';
+            } else if (percentage < 50) {
+                progressText.textContent = 'Good work! Keep documenting your deductions and credits.';
+            } else if (percentage < 100) {
+                progressText.textContent = 'Excellent progress! You\'re building a strong tax file.';
+            } else {
+                progressText.textContent = 'Outstanding! All deductions and credits documented.';
+            }
+        }
+        
+        // Update summary tab
+        function updateSummary() {
+            const incomeChecked = document.querySelectorAll('.income-checkbox:checked').length;
+            const incomeTotal = document.querySelectorAll('.income-checkbox').length;
+            const deductionChecked = document.querySelectorAll('.deduction-checkbox:checked').length;
+            const deductionTotal = document.querySelectorAll('.deduction-checkbox').length;
+            
+            const incomePercent = Math.round((incomeChecked / incomeTotal) * 100);
+            const deductionPercent = Math.round((deductionChecked / deductionTotal) * 100);
+            
+            document.getElementById('summary-income-percent').textContent = incomePercent + '%';
+            document.getElementById('summary-income-detail').textContent = `${incomeChecked} of ${incomeTotal} collected`;
+            document.getElementById('summary-deduction-percent').textContent = deductionPercent + '%';
+            document.getElementById('summary-deduction-detail').textContent = `${deductionChecked} of ${deductionTotal} collected`;
+            
+            // Highlight completed sections
+            const incomeCard = document.querySelector('.method-card:first-child');
+            const deductionCard = document.querySelector('.method-card:last-child');
+            
+            if (incomePercent === 100) {
+                incomeCard.classList.add('winner');
+            } else {
+                incomeCard.classList.remove('winner');
+            }
+            
+            if (deductionPercent === 100) {
+                deductionCard.classList.add('winner');
+            } else {
+                deductionCard.classList.remove('winner');
+            }
+        }
+        
+        // Export organizer as text file
+        function exportOrganizer() {
+            const incomeChecked = Array.from(document.querySelectorAll('.income-checkbox:checked')).map(cb => cb.parentElement.textContent.trim());
+            const deductionChecked = Array.from(document.querySelectorAll('.deduction-checkbox:checked')).map(cb => cb.parentElement.textContent.trim());
+            
+            const content = `INDIVIDUAL TAX DOCUMENT ORGANIZER\n\n` +
+                `Filing Status: ${personalData.filingStatus || 'Not specified'}\n` +
+                `Dependents: ${personalData.dependents}\n` +
+                `Tax Year: ${personalData.taxYear}\n` +
+                `Generated: ${new Date().toLocaleDateString()}\n\n` +
+                `INCOME SOURCES DOCUMENTED (${incomeChecked.length}):${incomeChecked.length > 0 ? '\n' + incomeChecked.join('\n') : '\nNone checked'}\n\n` +
+                `DEDUCTIONS & CREDITS DOCUMENTED (${deductionChecked.length}):${deductionChecked.length > 0 ? '\n' + deductionChecked.join('\n') : '\nNone checked'}\n\n` +
+                `Generated by E&N Tax & Accounting - entaxaccounting.com`;
+                
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `individual-tax-organizer-${personalData.taxYear}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Print organizer
+        function printOrganizer() {
+            const printContent = document.getElementById('summary-content').innerHTML;
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                    <head><title>Individual Tax Document Organizer</title></head>
+                    <body style="font-family: Arial, sans-serif; padding: 20px;">
+                        <h1>Individual Tax Document Organizer</h1>
+                        <p><strong>Tax Year:</strong> ${personalData.taxYear}</p>
+                        <p><strong>Generated:</strong> ${new Date().toLocaleDateString()}</p>
+                        ${printContent}
+                        <hr style="margin-top: 30px;">
+                        <p><em>Generated by E&N Tax & Accounting - entaxaccounting.com</em></p>
+                    </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+    </script>
+</body>
+</html>

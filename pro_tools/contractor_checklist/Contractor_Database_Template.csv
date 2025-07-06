@@ -1,0 +1,42 @@
+CONTRACTOR DATABASE,,,,,,,,,,,,,,,
+Comprehensive contractor information and management,,,,,,,,,,,,,,,
+Last Updated:,=TODAY(),,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+CONTRACTOR INFORMATION,,,,,,,,,,,,,,,
+ID,Contractor Name,Business Name,Contact Person,Phone,Email,Address,Classification,Start Date,End Date,Active,Notes
+C001,John Smith,Smith Consulting LLC,John Smith,(555) 123-4567,john@smithconsulting.com,"123 Main St, City, ST 12345",Independent Contractor,1/15/2024,,Yes,Marketing consultant - excellent performance
+C002,Sarah Johnson,Johnson Design Co,Sarah Johnson,(555) 234-5678,sarah@johnsondesign.com,"456 Oak Ave, City, ST 12345",Independent Contractor,2/1/2024,,Yes,Graphic designer - project-based work
+C003,Mike Davis,Davis Development,Mike Davis,(555) 345-6789,mike@davisdevelopment.com,"789 Pine Rd, City, ST 12345",Independent Contractor,3/10/2024,,Yes,Web developer - some employee-like factors
+C004,Lisa Chen,Chen Photography,Lisa Chen,(555) 456-7890,lisa@chenphotography.com,"321 Elm St, City, ST 12345",Independent Contractor,4/5/2024,,Yes,Corporate photographer - event-based
+C005,Robert Wilson,Wilson Legal Services,Robert Wilson,(555) 567-8901,robert@wilsonlegal.com,"654 Maple Dr, City, ST 12345",Independent Contractor,1/20/2024,,Yes,Legal consultant - monthly retainer
+C006,Emily Rodriguez,Rodriguez Marketing,Emily Rodriguez,(555) 678-9012,emily@rodriguezmarketing.com,"987 Cedar Ln, City, ST 12345",Independent Contractor,5/15/2024,,Yes,Digital marketing specialist
+C007,David Brown,Brown IT Solutions,David Brown,(555) 789-0123,david@brownitcom,"147 Birch Way, City, ST 12345",Independent Contractor,6/1/2024,,Yes,IT support - MISSING W-9 - High Risk
+C008,Jennifer Taylor,Taylor Writing Services,Jennifer Taylor,(555) 890-1234,jen@taylorwriting.com,"258 Ash Ct, City, ST 12345",Independent Contractor,7/10/2024,,Yes,Content writer - freelance articles
+C009,Michael Green,Green Landscaping,Michael Green,(555) 901-2345,mike@greenlandscaping.com,"369 Willow St, City, ST 12345",Independent Contractor,3/15/2024,12/31/2024,No,Seasonal landscaping - contract ended
+C010,Amanda White,White Accounting,Amanda White,(555) 012-3456,amanda@whiteaccounting.com,"741 Spruce Ave, City, ST 12345",Independent Contractor,8/1/2024,,Yes,Bookkeeping services - under $600 threshold
+,,,,,,,,,,,,,,,
+TAX INFORMATION,,,,,,,,,,,,,,,
+ID,Contractor Name,SSN/EIN,TIN Type,Backup Withholding,State Registration,Federal Registration,W-9 Date,W-9 Status,1099 Type,Payment Terms,Method
+C001,John Smith,12-3456789,EIN,No,Yes,Yes,1/20/2024,Complete,1099-NEC,Net 30,Check
+C002,Sarah Johnson,234-56-7890,SSN,No,Yes,Yes,2/5/2024,Complete,1099-NEC,Net 15,ACH
+C003,Mike Davis,34-5678901,EIN,No,Yes,Yes,3/15/2024,Complete,1099-NEC,Net 30,Check
+C004,Lisa Chen,456-78-9012,SSN,No,Yes,Yes,4/10/2024,Complete,1099-NEC,Net 15,Credit Card
+C005,Robert Wilson,56-7890123,EIN,No,Yes,Yes,1/25/2024,Complete,1099-NEC,Net 30,ACH
+C006,Emily Rodriguez,678-90-1234,SSN,No,Yes,Yes,5/20/2024,Complete,1099-NEC,Net 15,Check
+C007,David Brown,78-9012345,EIN,Yes,Yes,Yes,,Missing,1099-NEC,Net 30,ACH
+C008,Jennifer Taylor,890-12-3456,SSN,No,Yes,Yes,7/15/2024,Complete,1099-NEC,Net 15,Check
+C009,Michael Green,90-1234567,EIN,No,Yes,Yes,3/20/2024,Complete,1099-NEC,COD,Cash
+C010,Amanda White,012-34-5678,SSN,No,Yes,Yes,8/5/2024,Complete,1099-NEC,Net 30,ACH
+,,,,,,,,,,,,,,,
+CONTRACT DETAILS,,,,,,,,,,,,,,,
+ID,Contractor Name,Contract Type,Rate/Fee,Rate Type,Project Description,Department,Manager,Contract Start,Contract End,Auto Renew,Status
+C001,John Smith,Service Agreement,$150,Hourly,Marketing strategy and implementation,Marketing,Jane Doe,1/15/2024,12/31/2024,Yes,Active
+C002,Sarah Johnson,Project Contract,$5000,Fixed,Website redesign project,IT,John Manager,2/1/2024,6/30/2024,No,Complete
+C003,Mike Davis,Service Agreement,$125,Hourly,Web development and maintenance,IT,John Manager,3/10/2024,12/31/2024,Yes,Active
+C004,Lisa Chen,Per Event,$500,Per Event,Corporate event photography,Marketing,Jane Doe,4/5/2024,12/31/2024,Yes,Active
+C005,Robert Wilson,Retainer,$3000,Monthly,Legal consultation and review,Legal,CEO,1/20/2024,12/31/2024,Yes,Active
+C006,Emily Rodriguez,Service Agreement,$100,Hourly,Social media management,Marketing,Jane Doe,5/15/2024,12/31/2024,Yes,Active
+C007,David Brown,Service Agreement,$95,Hourly,IT support and maintenance,IT,John Manager,6/1/2024,12/31/2024,Yes,Active
+C008,Jennifer Taylor,Per Project,$75,Hourly,Content creation and copywriting,Marketing,Jane Doe,7/10/2024,12/31/2024,Yes,Active
+C009,Michael Green,Seasonal,$2500,Monthly,Landscape maintenance,Facilities,Office Manager,3/15/2024,12/31/2024,No,Ended
+C010,Amanda White,Service Agreement,$85,Hourly,Monthly bookkeeping services,Finance,CFO,8/1/2024,12/31/2024,Yes,Active

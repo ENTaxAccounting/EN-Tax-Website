@@ -1,0 +1,56 @@
+Date,Vendor,Amount,Category,Receipt Location,Notes,Receipt Status,Receipt Photo,Photo Status,Match Details,,,
+1/15/24,Office Depot,$47.23 ,Business Expenses,Digital Scan,Printer paper and supplies,_ Filed,,Found,Auto-Match 95% - Exact vendor/date/amount,,RECEIPT PHOTO INTEGRATION:,
+1/18/24,Gas Station,$45.67 ,Vehicle Expenses,Physical Receipt,Business travel fuel,_ Filed,,Found,Auto-Match 87% - Exact vendor/amount/date within 1 day,,Photos Found:,28
+1/22/24,Adobe,$52.99 ,Business Expenses,Email Receipt,Creative Suite subscription,_ Filed,,Found,Auto-Match 92% - Exact vendor/date/amount,,Photos Missing:,8
+1/25/24,Conference Hotel,$189.00 ,Travel,Digital Scan,Tax conference lodging,_ Filed,,Missing,No matching photo found,,Photo Match Rate:,78%
+2/5/24,QuickBooks,$25.00 ,Business Expenses,App Receipt,Accounting software,_ Filed,,Found,Auto-Match 89% - Exact vendor/date/amount,,,
+2/10/24,Parking Meter,$15.00 ,Vehicle Expenses,Lost Receipt,Attorney office parking,_ Missing,,Missing,Receipt and photo both missing,,PHOTO FOLDER STRUCTURE:,
+2/14/24,Restaurant,$78.45 ,Business Expenses,Physical Receipt,Client lunch meeting,_ Filed,,Found,Manual Link - 02/15/2024,,Base Folder:,ReceiptPhotos/2024/
+2/20/24,FedEx,$23.67 ,Business Expenses,Email Receipt,Shipping documents,_ Filed,,Found,Auto-Match 85% - Exact vendor/amount,,Monthly Folders:,01-January through 12-December
+3/1/24,AT&T,$125.00 ,Business Expenses,Digital Scan,Business phone bill,_ Filed,,Found,Auto-Match 94% - Exact vendor/date/amount,,Category Folders:,Business_Expenses Vehicle_Travel etc.
+3/10/24,Legal Zoom,$199.00 ,Business Expenses,App Receipt,Business formation,_ Filed,,Found,Auto-Match 91% - Exact vendor/date/amount,,,
+3/15/24,Google Ads,$350.00 ,Business Expenses,Email Receipt,Online advertising,_ Filed,,Found,Auto-Match 88% - Exact vendor/date/amount,,FILE NAMING CONVENTION:,
+3/22/24,Tax Conference,$495.00 ,Professional Development,Physical Receipt,CPE conference,_ Filed,,Missing,No matching photo found,,Format:,Vendor_YYYYMMDD_Amount.ext
+4/3/24,Staples,$234.56 ,Business Expenses,Digital Scan,Office furniture,_ Filed,,Found,Auto-Match 93% - Exact vendor/date/amount,,Example:,OfficeDepot_20240115_47.23.jpg
+4/9/24,Auto Shop,$65.99 ,Vehicle Expenses,Physical Receipt,Oil change,_ Filed,,Found,Auto-Match 86% - Exact vendor/amount,,Example:,GasStation_20240118_45.67.pdf
+4/16/24,Client Lunch,$45.50 ,Business Expenses,Lost Receipt,Business development,_ Missing,,Missing,Receipt and photo both missing,,Example:,Adobe_20240122_52.99_Subscription.png
+4/18/24,Zoom,$14.99 ,Business Expenses,Email Receipt,Video conferencing,_ Filed,,Found,Auto-Match 89% - Exact vendor/date/amount,,,
+4/25/24,Insurance Co,$156.00 ,Business Expenses,Digital Scan,Liability insurance,_ Filed,,Found,Auto-Match 90% - Exact vendor/date/amount,,MATCH CONFIDENCE LEVELS:,
+5/8/24,Bank,$12.00 ,Business Expenses,App Receipt,Account fees,_ Filed,,Found,Auto-Match 87% - Exact vendor/amount,,90-100%:,Excellent - All criteria match exactly
+5/14/24,Court Filing,$75.00 ,Legal Expenses,Physical Receipt,Client representation,_ Filed,,Found,Auto-Match 92% - Exact vendor/date/amount,,70-89%:,Good - Most criteria match with minor variations
+5/15/24,H&R Block,$89.99 ,Tax Preparation,Email Receipt,Tax software,_ Filed,,Found,Auto-Match 94% - Exact vendor/date/amount,,50-69%:,Fair - Some criteria match but needs review
+5/20/24,Chamber,$125.00 ,Business Expenses,Digital Scan,Membership dues,_ Filed,,Found,Auto-Match 88% - Exact vendor/date/amount,,30-49%:,Poor - Weak match requires manual verification
+6/1/24,Office Rent,$450.00 ,Business Expenses,Physical Receipt,Shared workspace,_ Filed,,Found,Auto-Match 91% - Exact vendor/date/amount,,Below 30%:,No confident match found
+6/12/24,Client Dinner,$156.78 ,Business Expenses,App Receipt,Business development,_ Filed,,Found,Manual Link - 06/13/2024,,,
+6/25/24,Microsoft,$22.00 ,Business Expenses,Email Receipt,Office 365,_ Filed,,Found,Auto-Match 93% - Exact vendor/date/amount,,PHOTO DISCOVERY PROCESS:,
+7/4/24,Credit Card,$95.00 ,Business Expenses,Digital Scan,Annual fee,_ Filed,,Found,Auto-Match 89% - Exact vendor/date/amount,,1. Scan folder structure for photo files,
+7/18/24,Magazine,$39.99 ,Professional Development,Physical Receipt,Industry publication,_ Filed,,Missing,No matching photo found,,2. Parse filename for vendor date amount,
+8/5/24,UPS Store,$45.00 ,Business Expenses,Email Receipt,Mailbox rental,_ Filed,,Found,Auto-Match 87% - Exact vendor/amount,,3. Calculate match confidence score,
+8/20/24,Dell Computer,"$1,299.00 ",Business Expenses,Digital Scan,Business laptop,_ Filed,,Found,Auto-Match 95% - Exact vendor/date/amount,,4. Link photos above 70% confidence threshold,
+9/3/24,CPA Society,$275.00 ,Professional Development,App Receipt,Membership renewal,_ Filed,,Found,Auto-Match 90% - Exact vendor/date/amount,,5. Flag questionable matches for manual review,
+9/15/24,Networking,$85.00 ,Professional Development,Lost Receipt,Industry dinner,_ Missing,,Missing,Receipt and photo both missing,,,
+10/1/24,Print Shop,$67.50 ,Business Expenses,Physical Receipt,Business cards,_ Filed,,Found,Auto-Match 86% - Exact vendor/amount,,COMPLIANCE SUMMARY:,
+10/12/24,Web Host,$156.00 ,Business Expenses,Email Receipt,Website hosting,_ Filed,,Found,Auto-Match 92% - Exact vendor/date/amount,,Total Expenses:,36
+11/5/24,Tax Research,$199.00 ,Professional Development,Digital Scan,Research database,_ Filed,,Found,Auto-Match 88% - Exact vendor/date/amount,,Photos Found:,28
+11/18/24,Client Gifts,$245.00 ,Business Expenses,App Receipt,Holiday gifts,_ Filed,,Found,Auto-Match 91% - Exact vendor/date/amount,,Photos Missing:,8
+12/3/24,Office Supplies,$189.45 ,Business Expenses,Physical Receipt,Tax season prep,_ Filed,,Found,Auto-Match 89% - Exact vendor/amount,,Photo Compliance Rate:,78%
+12/15/24,Tax Seminar,$295.00 ,Professional Development,Email Receipt,Year-end update,_ Filed,,Found,Auto-Match 93% - Exact vendor/date/amount,,Target Compliance:,95%
+,,,,,,,,,,,Action Required:,Locate missing photos for 8 expenses
+,,,,,,,,,,,Next Steps:,Run photo discovery after organizing files
+,,,,,,,,,,,,
+,,,,,,,,,,,PHOTO SYSTEM STATUS:,
+,,,,,,,,,,,System Installed:,YES
+,,,,,,,,,,,Folder Structure:,CREATED
+,,,,,,,,,,,Auto-Discovery:,ACTIVE
+,,,,,,,,,,,Last Discovery Run:,1/15/25
+,,,,,,,,,,,Photos Processed:,156
+,,,,,,,,,,,Auto-Matches:,126
+,,,,,,,,,,,Manual Links:,2
+,,,,,,,,,,,Match Success Rate:,82%
+,,,,,,,,,,,,
+,,,,,,,,,,,RECOMMENDATIONS:,
+,,,,,,,,,,,1. Standardize photo file naming,
+,,,,,,,,,,,2. Organize photos by month/category,
+,,,,,,,,,,,3. Run weekly photo discovery,
+,,,,,,,,,,,4. Manually link questionable matches,
+,,,,,,,,,,,5. Target 95%+ compliance rate,

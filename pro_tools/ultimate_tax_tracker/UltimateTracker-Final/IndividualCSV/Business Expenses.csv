@@ -1,0 +1,35 @@
+Date,Vendor/Payee,Description,Category,Business %,Amount,Receipt?,,,
+01/15/2024,Office Depot,Printer paper and supplies,Office Supplies,100%, $47.23 ,Yes,,,
+01/22/2024,Adobe,Creative Suite subscription,Equipment & Software,100%, $52.99 ,Yes,,,
+02/05/2024,QuickBooks,Accounting software monthly,Equipment & Software,100%, $25.00 ,Yes,,,
+02/14/2024,Business Lunch,Client meeting lunch,Meals & Entertainment,50%, $78.45 ,Yes,,,
+02/20/2024,FedEx,Shipping client documents,Professional Services,100%, $23.67 ,Yes,,,
+03/01/2024,AT&T,Business phone bill,Utilities (Business Portion),80%, $125.00 ,Yes,,,
+03/10/2024,Legal Zoom,Business formation docs,Legal & Professional Fees,100%, $199.00 ,Yes,,,
+03/15/2024,Google Ads,Online advertising campaign,Marketing & Advertising,100%, $350.00 ,Yes,,,
+03/22/2024,Conference Registration,Tax conference attendance,Conference & Training,100%, $495.00 ,Yes,,,
+04/03/2024,Staples,Office chair and desk supplies,Office Supplies,100%, $234.56 ,Yes,,Office Supplies, $471.24 
+04/18/2024,Zoom,Video conferencing subscription,Equipment & Software,100%, $14.99 ,Yes,,Equipment & Software," $1,413.98 "
+04/25/2024,Business Insurance,General liability insurance,Insurance (Business Portion),100%, $156.00 ,Yes,,Professional Services, $357.66 
+05/08/2024,Bank of America,Business account fees,Bank Fees,100%, $12.00 ,Yes,,Marketing & Advertising, $573.50 
+05/15/2024,H&R Block,Tax preparation software,Professional Services,100%, $89.99 ,Yes,,Utilities (Business Portion), $125.00 
+05/20/2024,Chamber of Commerce,Annual membership dues,Subscriptions & Memberships,100%, $125.00 ,Yes,,Rent (Business Portion), $450.00 
+06/01/2024,Office Space Rent,Shared office space rental,Rent (Business Portion),100%, $450.00 ,Yes,,Insurance (Business Portion), $156.00 
+06/12/2024,Client Dinner,Business development dinner,Meals & Entertainment,50%, $156.78 ,Yes,,Meals & Entertainment, $235.23 
+06/25/2024,Microsoft,Office 365 Business subscription,Equipment & Software,100%, $22.00 ,No,,Conference & Training, $875.00 
+07/04/2024,American Express,Business credit card annual fee,Bank Fees,100%, $95.00 ,Yes,,Subscriptions & Memberships, $439.99 
+07/18/2024,Trade Publication,Industry magazine subscription,Subscriptions & Memberships,100%, $39.99 ,Yes,,Legal & Professional Fees, $199.00 
+08/05/2024,UPS Store,Business mailbox rental,Professional Services,100%, $45.00 ,Yes,,Bank Fees, $107.00 
+08/20/2024,Dell,Business laptop computer,Equipment & Software,100%," $1,299.00 ",Yes,,Other Business Expenses, $245.00 
+09/03/2024,Professional Association,CPA membership renewal,Subscriptions & Memberships,100%, $275.00 ,Yes,,Professional Development,
+09/15/2024,Networking Event,Industry networking dinner,Conference & Training,100%, $85.00 ,Yes,,Vehicle & Travel,
+10/01/2024,Business Cards,New business card printing,Marketing & Advertising,100%, $67.50 ,Yes,,,
+10/12/2024,Website Hosting,Annual hosting renewal,Marketing & Advertising,100%, $156.00 ,Yes,,TOTAL BUSINESS EXPENSES," $5,648.60 "
+11/05/2024,Tax Research,Tax law research database,Professional Services,100%, $199.00 ,Yes,,,
+11/18/2024,Client Gift,Holiday client gifts,Other Business Expenses,100%, $245.00 ,Yes,,,
+12/03/2024,Year-End Supplies,Office supplies for tax season,Office Supplies,100%, $189.45 ,Yes,,,
+12/15/2024,Professional Development,Tax update seminar,Conference & Training,100%, $295.00 ,Yes,,,
+12/15/2024,Adobe,Creative Suite subscription,Rent,100%, $300.00 ,No,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
