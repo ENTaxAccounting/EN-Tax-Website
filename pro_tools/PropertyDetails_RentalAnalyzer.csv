@@ -1,0 +1,26 @@
+PROPERTY DETAILS - Enter Your Rental Property Information,,,,,,,,,,,
+,,,,,,,,,,,
+Property Address,Property Type,Purchase Price,Purchase Date,Current Value,Monthly Rent,Annual Rent,Occupancy Rate,Loan Amount,Interest Rate,Loan Term,Property Tax/Year
+123 Main St,Single Family,$250000,1/1/2023,$275000,$2500,$30000,95%,$200000,6.5%,30,$3500
+456 Oak Ave,Duplex,$350000,6/15/2022,$375000,$3200,$38400,98%,$280000,5.75%,30,$4800
+789 Elm Dr,Condo,$175000,3/1/2024,$180000,$1800,$21600,100%,$140000,7%,30,$2200
+321 Pine Rd,Townhouse,$225000,9/1/2023,$230000,$2100,$25200,92%,$180000,6.25%,30,$2900
+654 Maple Ln,Single Family,$300000,11/1/2022,$310000,$2800,$33600,100%,$240000,6%,30,$4100
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+PROPERTY EXPENSES (Annual),,,,,,,,,,,
+Property Address,Insurance,HOA Fees,Property Mgmt %,Maintenance Reserve %,Utilities (Owner Paid),Marketing/Advertising,Legal/Professional,Pest Control,Landscaping,Snow Removal,Other Annual
+123 Main St,$1800,$0,8%,5%,$600,$200,$300,$240,$800,$300,$0
+456 Oak Ave,$2400,$0,10%,6%,$1200,$300,$400,$360,$1000,$400,$0
+789 Elm Dr,$1200,$600,0%,4%,$0,$150,$200,$180,$0,$0,$0
+321 Pine Rd,$1500,$300,8%,5%,$480,$200,$250,$240,$600,$200,$0
+654 Maple Ln,$2100,$0,10%,5%,$720,$250,$350,$300,$900,$350,$0
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+ADDITIONAL PROPERTY INFO,,,,,,,,,,,
+Property Address,Year Built,Square Feet,Bedrooms,Bathrooms,Parking,Last Renovation,Next Major Repair,Tenant Lease End,Market Rent Comp,Notes,
+123 Main St,1995,1800,3,2,2 Car Garage,2020,Roof 2028,12/31/2024,$2600,Great tenant - consider renewal,
+456 Oak Ave,1985,2400,4,3,Driveway,2019,HVAC 2025,6/30/2025,$3300,Below market rent,
+789 Elm Dr,2010,1200,2,2,1 Assigned,2022,None planned,3/31/2025,$1850,HOA increasing fees next year,
+321 Pine Rd,2000,1600,3,2.5,2 Car Garage,2021,Deck 2026,9/30/2024,$2200,Consider rent increase,
+654 Maple Ln,1990,2000,3,2,Driveway,2018,Windows 2026,11/30/2024,$2900,Long-term tenant since 2020,

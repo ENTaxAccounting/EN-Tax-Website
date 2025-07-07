@@ -1,0 +1,37 @@
+RENTAL PROPERTY ANALYZER PRO - PORTFOLIO DASHBOARD,,,,,,,,,
+E&N Tax & Accounting,,,,,,,,,
+,,,,,,,,,
+PORTFOLIO OVERVIEW,,,,,,,,,
+,,,,,,,,,
+Key Metrics,Value,,Property Performance,,,,,
+Total Properties,=COUNTIF('Property Details'!A:A;">0"),,Property,Monthly Cash Flow,Annual Cash Flow,Cap Rate,Cash-on-Cash Return,Occupancy Rate
+Total Investment,"=SUMIF('Property Details'!A:A;"">0"";'Property Details'!C:C)",,Property 1,=IF('Property Details'!A2<>"",'Cash Flow Analysis'!D15,0),=IF('Property Details'!A2<>"",'Cash Flow Analysis'!E15,0),=IF('Property Details'!A2<>"",'ROI Calculator'!B8,0),=IF('Property Details'!A2<>"",'ROI Calculator'!B9,0),=IF('Property Details'!A2<>"",'Property Details'!H2,0)
+Total Monthly Income,"=SUMIF('Cash Flow Analysis'!A:A;"">0"";'Cash Flow Analysis'!D3:D22)",,Property 2,=IF('Property Details'!A3<>"",'Cash Flow Analysis'!D16,0),=IF('Property Details'!A3<>"",'Cash Flow Analysis'!E16,0),=IF('Property Details'!A3<>"",'ROI Calculator'!C8,0),=IF('Property Details'!A3<>"",'ROI Calculator'!C9,0),=IF('Property Details'!A3<>"",'Property Details'!H3,0)
+Total Monthly Expenses,"=SUMIF('Cash Flow Analysis'!A:A;"">0"";'Cash Flow Analysis'!D10:D29)",,Property 3,=IF('Property Details'!A4<>"",'Cash Flow Analysis'!D17,0),=IF('Property Details'!A4<>"",'Cash Flow Analysis'!E17,0),=IF('Property Details'!A4<>"",'ROI Calculator'!D8,0),=IF('Property Details'!A4<>"",'ROI Calculator'!D9,0),=IF('Property Details'!A4<>"",'Property Details'!H4,0)
+Total Monthly Cash Flow,=B7-B8,,Property 4,=IF('Property Details'!A5<>"",'Cash Flow Analysis'!D18,0),=IF('Property Details'!A5<>"",'Cash Flow Analysis'!E18,0),=IF('Property Details'!A5<>"",'ROI Calculator'!E8,0),=IF('Property Details'!A5<>"",'ROI Calculator'!E9,0),=IF('Property Details'!A5<>"",'Property Details'!H5,0)
+Portfolio Cap Rate,=IF(B6>0;B9*12/B6;0),,Property 5,=IF('Property Details'!A6<>"",'Cash Flow Analysis'!D19,0),=IF('Property Details'!A6<>"",'Cash Flow Analysis'!E19,0),=IF('Property Details'!A6<>"",'ROI Calculator'!F8,0),=IF('Property Details'!A6<>"",'ROI Calculator'!F9,0),=IF('Property Details'!A6<>"",'Property Details'!H6,0)
+Average Occupancy Rate,=AVERAGE(I7:I26),,,,,,,,
+,,,,,,,,,
+FINANCIAL SUMMARY,,,EXPENSE BREAKDOWN,,,,,
+,Amount,% of Income,Category,Amount,% of Total,,
+Gross Rental Income,=B7,100%,Property Management,=SUMIF('Expense Tracker'!C:C;"Property Management";'Expense Tracker'!D:D),=IF(B19>0;E19/$B$19;0),,
+Vacancy Loss,=B7*0.05,=B15/B7,Maintenance & Repairs,=SUMIF('Expense Tracker'!C:C;"Maintenance";'Expense Tracker'!D:D),=IF(B19>0;E20/$B$19;0),,
+Effective Rental Income,=B7-B15,=B16/B7,Property Taxes,=SUMIF('Expense Tracker'!C:C;"Property Taxes";'Expense Tracker'!D:D),=IF(B19>0;E21/$B$19;0),,
+Other Income,=SUMIF('Cash Flow Analysis'!B:B;"Other Income";'Cash Flow Analysis'!D:D),=B17/B7,Insurance,=SUMIF('Expense Tracker'!C:C;"Insurance";'Expense Tracker'!D:D),=IF(B19>0;E22/$B$19;0),,
+Total Operating Income,=B16+B17,=B18/B7,Utilities,=SUMIF('Expense Tracker'!C:C;"Utilities";'Expense Tracker'!D:D),=IF(B19>0;E23/$B$19;0),,
+Total Operating Expenses,=B8,=B19/B7,HOA Fees,=SUMIF('Expense Tracker'!C:C;"HOA";'Expense Tracker'!D:D),=IF(B19>0;E24/$B$19;0),,
+Net Operating Income,=B18-B19,=B20/B7,Legal & Professional,=SUMIF('Expense Tracker'!C:C;"Legal";'Expense Tracker'!D:D),=IF(B19>0;E25/$B$19;0),,
+Debt Service,=SUMIF('Cash Flow Analysis'!B:B;"Mortgage";'Cash Flow Analysis'!D:D),=B21/B7,Other Expenses,=SUMIF('Expense Tracker'!C:C;"Other";'Expense Tracker'!D:D),=IF(B19>0;E26/$B$19;0),,
+Cash Flow Before Tax,=B20-B21,=B22/B7,Total Expenses,=SUM(E19:E26),=IF(B19>0;E27/$B$19;0),,
+,,,,,,,,,
+TAX BENEFITS SUMMARY,,,RETURN ON INVESTMENT,,,,,
+Annual Depreciation,='Tax Benefits'!B15,,Metric,Value,Target,Status,,
+Tax Rate,='Tax Benefits'!B3,,Portfolio Cap Rate,=B10,8%,=IF(E31>=F31;"Good";"Below Target"),,
+Annual Tax Savings,='Tax Benefits'!B17,,Avg Cash-on-Cash Return,=AVERAGE(I7:I11),10%,=IF(E32>=F32;"Good";"Below Target"),,
+After-Tax Cash Flow,=B22*12+B26,,Total ROI (5-Year),='ROI Calculator'!B15,25%,=IF(E33>=F33;"Good";"Below Target"),,
+,,,,,,,,,
+QUICK ACTIONS,,,ALERTS & REMINDERS,,,,,
+[Generate Report],,,⚠️ Property Tax Due: Check Property Details sheet for due dates,,,,,
+[Add New Property],,,⚠️ Insurance Renewal: Review coverage amounts annually,,,,,
+[Update Expenses],,,⚠️ Maintenance: Schedule annual HVAC inspections,,,,,
+[Compare Properties],,,✓ All properties currently occupied,,,,,
