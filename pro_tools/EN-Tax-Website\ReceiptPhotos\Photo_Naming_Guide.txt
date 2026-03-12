@@ -1,23 +1,0 @@
-E&N TAX TRACKER - RECEIPT PHOTO NAMING GUIDE
-=============================================
-
-RECOMMENDED FILE NAMING CONVENTION:
-Vendor_YYYYMMDD_Amount[_Optional].ext
-
-EXAMPLES:
-¥ OfficeDepot_20240115_47.23.jpg
-¥ GasStation_20240118_45.67_Travel.pdf
-¥ Adobe_20240122_52.99_Subscription.png
-¥ RestaurantName_20240214_78.45_ClientLunch.jpg
-
-FOLDER ORGANIZATION:
-¥ Store photos in month/category folders
-¥ Use category folders: Business_Expenses, Vehicle_Travel, etc.
-¥ Keep file names descriptive but concise
-
-TIPS FOR BEST MATCHING:
-¥ Use exact vendor names when possible
-¥ Include exact date (YYYYMMDD format)
-¥ Include exact amount (use decimal point)
-¥ Avoid spaces (use underscores)
-¥ Remove special characters from vendor names

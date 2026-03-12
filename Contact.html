@@ -933,7 +933,11 @@
                 <!-- Contact Form -->
                 <div class="contact-form-section reveal" id="contact-form">
                     <h3>Send a Message</h3>
-                    <form id="contactForm">
+                    <form id="contactForm" name="contact">
+                        <!-- Formspree config fields -->
+                        <input type="hidden" name="_subject" value="New Contact Form Submission — E&N Tax & Accounting">
+                        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                        <div id="form-error" style="display:none;background:#fff3cd;border:1px solid #ffc107;color:#856404;padding:15px 20px;border-radius:10px;margin-bottom:20px;font-size:16px;">Something went wrong. Please try again or email us directly at <a href="mailto:info@entaxaccounting.com">info@entaxaccounting.com</a>.</div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name <span class="required">*</span></label>
@@ -963,7 +967,7 @@
                                 <option value="individual-tax">Individual Tax Preparation</option>
                                 <option value="business-tax">Business Tax Services</option>
                                 <option value="bookkeeping">Bookkeeping Services</option>
-                                <option value="tax-planning">Tax Planning Strategies</option>
+                                <option value="tax-consulting">Tax Consulting</option>
                                 <option value="entity-selection">Business Entity Selection</option>
                                 <option value="quarterly-estimates">Quarterly Tax Estimates</option>
                                 <option value="other">Other</option>
@@ -1145,11 +1149,32 @@
         });
 
         // Form submission handler
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            // Here you would normally send the form data to a server
-            alert('Thank you for your message! E&N Tax & Accounting will be in touch within 24-48 business hours.');
-            this.reset();
+
+            const btn = this.querySelector('.submit-btn');
+            const originalText = btn.textContent;
+            btn.textContent = 'Sending…';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('https://formspree.io/f/xeergwwe', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: new FormData(this)
+                });
+
+                if (response.ok) {
+                    this.innerHTML = '<div style="text-align:center;padding:40px 20px"><div style="font-size:48px;margin-bottom:20px">✅</div><h3 style="color:var(--primary-color);margin-bottom:15px">Message Sent!</h3><p style="font-size:18px;color:#6C757D">Thank you for reaching out. E&amp;N Tax &amp; Accounting will be in touch within 24–48 business hours.</p></div>';
+                } else {
+                    throw new Error('Server error');
+                }
+            } catch (err) {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                const errorMsg = document.getElementById('form-error');
+                if (errorMsg) errorMsg.style.display = 'block';
+            }
         });
 
         // Smooth scrolling for anchor links

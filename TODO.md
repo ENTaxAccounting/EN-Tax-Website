@@ -8,32 +8,24 @@ Status key: ✅ Done · 🔄 In Progress / Blocked · ⬜ To Do · 💬 Needs De
 
 - ✅ **Domain** — `entaxaccounting.com` is registered through Google Workspace (Domains tab in Google Admin). No action needed.
 - ⬜ **Cancel Wix** — redundant, not needed
-- ⬜ **Sign up for Netlify** — netlify.com, use Google login
-- ⬜ **Deploy site to Netlify** — drag project folder (after deleting `deprecated/`) into Netlify deploy area
+- ✅ **Sign up for Netlify** — done
+- ⬜ **Deploy site to Netlify** — drag project folder into Netlify deploy area (deprecated/ is now deleted and committed)
 - ⬜ **Connect domain to Netlify** — add DNS records Netlify provides into wherever domain is registered
-- ⬜ **Fix contact form** — currently shows a fake success alert and sends nothing
-  - Sign up at formspree.io (free, 50 submissions/month)
-  - Create a form, get the endpoint ID (looks like `abcdefgh`)
-  - Share the ID here and Claude will update Contact.html
+- ✅ **Fix contact form** — Formspree wired up (endpoint: xeergwwe); honeypot spam protection added; domain restricted to entaxaccounting.com in Formspree settings
 
 ---
 
 ## 📋 Pre-Deploy Cleanup
 
-- ⬜ **Back up `deprecated/` folder** — copy to Google Drive or local backup, then delete from project
-  - Contains: Blog.html, blog-posts.json, Shop.html, blog-manager, Python scripts, guides, broken tool
-- ⬜ **Commit all pending git changes** — large batch of uncommitted work sitting in working tree
-  - New files to `git add`: CLAUDE.md, Resources.html, _headers, TODO.md, SITE_NOTES.md
-  - Everything else is already staged or modified
+- ✅ **Back up and delete `deprecated/` folder** — backed up externally, deleted, committed
+- ✅ **Commit all pending git changes** — committed as v1.0 pre-launch (commit c9970da)
 
 ---
 
 ## 🏗️ Content / Page Updates
 
 - ⬜ **Remove "Tax Planning Strategies" from Contact.html dropdown** — line 966, service interest select menu. User handling this manually.
-- ⬜ **Google Business Profile** — set up at business.google.com (free)
-  - Required before Reviews page is useful
-  - Once set up: replace placeholder link in Reviews.html (search for `REPLACE-WITH-GOOGLE-PROFILE-LINK`)
+- ✅ **Google Business Profile** — set up; review link updated in Reviews.html (https://g.page/r/CQg5gRyJ4mdoEAE/review)
 - ⬜ **Reviews page — add first real reviews** — when clients start leaving reviews, add them using the commented-out template in Reviews.html. Instructions are embedded in the HTML comment.
 - 💬 **Reviews hero background** — currently using `lighthouse.png`. Swap for a different image from `images/backgrounds/` if preferred.
 - 💬 **Portrait sizing** — `portrait.png` is set to max-width 400px on the About page. Adjust in Index.html (`.family-photo` CSS) if it needs to be larger or smaller.
