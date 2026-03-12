@@ -358,70 +358,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        /* Blog Section */
-        .blog-section {
-            padding: 80px 40px; /* Matching other sections */
-            max-width: 1440px; /* Increased by 20% from 1200px */
-            margin: 40px auto; /* Added top/bottom margin to match other sections */
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-
-        .blog-section .container {
-            /* Container no longer needs max-width since parent handles it */
-        }
-
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .blog-card {
-            background: var(--text-light);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-        }
-
-        .blog-card p {
-            font-size: 19px; /* Increased by 20% from base */
-        }
-
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-        }
-
-        .blog-card h4 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            font-size: 24px; /* Increased by 20% from 20px */
-        }
-
-        .blog-date {
-            color: var(--accent-color);
-            font-size: 17px; /* Increased by 20% from 14px */
-            margin-bottom: 15px;
-        }
-
-        .blog-link {
-            color: var(--secondary-color);
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .blog-link:hover {
-            color: var(--primary-color);
-            padding-left: 5px;
-        }
-
         .hero h1 {
             font-size: 58px; /* Increased by 20% from 48px */
             margin-bottom: 24px;
@@ -534,10 +470,21 @@
         }
 
         .family-photo {
+            display: block;
+            max-width: 400px;
             width: 100%;
+            margin: 0 auto;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             animation: growFromRight 1s ease;
+        }
+
+        .photo-caption {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 17px;
+            color: #6C757D;
+            font-style: italic;
         }
 
         @keyframes growFromRight {
@@ -1130,19 +1077,9 @@
                 <li><a href="index.html">About</a></li>
                 <li><a href="services.html">Services</a></li>
 
-                <li class="dropdown">
-                    <a href="tools.html">Tools & Resources</a>
-                    <div class="dropdown-menu">
-                        <a href="tools/1099-contractor-checklist.html" class="dropdown-item">1099 Contractor Checklist</a>
-                        <a href="tools/depreciation-schedule-tool.html" class="dropdown-item">Depreciation Schedule Tool</a>
-                        <a href="tools/quarterly-tax-calculator.html" class="dropdown-item">Quarterly Tax Calculator</a>
-                        <a href="tools/rental-property-calculator.html" class="dropdown-item">Rental Property Calculator</a>
-                        <a href="tools/tax-calendar-2025.html" class="dropdown-item">Tax Calendar 2025</a>
-                        <a href="tools/tax-withholding-estimator.html" class="dropdown-item">Tax Withholding Estimator</a>
-                    </div>
-                </li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <!-- <li><a href="shop.html">Shop</a></li> -->
+                <li><a href="reviews.html">Reviews</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <a href="contact.html" class="nav-cta">Book Consultation</a>
@@ -1183,7 +1120,7 @@
                 </div>
                 <div class="hero-text-item">
                     <h1>Flowing Toward Greater Financial Success</h1>
-                    <p>Harnessing the power of strategic planning for continuous growth</p>
+                    <p>Harnessing the power of intelligent solutions for continuous growth</p>
                 </div>
             </div>
             <div class="hero-buttons">
@@ -1200,22 +1137,23 @@
         <div class="about-section">
             <div class="section-header reveal">
                 <h2>Building Your Financial Future</h2>
-                <p>At E&N Tax & Accounting, we believe that financial success comes from strategic planning, expert guidance, and a commitment to helping you thrive. We tailor our approach to your specific financial needs, ensuring you retain more of what you earn through every tax season and beyond.</p>
+                <p>At E&N Tax & Accounting, we believe that financial success comes from meticulous planning, expert guidance, and a commitment to helping you thrive. We tailor our approach to your specific financial needs, ensuring you retain more of what you earn through every tax season and beyond.</p>
             </div>
 
             <div class="story-grid">
                 <div class="story-content reveal">
                     <h3>Who We Are</h3>
                     <p>E&N Tax & Accounting represents more than just a business—it's a testament to family values and professional dedication. Named after twin daughters Emma and Nina, the firm embodies the care, attention, and commitment brought to every client relationship.</p>
-                    <p>The founder believes that behind every tax return is a story, a family, or a dream. That's why E&N approaches each client with the same care and attention given to family. This commitment to excellence ensures that clients receive not just accurate tax services, but a trusted partner in their financial journey.</p>
+                    <p>We believe that behind every tax return is a story, a family, or a dream. That's why E&N approaches each client with the same care and attention given to family. This commitment to excellence ensures that clients receive not just accurate tax services, but a trusted partner in their financial journey.</p>
                     <div class="company-quote">
                         "When clients work with E&N, they're not just another number. They become part of an extended family, and their success is E&N's success."
                     </div>
-                    <p>While currently focused on providing exceptional service to existing clients, E&N is building a foundation for thoughtful growth—always maintaining the personal touch that sets the firm apart.</p>
+                    <p>E&N is committed to thoughtful growth while maintaining the personal touch that sets the firm apart, welcoming new clients who value the same dedication to excellence and family-centered approach.</p>
                     <p>Whether you're a family navigating tax season, a small business owner pursuing growth, or someone planning for the future, E&N brings both professional expertise and genuine care to help you succeed. Because when you treat clients like family, everyone thrives together.</p>
                 </div>
                 <div class="reveal">
-                    <img src="images/FamilyPhotoshootPhoto.JPG" alt="E&N Family" class="family-photo">
+                    <img src="images/portrait.png" alt="Marija Sparano, Founder & CEO" class="family-photo">
+                    <p class="photo-caption">Marija Sparano, Founder &amp; CEO</p>
                 </div>
             </div>
         </div>
@@ -1236,25 +1174,25 @@
             <div class="client-card reveal">
                 <div class="client-card-content">
                     <h4>Individuals & Families</h4>
-                    <p>Comprehensive tax planning to help families thrive and retain more of their earnings. We understand the unique challenges families face and provide personalized strategies to minimize tax burdens while maximizing deductions for education, childcare, and household expenses.</p>
+                    <p>Comprehensive tax services to help families thrive and retain more of their earnings. We understand the unique challenges families face and provide personalized solutions to minimize tax burdens while maximizing deductions for education, childcare, and household expenses.</p>
                 </div>
             </div>
             <div class="client-card reveal">
                 <div class="client-card-content">
                     <h4>Small Businesses</h4>
-                    <p>Strategic tax solutions and accounting services for sustainable business growth. Our expertise helps small businesses navigate complex tax regulations, optimize cash flow, and identify valuable deductions that reduce tax liability while supporting expansion goals.</p>
+                    <p>Tax solutions and accounting services for sustainable business growth. Our expertise helps small businesses navigate complex tax regulations, optimize cash flow, and identify valuable deductions that reduce tax liability while supporting expansion goals.</p>
                 </div>
             </div>
             <div class="client-card reveal">
                 <div class="client-card-content">
                     <h4>Startups</h4>
-                    <p>Building strong financial foundations for new ventures and entrepreneurs. We guide startups through entity selection, tax planning, and compliance requirements, ensuring your innovative business starts on solid financial ground with strategies for long-term success.</p>
+                    <p>Building strong financial foundations for new ventures and entrepreneurs. We guide startups through entity selection, tax solutions, and compliance requirements, ensuring your innovative business starts on solid financial ground with solutions for long-term success.</p>
                 </div>
             </div>
             <div class="client-card reveal">
                 <div class="client-card-content">
                     <h4>Real Estate Investors</h4>
-                    <p>Strategic tax guidance for small portfolio real estate investors. We help navigate real estate professional status qualification, maximize short-term rental tax advantages, implement bonus depreciation strategies, and optimize de minimis safe harbor elections to significantly reduce your tax burden and accelerate wealth building.
+                    <p>Personalized tax guidance for small portfolio real estate investors. We help navigate real estate professional status qualification, maximize short-term rental tax advantages, implement bonus depreciation solutions, and optimize de minimis safe harbor elections to significantly reduce your tax burden and accelerate wealth building.
                     </p>
                 </div>
             </div>
@@ -1267,26 +1205,11 @@
             <div class="client-card reveal">
                 <div class="client-card-content">
                     <h4>Gig Economy Workers</h4>
-                    <p>Specialized tax solutions for freelancers and independent contractors. We understand the unique tax challenges of self-employment, helping you maximize business deductions, manage quarterly payments, and implement strategies to reduce self-employment tax burdens.</p>
+                    <p>Specialized tax solutions for freelancers and independent contractors. We understand the unique tax challenges of self-employment, helping you maximize business deductions, manage quarterly payments, and implement solutions to reduce self-employment tax burdens.</p>
                 </div>
             </div>
         </div>
     </section>
-
-    
-    <!-- Blog Section -->
-    <section class="blog-section">
-        <div class="container">
-            <div class="section-header reveal">
-                <h2>Latest Insights</h2>
-                <p>Stay informed with our latest tax tips and financial guidance. Our expert insights help you navigate complex tax regulations, maximize deductions, and make smarter financial decisions throughout the year. From tax law updates to strategic planning tips, we provide the knowledge you need to optimize your financial success.</p>
-            </div>
-            <div class="blog-grid" id="latestInsights">
-                <!-- Blog posts will be loaded dynamically -->
-            </div>
-        </div>
-    </section>
-
 
     <!-- CTA Section -->
     <section class="cta-section">
@@ -1311,16 +1234,16 @@
                 <div class="quick-links-grid">
                     <a href="index.html">About</a>
                     <a href="services.html">Services</a>
-                    <a href="tools.html">Tools & Resources</a>
-                    <a href="shop.html">Shop</a>
-                    <a href="blog.html">Blog</a>
+                    <a href="resources.html">Resources</a>
+                    <!-- <a href="shop.html">Shop</a> -->
+                    <a href="reviews.html">Reviews</a>
                     <a href="contact.html">Contact</a>
                 </div>
             </div>
             <div class="footer-section">
                 <h4>Contact</h4>
                 <p><a href="mailto:info@entaxaccounting.com">info@entaxaccounting.com</a></p>
-                <p>Currently nurturing existing clients</p>
+                <p>Welcoming new clients</p>
             </div>
         </div>
     </footer>
@@ -1415,93 +1338,6 @@
         // Start the carousel
         setInterval(rotateHeroContent, slideInterval);
 
-        // Load Latest Blog Posts
-        async function loadLatestBlogPosts() {
-            const insightsContainer = document.getElementById('latestInsights');
-            let blogData = {};
-            
-            try {
-                // Try loading from JSON file
-                const response = await fetch('blog-posts.json');
-                blogData = await response.json();
-            } catch (error) {
-                // Try loading from localStorage
-                const savedData = localStorage.getItem('enTaxBlogData');
-                if (savedData) {
-                    try {
-                        blogData = JSON.parse(savedData);
-                    } catch (e) {
-                        console.error('Error parsing saved data:', e);
-                    }
-                }
-            }
-            
-            // Combine featured and regular posts
-            let allPosts = [];
-            if (blogData.featured) {
-                allPosts.push(blogData.featured);
-            }
-            if (blogData.posts) {
-                allPosts = allPosts.concat(blogData.posts);
-            }
-            
-            // If no posts, show default content
-            if (allPosts.length === 0) {
-                insightsContainer.innerHTML = `
-                    <article class="blog-card reveal">
-                        <h4>No blog posts available</h4>
-                        <p class="blog-date">Check back soon!</p>
-                        <p>We're working on creating valuable content for you...</p>
-                        <a href="blog.html" class="blog-link">Visit Blog →</a>
-                    </article>
-                `;
-                return;
-            }
-            
-            // Display up to 3 latest posts
-            const postsToShow = allPosts.slice(0, 3);
-            
-            insightsContainer.innerHTML = postsToShow.map(post => {
-                const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-                
-                return `
-                    <article class="blog-card reveal">
-                        <h4>${post.title}</h4>
-                        <p class="blog-date">${formattedDate}</p>
-                        <p>${post.excerpt.substring(0, 150)}...</p>
-                        <a href="blog.html#${post.id}" class="blog-link">Read More →</a>
-                    </article>
-                `;
-            }).join('');
-            
-            // If fewer than 3 posts, add placeholder cards
-            if (postsToShow.length < 3) {
-                for (let i = postsToShow.length; i < 3; i++) {
-                    insightsContainer.innerHTML += `
-                        <article class="blog-card reveal">
-                            <h4>More Content Coming Soon</h4>
-                            <p class="blog-date">Stay tuned!</p>
-                            <p>We're creating more valuable tax insights and financial guidance...</p>
-                            <a href="blog.html" class="blog-link">Visit Blog →</a>
-                        </article>
-                    `;
-                }
-            }
-            
-            // Re-trigger reveal animations
-            setTimeout(reveal, 100);
-        }
-        
-        // Load blog posts when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadLatestBlogPosts);
-        } else {
-            loadLatestBlogPosts();
-        }
     </script>
 </body>
 </html>

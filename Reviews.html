@@ -4,58 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reviews - E&N Tax & Accounting</title>
-    
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Read what clients say about E&N Tax & Accounting. Client testimonials and reviews for professional tax and accounting services.">
-    <meta name="keywords" content="tax accountant reviews, accounting firm testimonials, client reviews, tax service feedback">
+    <meta name="description" content="Client reviews and testimonials for E&N Tax & Accounting. See what clients say about our professional tax preparation and accounting services.">
+    <meta name="keywords" content="tax accountant reviews, accounting firm testimonials, client reviews, E&N Tax Accounting">
     <meta name="author" content="E&N Tax & Accounting">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="Reviews - E&N Tax & Accounting">
     <meta property="og:description" content="Discover what clients say about working with E&N Tax & Accounting.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.entaxaccounting.com/reviews.html">
-    
+
     <style>
-        /* CSS Variables for Theme Switching */
         :root {
-            --primary-color: #5B8A8C;
-            --secondary-color: #F4A09C;
-            --accent-color: #2C5F61;
+            --primary-color: #003366;
+            --secondary-color: #f2b90c;
+            --accent-color: #1c3a53;
+            --text-light: #f8f9fa;
             --text-dark: #2C3E50;
-            --text-light: #6C757D;
-            --background-light: #FFF9F5;
-            --background-white: #FFFFFF;
-            --border-color: #E9ECEF;
-            --nav-dark: #1A4547;
-            --nav-darker: #0F2D2F;
-        }
-
-        .theme-professional {
-            --primary-color: #1E3A5F;
-            --secondary-color: #D4A574;
-            --accent-color: #0F2440;
-            --text-dark: #1A1A1A;
-            --text-light: #4A5568;
-            --background-light: #F8F9FA;
-            --background-white: #FFFFFF;
-            --border-color: #DEE2E6;
-            --nav-dark: #0A1F30;
-            --nav-darker: #051218;
-        }
-
-        .theme-corporate {
-            --primary-color: #2D3436;
-            --secondary-color: #00B894;
-            --accent-color: #1E272E;
-            --text-dark: #2C3E50;
-            --text-light: #636E72;
-            --background-light: #F5F6FA;
-            --background-white: #FFFFFF;
-            --border-color: #DFE6E9;
-            --nav-dark: #191C1E;
-            --nav-darker: #0F1214;
         }
 
         * {
@@ -68,86 +36,29 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
-            transition: all 0.3s ease;
-            background-color: var(--background-white);
-        }
-
-        /* Theme Switcher - Collapsible */
-        .theme-switcher {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--background-white);
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .theme-switcher.collapsed {
-            width: 50px;
-            height: 50px;
-        }
-
-        .theme-toggle {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 15px;
-            cursor: pointer;
-            width: 100%;
+            overflow-x: hidden;
+            background: var(--text-light);
             font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .theme-content {
-            padding: 15px;
-            display: block;
-        }
-
-        .theme-switcher.collapsed .theme-content {
-            display: none;
-        }
-
-        .theme-switcher h4 {
-            font-size: 14px;
-            margin-bottom: 10px;
-            color: var(--text-dark);
-        }
-
-        .theme-btn {
-            display: block;
+        /* Professional Background */
+        .main-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 8px 12px;
-            margin: 5px 0;
-            border: 1px solid var(--border-color);
-            background: var(--background-white);
-            color: var(--text-dark);
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.3s ease;
-        }
-
-        .theme-btn:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .theme-btn.active {
-            background: var(--primary-color);
-            color: white;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #024d96 60%);
+            opacity: 0.05;
         }
 
         /* Header Navigation */
         header {
-            background: linear-gradient(135deg, var(--nav-darker) 0%, var(--nav-dark) 100%);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-            position: fixed;
+            background: rgba(255, 255, 255, 1);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: sticky;
             width: 100%;
             top: 0;
             z-index: 999;
@@ -155,12 +66,12 @@
         }
 
         nav {
-            max-width: 1200px;
             margin: 0 auto;
-            padding: 15px 20px;
+            padding: 5px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 60px;
         }
 
         .logo {
@@ -168,39 +79,42 @@
             align-items: center;
             text-decoration: none;
             gap: 15px;
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .logo img {
-            height: 50px;
+            height: 70px;
             width: auto;
         }
 
         .logo-text {
             font-size: 24px;
             font-weight: 700;
-            color: white;
+            color: var(--primary-color);
+            white-space: nowrap;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
             gap: 30px;
+            flex-grow: 1;
+            justify-content: center;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--primary-color);
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             position: relative;
+            white-space: nowrap;
+            font-size: 19px;
         }
 
         .nav-links a:hover {
-            color: white;
-        }
-
-        .nav-links a.active {
-            color: white;
+            color: var(--secondary-color);
         }
 
         .nav-links a::after {
@@ -219,87 +133,25 @@
             width: 100%;
         }
 
-        /* Dropdown Styles */
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-toggle {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .dropdown-toggle::after {
-            content: '▼';
-            font-size: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .dropdown:hover .dropdown-toggle::after {
-            transform: rotate(180deg);
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: var(--background-white);
-            min-width: 280px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            margin-top: 10px;
-            border: 1px solid var(--border-color);
-            z-index: 1000;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-header {
-            padding: 15px 20px 10px;
-            border-bottom: 1px solid var(--border-color);
-            background: var(--background-light);
-            border-radius: 10px 10px 0 0;
-        }
-
-        .dropdown-header h4 {
+        .nav-cta {
+            background: var(--secondary-color);
             color: var(--primary-color);
-            font-size: 14px;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .dropdown-item {
-            display: block;
-            padding: 12px 20px;
-            color: #2C3E50 !important;
+            padding: 10px 24px;
+            border-radius: 50px;
             text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            font-size: 14px;
             font-weight: 600;
-            background: transparent;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            font-size: 19px;
         }
 
-        .dropdown-item:hover {
-            background: var(--background-light) !important;
-            color: var(--primary-color) !important;
-            padding-left: 25px;
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .dropdown-item:last-child {
-            border-radius: 0 0 10px 10px;
-        }
-
-        /* Mobile Menu Toggle */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -309,330 +161,486 @@
         .menu-toggle span {
             width: 25px;
             height: 3px;
-            background: white;
+            background: var(--primary-color);
             margin: 3px 0;
             transition: 0.3s;
         }
 
-        /* Page Header */
-        .page-header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-            padding: 140px 20px 80px;
+        /* Hero Section */
+        .hero {
+            height: 55vh;
+            min-height: 400px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
             text-align: center;
-            margin-top: 80px;
             color: white;
+            padding: 80px 20px;
             position: relative;
             overflow: hidden;
         }
 
-        .page-header::before {
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/backgrounds/lighthouse.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .hero-bg-image::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: float 20s ease-in-out infinite;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 51, 102, 0.7);
+            z-index: 1;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-30px, 30px) rotate(180deg); }
-        }
-
-        .page-header h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            animation: fadeInUp 0.8s ease;
+        .hero-content {
+            animation: fadeInUp 1.2s ease;
             position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
         }
 
-        .page-header p {
-            font-size: 20px;
-            max-width: 600px;
-            margin: 0 auto;
+        .hero h1 {
+            font-size: 58px;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 29px;
+            margin-bottom: 16px;
             opacity: 0.95;
-            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: transparent;
+            margin: 40px 0;
             position: relative;
+            z-index: 10;
         }
 
-        /* Main Content */
-        .main-content {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+        .reviews-section {
+            padding: 80px 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            margin: 40px auto;
+            max-width: 1440px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
-        /* Reviews Introduction */
-        .reviews-intro {
+        .section-header {
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto 80px;
+            margin-bottom: 60px;
+            background: rgba(0, 51, 102, 0.05);
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid rgba(0, 51, 102, 0.1);
         }
 
-        .reviews-intro h2 {
-            font-size: 36px;
+        .section-header h2 {
+            font-size: 43px;
             color: var(--primary-color);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-weight: 600;
         }
 
-        .reviews-intro p {
-            font-size: 18px;
-            color: var(--text-light);
+        .section-header p {
+            font-size: 22px;
+            color: #2C3E50;
+            max-width: 1080px;
+            margin: 0 auto;
             line-height: 1.8;
         }
 
-        /* Coming Soon Section */
-        .coming-soon-section {
-            background: linear-gradient(135deg, var(--background-light) 0%, var(--background-white) 100%);
-            padding: 100px 40px;
-            border-radius: 30px;
+        /* Coming Soon Block */
+        .coming-soon-block {
             text-align: center;
-            margin-bottom: 80px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 80px 40px;
+            background: rgba(0, 51, 102, 0.03);
+            border-radius: 20px;
+            border: 2px dashed rgba(0, 51, 102, 0.15);
+            margin-bottom: 60px;
         }
 
         .coming-soon-icon {
-            width: 120px;
-            height: 120px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px;
-            font-size: 60px;
-            color: white;
+            font-size: 72px;
+            margin-bottom: 30px;
+            display: block;
         }
 
-        .coming-soon-section h3 {
-            font-size: 36px;
-            color: var(--text-dark);
+        .coming-soon-block h3 {
+            font-size: 38px;
+            color: var(--primary-color);
             margin-bottom: 20px;
+            font-weight: 600;
         }
 
-        .coming-soon-section p {
-            font-size: 18px;
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto 30px;
+        .coming-soon-block p {
+            font-size: 22px;
+            color: #6C757D;
+            max-width: 700px;
+            margin: 0 auto 40px;
             line-height: 1.8;
         }
 
-        .email-badge {
-            display: inline-block;
-            background: var(--secondary-color);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .email-badge:hover {
-            background: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-        }
-
-        /* Sample Review Cards (for future use) */
-        .reviews-preview {
-            margin: 80px 0;
-        }
-
-        .preview-title {
-            text-align: center;
-            font-size: 32px;
-            color: var(--primary-color);
-            margin-bottom: 50px;
-        }
-
-        .review-cards {
+        /* Review Cards Grid */
+        .review-cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
         }
 
+        /* Individual review card — add entries here when reviews come in */
         .review-card {
-            background: var(--background-white);
-            padding: 40px;
-            border-radius: 20px;
+            background: var(--text-light);
+            padding: 40px 35px;
+            border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            border: 1px solid var(--border-color);
-            position: relative;
-            opacity: 0.5;
-            filter: blur(2px);
+            border: 2px solid rgba(0,0,0,0.05);
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .review-card:hover {
-            opacity: 0.6;
-            filter: blur(1px);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
         }
 
         .review-stars {
             color: var(--secondary-color);
-            font-size: 20px;
-            margin-bottom: 15px;
+            font-size: 24px;
+            letter-spacing: 4px;
         }
 
         .review-text {
-            color: var(--text-light);
+            font-size: 19px;
+            color: #4a5568;
             line-height: 1.8;
-            margin-bottom: 20px;
             font-style: italic;
+            flex-grow: 1;
         }
 
         .review-author {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.08);
         }
 
         .author-avatar {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-color);
+            width: 54px;
+            height: 54px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 20px;
+            flex-shrink: 0;
         }
 
-        .author-info h4 {
-            color: var(--text-dark);
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-
-        .author-info p {
-            color: var(--text-light);
-            font-size: 14px;
-        }
-
-        /* Why Reviews Matter Section */
-        .why-reviews {
-            background: var(--background-white);
-            padding: 60px;
-            border-radius: 20px;
-            margin: 80px 0;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .why-reviews h3 {
-            text-align: center;
-            font-size: 32px;
+        .author-name {
+            font-weight: 600;
+            font-size: 19px;
             color: var(--primary-color);
-            margin-bottom: 40px;
         }
 
-        .why-grid {
+        .author-type {
+            font-size: 16px;
+            color: #6C757D;
+        }
+
+        .review-source {
+            font-size: 15px;
+            color: #9CA3AF;
+            text-align: right;
+            margin-top: auto;
+        }
+
+        /* Leave a Review Section */
+        .leave-review-section {
+            padding: 80px 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 1440px;
+            margin: 40px auto;
+        }
+
+        .leave-review-section h2 {
+            text-align: center;
+            font-size: 43px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .leave-review-section > p {
+            text-align: center;
+            font-size: 22px;
+            color: #6C757D;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            line-height: 1.8;
+        }
+
+        .review-platform-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            max-width: 900px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .platform-card {
+            text-align: center;
+            padding: 50px 30px;
+            background: var(--text-light);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 2px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .platform-icon {
+            font-size: 54px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .platform-card h3 {
+            font-size: 26px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .platform-card p {
+            font-size: 18px;
+            color: #6C757D;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .platform-btn {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+        }
+
+        .platform-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.16);
+        }
+
+        .platform-btn.secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .platform-btn.secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            text-align: center;
+            background: var(--primary-color);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 0;
+            border-radius: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></svg>') repeat;
+            background-size: 100px 100px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 100px); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 10;
             margin: 0 auto;
         }
 
-        .why-item {
-            text-align: center;
-        }
-
-        .why-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--secondary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 30px;
+        .cta-content h3 {
+            font-size: 50px;
+            margin-bottom: 24px;
             color: white;
+            font-weight: 600;
         }
 
-        .why-item h4 {
-            color: var(--text-dark);
-            margin-bottom: 10px;
+        .cta-content p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
         }
 
-        .why-item p {
-            color: var(--text-light);
-            font-size: 15px;
-            line-height: 1.6;
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 22px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         /* Footer */
         footer {
-            background: var(--text-dark);
-            color: white;
+            background: #001a33;
+            color: #c6d4e1;
             padding: 60px 20px 40px;
+            position: relative;
+            margin-top: 0;
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: 1440px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-section {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-section h4 {
             margin-bottom: 20px;
             color: white;
+            font-size: 24px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
         }
 
-        .footer-section p,
+        .footer-section p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 12px;
+            line-height: 1.6;
+            font-size: 19px;
+        }
+
         .footer-section a {
             color: rgba(255,255,255,0.8);
             text-decoration: none;
             margin-bottom: 10px;
             display: block;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+            font-size: 19px;
         }
 
         .footer-section a:hover {
-            color: white;
+            color: var(--secondary-color);
+            padding-left: 10px;
         }
 
-        .footer-bottom {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            color: rgba(255,255,255,0.6);
+        .company-description {
+            font-style: italic;
+            opacity: 0.9;
+            border-left: 3px solid var(--secondary-color);
+            padding-left: 15px;
+            margin: 15px 0;
+        }
+
+        .established-year {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .quick-links-column {
+            display: flex;
+            flex-direction: column;
         }
 
         /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-            }
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .menu-toggle { display: flex; }
 
             .nav-links {
                 display: none;
@@ -640,140 +648,53 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: linear-gradient(135deg, var(--nav-darker) 0%, var(--nav-dark) 100%);
+                background: white;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
                 flex-direction: column;
                 padding: 20px;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+                border-radius: 0 0 10px 10px;
             }
 
-            .nav-links.active {
-                display: flex;
-            }
+            .nav-links.active { display: flex; }
 
-            /* Mobile Dropdown Styles */
-            .dropdown-menu {
-                position: static;
-                background: rgba(255, 255, 255, 0.1);
-                border-radius: 5px;
-                margin: 10px 0;
-                box-shadow: none;
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                opacity: 0;
-                max-height: 0;
-                overflow: hidden;
-                transform: none;
-                transition: all 0.3s ease;
-            }
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 18px; }
+            .nav-cta { display: none; }
+        }
 
-            .dropdown.mobile-open .dropdown-menu {
-                opacity: 1;
-                max-height: 500px;
-                padding: 10px 0;
-            }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .review-cards-grid { grid-template-columns: 1fr; }
+            .review-platform-grid { grid-template-columns: 1fr; }
+        }
 
-            .dropdown-header {
-                background: rgba(255, 255, 255, 0.1);
-                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-                border-radius: 5px 5px 0 0;
-            }
-
-            .dropdown-header h4 {
-                color: rgba(255, 255, 255, 0.8);
-            }
-
-            .dropdown-item {
-                color: rgba(255, 255, 255, 0.8);
-                padding: 8px 15px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            .dropdown-item:hover {
-                background: rgba(255, 255, 255, 0.1);
-                color: white;
-                padding-left: 20px;
-            }
-
-            .dropdown-item:last-child {
-                border-bottom: none;
-            }
-
-            .dropdown-toggle {
-                cursor: pointer;
-            }
-
-            .page-header h1 {
-                font-size: 36px;
-            }
-
-            .review-cards {
-                grid-template-columns: 1fr;
-            }
-
-            .why-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .why-reviews {
-                padding: 40px 30px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .theme-switcher {
-                top: auto;
-                bottom: 20px;
-            }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            nav { padding: 15px 30px; }
+            .nav-links { gap: 20px; }
+            .nav-links a { font-size: 17px; }
+            .logo-text { font-size: 22px; }
+            .nav-cta { padding: 8px 20px; font-size: 17px; }
         }
     </style>
 </head>
 <body>
-    <!-- Theme Switcher - Collapsible -->
-    <div class="theme-switcher collapsed" id="themeSwitcher">
-        <button class="theme-toggle" onclick="toggleThemeSwitcher()">🎨</button>
-        <div class="theme-content">
-            <h4>Choose Theme:</h4>
-            <button class="theme-btn active" onclick="setTheme('warm')">Warm & Inviting</button>
-            <button class="theme-btn" onclick="setTheme('professional')">Professional Classic</button>
-            <button class="theme-btn" onclick="setTheme('corporate')">Modern Corporate</button>
-        </div>
-    </div>
+    <div class="main-bg"></div>
 
     <!-- Header -->
     <header>
         <nav>
             <a href="index.html" class="logo">
-                <img src="E_N-Tax-Accounting-Logo.png">
+                <img src="images/E_N_LOGO.png" alt="E&N Tax & Accounting">
                 <span class="logo-text">E&N Tax & Accounting</span>
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">About</a></li>
                 <li><a href="services.html">Services</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li class="dropdown">
-                    <a href="tools.html" class="dropdown-toggle">Tools & Resources</a>
-                    <div class="dropdown-menu">
-                        <a href="tools/home-office-calculator.html" class="dropdown-item">Home Office Calculator</a>
-                        <a href="tools/quarterly-tax-calculator.html" class="dropdown-item">Quarterly Tax Calculator</a>
-                        <a href="tools/tax-withholding-estimator.html" class="dropdown-item">Tax Withholding Estimator</a>
-                        <a href="tools/business-expense-tracker.html" class="dropdown-item">Business Expense Tracker</a>
-                        <a href="tools/1099-contractor-checklist.html" class="dropdown-item">1099 Contractor Checklist</a>
-                        <a href="tools/entity-selection-guide.html" class="dropdown-item">Entity Selection Guide</a>
-                        <a href="tools/rental-income-tracker.html" class="dropdown-item">Rental Income Tracker</a>
-                        <a href="tools/depreciation-schedule-tool.html" class="dropdown-item">Depreciation Schedule Tool</a>
-                        <a href="tools/rental-property-calculator.html" class="dropdown-item">Rental Property Calculator</a>
-                        <a href="tools/business-tax-checklist.html" class="dropdown-item">Business Tax Checklist</a>
-                        <a href="tools/individual-tax-organizer.html" class="dropdown-item">Individual Tax Organizer</a>
-                        <a href="tools/tax-calendar-2025.html" class="dropdown-item">Tax Calendar 2025</a>
-                    </div>
-                </li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="resources.html">Resources</a></li>
                 <li><a href="reviews.html" class="active">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
+            <a href="contact.html" class="nav-cta">Book Consultation</a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -782,88 +703,86 @@
         </nav>
     </header>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <h1>Client Reviews</h1>
-        <p>What clients say about working with E&N Tax & Accounting</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-image"></div>
+        <div class="hero-content">
+            <h1>Client Reviews</h1>
+            <p>Honest feedback from the clients we're proud to serve</p>
+        </div>
     </section>
 
-    <!-- Main Content -->
-    <section class="main-content">
-        <!-- Reviews Introduction -->
-        <div class="reviews-intro">
-            <h2>Building Trust Through Excellence</h2>
-            <p>At E&N Tax & Accounting, every client relationship is built on trust, transparency, and exceptional service. The firm looks forward to sharing client success stories and testimonials as it grows.</p>
-        </div>
+    <!-- Reviews Grid -->
+    <section class="content-section">
+        <div class="reviews-section">
+            <div class="section-header reveal">
+                <h2>What Our Clients Say</h2>
+                <p>At E&N Tax & Accounting, every engagement is built on trust, transparency, and personal attention. As a newly established firm, we're actively building relationships with our founding clients and will share their stories here as reviews come in.</p>
+            </div>
 
-        <!-- Coming Soon Section -->
-        <div class="coming-soon-section">
-            <div class="coming-soon-icon">⭐</div>
-            <h3>Reviews Coming Soon</h3>
-            <p>As a newly established firm in 2024, E&N Tax & Accounting is focused on building strong relationships with its founding clients. Check back soon to read about their experiences!</p>
-            <a href="mailto:info@entaxaccounting.com" class="email-badge">Be Among the First to Share Your Story</a>
-        </div>
+            <!-- Coming Soon -->
+            <div class="coming-soon-block reveal">
+                <span class="coming-soon-icon">⭐</span>
+                <h3>Reviews Coming Soon</h3>
+                <p>E&N Tax & Accounting launched in 2024 and is focused on delivering exceptional service to its founding clients. Check back here soon — and if you're a current client, we'd love to hear from you.</p>
+            </div>
 
-        <!-- Sample Review Preview (Blurred) -->
-        <div class="reviews-preview">
-            <h3 class="preview-title">What to Expect</h3>
-            <div class="review-cards">
-                <div class="review-card">
+            <!-- Review cards will be added here as they come in.
+                 To add a review, duplicate the .review-card block below and fill in the details.
+                 Set author-avatar initials to the client's first + last initial. -->
+
+            <!-- TEMPLATE (commented out — uncomment and fill in when first reviews arrive):
+
+            <div class="review-cards-grid">
+                <div class="review-card reveal">
                     <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Working with E&N has been a fantastic experience. The attention to detail and personalized service exceeded all expectations..."</p>
+                    <p class="review-text">"Review text goes here."</p>
                     <div class="review-author">
-                        <div class="author-avatar">JD</div>
-                        <div class="author-info">
-                            <h4>Jane D.</h4>
-                            <p>Small Business Owner</p>
+                        <div class="author-avatar">AB</div>
+                        <div>
+                            <div class="author-name">First Last</div>
+                            <div class="author-type">Small Business Owner</div>
                         </div>
                     </div>
+                    <div class="review-source">via Google</div>
                 </div>
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Professional, responsive, and truly understands the needs of small businesses. Highly recommend..."</p>
-                    <div class="review-author">
-                        <div class="author-avatar">MS</div>
-                        <div class="author-info">
-                            <h4>Michael S.</h4>
-                            <p>Real Estate Investor</p>
-                        </div>
-                    </div>
+            </div>
+
+            -->
+
+        </div>
+    </section>
+
+    <!-- Leave a Review -->
+    <section class="content-section">
+        <div class="leave-review-section">
+            <h2 class="reveal">Share Your Experience</h2>
+            <p class="reveal">If you've worked with E&N Tax & Accounting, your feedback helps others find the right fit for their financial needs — and helps us keep getting better.</p>
+
+            <div class="review-platform-grid">
+                <div class="platform-card reveal">
+                    <span class="platform-icon">🔍</span>
+                    <h3>Google</h3>
+                    <p>The most trusted and visible place to leave a review. A Google review directly helps new clients find E&N when searching for tax services.</p>
+                    <a href="https://g.page/r/CQg5gRyJ4mdoEAE/review" class="platform-btn" target="_blank" rel="noopener">Leave a Google Review</a>
                 </div>
-                <div class="review-card">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"The peace of mind that comes from knowing your taxes are in capable hands is invaluable..."</p>
-                    <div class="review-author">
-                        <div class="author-avatar">RT</div>
-                        <div class="author-info">
-                            <h4>Rachel T.</h4>
-                            <p>Individual Client</p>
-                        </div>
-                    </div>
+
+                <div class="platform-card reveal">
+                    <span class="platform-icon">✉️</span>
+                    <h3>Share Directly</h3>
+                    <p>Prefer to share your experience directly? Send a note to E&N and your testimonial may be featured here on this page.</p>
+                    <a href="mailto:info@entaxaccounting.com?subject=My Experience with E%26N Tax" class="platform-btn secondary">Send a Testimonial</a>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Why Reviews Matter -->
-        <div class="why-reviews">
-            <h3>Why E&N Values Client Feedback</h3>
-            <div class="why-grid">
-                <div class="why-item">
-                    <div class="why-icon">🤝</div>
-                    <h4>Build Trust</h4>
-                    <p>Reviews help potential clients understand the E&N experience and build confidence in the services provided</p>
-                </div>
-                <div class="why-item">
-                    <div class="why-icon">📈</div>
-                    <h4>Continuous Improvement</h4>
-                    <p>Client feedback drives continuous improvement and ensures services evolve to meet changing needs</p>
-                </div>
-                <div class="why-item">
-                    <div class="why-icon">💬</div>
-                    <h4>Share Success Stories</h4>
-                    <p>Every client has a unique story, and sharing these experiences helps others see the value E&N provides</p>
-                </div>
-            </div>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content reveal">
+            <h3>Ready to Experience the E&N Difference?</h3>
+            <p>Join the clients who trust E&N Tax & Accounting with their financial success.</p>
+            <a href="contact.html" class="cta-button">Book a Consultation</a>
         </div>
     </section>
 
@@ -872,129 +791,56 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h4>E&N Tax & Accounting</h4>
-                <p>Professional tax and accounting services built on family values.</p>
-                <p>Established 2024</p>
+                <p class="company-description">Building financial success through expertise and dedication.</p>
+                <p class="established-year">Established 2024</p>
             </div>
             <div class="footer-section">
                 <h4>Quick Links</h4>
-                <a href="services.html">Services</a>
-                <a href="pricing.html">Pricing</a>
-                <a href="tools.html">Tools & Resources</a>
-                <a href="blog.html">Blog</a>
+                <div class="quick-links-grid">
+                    <div class="quick-links-column">
+                        <a href="index.html">About</a>
+                        <a href="services.html">Services</a>
+                        <a href="resources.html">Resources</a>
+                    </div>
+                    <div class="quick-links-column">
+                        <a href="reviews.html">Reviews</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
             </div>
             <div class="footer-section">
                 <h4>Contact</h4>
-                <p>info@entaxaccounting.com</p>
-                <p>Currently serving existing clients</p>
+                <p><a href="mailto:info@entaxaccounting.com">info@entaxaccounting.com</a></p>
+                <p>Welcoming new clients</p>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 E&N Tax & Accounting. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Theme Switcher Functions
-        function toggleThemeSwitcher() {
-            const switcher = document.getElementById('themeSwitcher');
-            switcher.classList.toggle('collapsed');
-        }
-
-        function setTheme(theme) {
-            const body = document.body;
-            const buttons = document.querySelectorAll('.theme-btn');
-            
-            // Remove all theme classes
-            body.classList.remove('theme-professional', 'theme-corporate');
-            
-            // Remove active class from all buttons
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
-            // Add appropriate theme class
-            if (theme === 'professional') {
-                body.classList.add('theme-professional');
-                buttons[1].classList.add('active');
-            } else if (theme === 'corporate') {
-                body.classList.add('theme-corporate');
-                buttons[2].classList.add('active');
-            } else {
-                // Default warm theme
-                buttons[0].classList.add('active');
-            }
-            
-            // Collapse the switcher after selection
-            document.getElementById('themeSwitcher').classList.add('collapsed');
-        }
-
-        // Mobile Menu Toggle
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
         }
 
-        // Mobile Dropdown Toggle
-        function toggleMobileDropdown(event) {
-            if (window.innerWidth <= 768) {
-                event.preventDefault();
-                const dropdown = event.target.closest('.dropdown');
-                dropdown.classList.toggle('mobile-open');
-            }
-        }
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const nav = document.querySelector('nav');
-            const navLinks = document.getElementById('navLinks');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                // Also close any open mobile dropdowns
-                document.querySelectorAll('.dropdown.mobile-open').forEach(dropdown => {
-                    dropdown.classList.remove('mobile-open');
-                });
-            }
-        });
-
-        // Add click event to dropdown toggle for mobile
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownToggle = document.querySelector('.dropdown-toggle');
-            if (dropdownToggle) {
-                dropdownToggle.addEventListener('click', toggleMobileDropdown);
-            }
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.boxShadow = '0 4px 25px rgba(0,0,0,0.25)';
-            } else {
-                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.15)';
-            }
-        });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 150) {
+                    element.classList.add('active');
                 }
             });
-        }, observerOptions);
+        }
 
-        // Observe elements for animation
-        document.querySelectorAll('.why-item').forEach(item => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(30px)';
-            item.style.transition = 'all 0.6s ease';
-            observer.observe(item);
+        window.addEventListener('scroll', reveal);
+        reveal();
+
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            header.style.boxShadow = window.scrollY > 50
+                ? '0 4px 20px rgba(0,0,0,0.1)'
+                : '0 2px 8px rgba(0,0,0,0.08)';
         });
     </script>
 </body>
