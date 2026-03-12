@@ -4,27 +4,28 @@ Status key: ✅ Done · 🔄 In Progress / Blocked · ⬜ To Do · 💬 Needs De
 
 ---
 
-## 🚀 Launch Blockers (must finish before going live)
+## 🚀 Launch Blockers
 
-- ✅ **Domain** — `entaxaccounting.com` is registered through Google Workspace (Domains tab in Google Admin). No action needed.
-- ⬜ **Cancel Wix** — redundant, not needed
+- ✅ **Domain** — `entaxaccounting.com` registered at Squarespace (migrated from Google Domains 2023)
 - ✅ **Sign up for Netlify** — done
-- ⬜ **Deploy site to Netlify** — drag project folder into Netlify deploy area (deprecated/ is now deleted and committed)
-- ⬜ **Connect domain to Netlify** — add DNS records Netlify provides into wherever domain is registered
-- ✅ **Fix contact form** — Formspree wired up (endpoint: xeergwwe); honeypot spam protection added; domain restricted to entaxaccounting.com in Formspree settings
+- ✅ **Deploy site to Netlify** — live at entaxaccounting.com
+- ✅ **Connect domain to Netlify** — DNS records added in Squarespace
+- ✅ **Verify HTTPS** — SSL provisioned by Netlify, padlock confirmed
+- ✅ **Fix contact form** — Formspree wired up (endpoint: xeergwwe); honeypot spam protection added
+- ⬜ **Cancel Wix** — redundant, still active
 
 ---
 
-## 📋 Pre-Deploy Cleanup
+## 📋 Post-Launch Cleanup
 
-- ✅ **Back up and delete `deprecated/` folder** — backed up externally, deleted, committed
-- ✅ **Commit all pending git changes** — committed as v1.0 pre-launch (commit c9970da)
+- ⬜ **Formspree domain restriction** — add `entaxaccounting.com` to allowed domains in Formspree dashboard (formspree.io → your form → Settings → Allowed Domains)
+- ⬜ **Test contact form on live domain** — submit a real test from entaxaccounting.com to confirm end-to-end
 
 ---
 
 ## 🏗️ Content / Page Updates
 
-- ⬜ **Remove "Tax Planning Strategies" from Contact.html dropdown** — line 966, service interest select menu. User handling this manually.
+- ✅ **Remove "Tax Planning Strategies" from Contact.html dropdown** — replaced with "Tax Consulting"
 - ✅ **Google Business Profile** — set up; review link updated in Reviews.html (https://g.page/r/CQg5gRyJ4mdoEAE/review)
 - ⬜ **Reviews page — add first real reviews** — when clients start leaving reviews, add them using the commented-out template in Reviews.html. Instructions are embedded in the HTML comment.
 - 💬 **Reviews hero background** — currently using `lighthouse.png`. Swap for a different image from `images/backgrounds/` if preferred.
@@ -34,42 +35,38 @@ Status key: ✅ Done · 🔄 In Progress / Blocked · ⬜ To Do · 💬 Needs De
 
 ## 🛒 Shop (on hold)
 
-- ⬜ **Finalize products** — work in progress; files are in `pro_tools/`
-- ⬜ **Restore Shop to nav** — when ready, search `<!-- <li><a href="shop.html">Shop</a></li> -->` across all pages and uncomment
-- ⬜ **Restore Shop.html** — it's in `deprecated/Shop.html`, move back to root when ready
+- ⬜ **Restore Shop** — when ready, recover files from external backup, add Shop.html to root, uncomment nav links across all pages
 
 ---
 
-## 🔒 Security (post-launch)
+## 🔒 Security
 
 - ✅ **Security headers file** — `_headers` created for Netlify (X-Frame-Options, nosniff, Referrer-Policy)
-- ⬜ **Verify HTTPS** — Netlify provisions this automatically once domain is connected; confirm padlock shows
-- ⬜ **Formspree spam protection** — Formspree free tier includes basic spam filtering; no extra action needed
+- ✅ **HTTPS** — confirmed live
+- ✅ **Formspree honeypot** — in place
 
 ---
 
 ## ✅ Completed
 
-- ✅ Added **Tax Consulting** service card to Services page
-- ✅ Removed **Blog** from all page navs, footers, and homepage section
-- ✅ Moved Blog files to `deprecated/` (Blog.html, blog-posts.json, blog-manager, Python scripts, guides)
-- ✅ Removed **Shop** from all page navs and footers (commented out for easy restore)
-- ✅ Moved Shop.html to `deprecated/`
-- ✅ Replaced **FamilyPhotoshootPhoto.JPG** with **portrait.png** on About page
-- ✅ Added caption "Marija Sparano, Founder & CEO" under portrait
-- ✅ Created new **Reviews.html** — on-brand, coming soon state, with review card template embedded
-- ✅ Added **Reviews** link to nav and footer on all live pages
-- ✅ Created **Netlify `_headers`** security file
-- ✅ Cleaned up `.gitignore` (added Python cache, generated files)
-- ✅ Rewrote **CLAUDE.md** with accurate project documentation
-- ✅ Moved all deprecated/unused files to `deprecated/` folder using `git mv`
-- ✅ Removed empty `guides/` directory
+- ✅ Site live at entaxaccounting.com via Netlify
+- ✅ GitHub org created: ENTaxAccounting; repo transferred and public
+- ✅ Auto-deploy configured: push to main → Netlify deploys in ~30s
+- ✅ DNS configured at Squarespace (A record + CNAME → Netlify)
+- ✅ info@ email set up as Google Group alias forwarding to marija@
+- ✅ Contact form wired to Formspree (xeergwwe)
+- ✅ Google Business Profile live; review link in Reviews.html
+- ✅ Added Tax Consulting service card
+- ✅ Removed Blog and Shop from nav (commented out for restore)
+- ✅ Created Resources.html, Reviews.html, CLAUDE.md, TODO.md, SITE_NOTES.md, _headers
+- ✅ Deleted deprecated/ and pro_tools/ and images/featured/
+- ✅ Portrait (portrait.png) on About page with Marija's caption
 
 ---
 
 ## 💡 Future Ideas (no timeline)
 
-- Blog — wife may want to revisit once the firm is more established
-- Shop — digital products / downloadable tools (files exist in `pro_tools/`)
+- Blog — Marija may want to revisit once the firm is more established
+- Shop — digital products / downloadable tools
 - Google Reviews embed widget — once reviews accumulate, consider Elfsight (~$9/mo) to auto-display them
-- Testimonials section on homepage — pull 1–2 strong reviews into the Index.html hero or about section
+- Testimonials section on homepage — pull 1–2 strong reviews into Index.html

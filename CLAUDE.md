@@ -29,9 +29,9 @@ Static HTML website for E&N Tax & Accounting, a virtual tax and accounting firm 
 | Services | `Services.html` | 4 active service cards (see Services section below) |
 | Resources | `Resources.html` | Links to tools in `tools/` |
 | Reviews | `Reviews.html` | Coming soon — no reviews yet; template embedded in HTML comment |
-| Contact | `Contact.html` | **Form is not wired up** — shows fake alert, needs Formspree integration |
+| Contact | `Contact.html` | Formspree wired up (endpoint: xeergwwe), honeypot spam protection included |
 
-**Removed/hidden pages:** Blog and Shop are commented out of all navs and moved to `deprecated/`. Do not re-add without being asked.
+**Removed/hidden pages:** Blog and Shop are commented out of all navs. Do not re-add without being asked.
 
 ## Services Offered
 
@@ -56,13 +56,24 @@ Each page has a sticky white header with `.nav-links` (ul > li > a) and a `.nav-
 **Tools** (`tools/` directory) are standalone calculators with no nav/footer:
 `quarterly-tax-calculator.html`, `tax-withholding-estimator.html`, `rental-property-calculator.html`, `tax-calendar-2025.html`, `depreciation-schedule-tool.html`, `1099-contractor-checklist.html`
 
+## Tech Stack & Hosting
+
+- **Hosting:** Netlify (free tier) — auto-deploys on every push to `main`
+- **Repo:** `github.com/ENTaxAccounting/EN-Tax-Website` (public, GitHub org)
+- **Domain:** `entaxaccounting.com` — registered at Squarespace (migrated from Google Domains in 2023); DNS managed there. A record → `75.2.60.5`, www CNAME → Netlify subdomain.
+- **Email:** Google Workspace — `marija@entaxaccounting.com`, `info@entaxaccounting.com` (info@ is a free Google Group alias forwarding to marija@)
+- **Contact form:** Formspree endpoint `xeergwwe` — restrict allowed domain to `entaxaccounting.com` in Formspree dashboard
+- **Google Business Profile:** live — review link `https://g.page/r/CQg5gRyJ4mdoEAE/review`
+
+## Deploy Workflow
+
+Edit files → `git add` → `git commit` → `git push` → Netlify auto-deploys in ~30 seconds.
+
 ## Pending Items (important for new sessions)
 
-- **Contact form** — needs Formspree. User will provide form endpoint ID; update the `<form>` action and replace the fake JS submit handler with a real fetch call.
-- **Google Business Profile link** — Reviews.html has a placeholder `REPLACE-WITH-GOOGLE-PROFILE-LINK` in the Google review button.
-- **`deprecated/` folder** — user needs to back this up externally and delete it from the project before deploying.
-- **Hosting** — targeting Netlify (free). Domain `entaxaccounting.com` is registered in Google Workspace (Google Admin → Domains → DNS settings is where Netlify's DNS records get added). `_headers` file already created for Netlify security headers.
-- **Git** — large batch of uncommitted changes. New untracked files include: `CLAUDE.md`, `Resources.html`, `_headers`, `TODO.md`, `SITE_NOTES.md`.
+- **Formspree domain restriction** — add `entaxaccounting.com` to allowed domains in Formspree dashboard (not yet done)
+- **Cancel Wix** — still active, redundant subscription
+- **Reviews** — no reviews yet; template embedded in HTML comment in Reviews.html. When first reviews arrive, uncomment and fill in.
 
 ## File Organization
 
@@ -73,9 +84,6 @@ Each page has a sticky white header with `.nav-links` (ul > li > a) and a `.nav-
 ├── TODO.md             # Task tracker — check this at the start of each session
 ├── SITE_NOTES.md       # Detailed brand/content reference
 ├── images/
-│   ├── backgrounds/    # Hero background images
-│   └── featured/       # Legacy blog images (unused)
-├── tools/              # Interactive tax calculators
-├── pro_tools/          # Downloadable product files (Excel, CSV) — Shop on hold
-└── deprecated/         # Archived files pending external backup and deletion
+│   └── backgrounds/    # Hero background images
+└── tools/              # Interactive tax calculators
 ```

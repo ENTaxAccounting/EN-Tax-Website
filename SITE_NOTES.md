@@ -58,9 +58,10 @@ Bring this file (along with TODO.md and CLAUDE.md) into any new chat session for
 - Pure static HTML/CSS/JS — no frameworks, no build tools
 - Every page is self-contained with its own `<style>` and `<script>`
 - No shared components — nav/footer/CSS are copy-pasted across pages
-- Hosted on **Netlify** (free tier) — pending domain setup
-- Domain: **entaxaccounting.com** — pending recovery/registration
-- Email: **info@entaxaccounting.com** via Google Workspace ($7/mo)
+- Hosted on **Netlify** (free tier) — live at `entaxaccounting.com`
+- Repo: **github.com/ENTaxAccounting/EN-Tax-Website** (public)
+- Domain: **entaxaccounting.com** — registered at Squarespace (migrated from Google Domains 2023)
+- Email: **marija@entaxaccounting.com** and **info@entaxaccounting.com** via Google Workspace. `info@` is a free Google Group alias forwarding to `marija@`.
 
 **Updating any shared element (nav, footer, color palette) requires editing every HTML file individually.**
 
@@ -90,9 +91,7 @@ Standalone interactive calculators — no nav/footer, self-contained:
 
 ## Contact Form
 
-The form in Contact.html is **not functional** — it currently shows a fake alert.
-Fix: Sign up at formspree.io, get a form endpoint ID, share it in chat.
-Claude will wire up the AJAX submission to Formspree.
+Wired up to Formspree (endpoint: `xeergwwe`). Submits via AJAX fetch, shows inline success/error. Honeypot spam protection included. Allowed domain restriction should be set to `entaxaccounting.com` in Formspree dashboard.
 
 ---
 
@@ -101,15 +100,14 @@ Claude will wire up the AJAX submission to Formspree.
 - No reviews exist yet (firm established 2024)
 - Reviews.html is live but in "coming soon" state
 - When first reviews come in: open Reviews.html, find the HTML comment block labeled TEMPLATE, uncomment it, and fill in the details
-- Google review link placeholder in Reviews.html: search `REPLACE-WITH-GOOGLE-PROFILE-LINK`
-- Google Business Profile: set up at business.google.com
+- Google Business Profile review link: `https://g.page/r/CQg5gRyJ4mdoEAE/review`
 
 ---
 
 ## Git / Deployment Notes
 
+- Repo: `github.com/ENTaxAccounting/EN-Tax-Website` (public org repo)
 - Branch: `main`
-- Large batch of uncommitted changes pending (see TODO → Pre-Deploy Cleanup)
-- `deprecated/` folder: back up externally then delete — it will then be committed as a batch of deletions
-- Deploy to Netlify: drag project folder into Netlify UI, or connect GitHub repo for auto-deploys
+- **Deploy workflow:** `git push origin main` → Netlify auto-deploys in ~30 seconds
 - Security headers: `_headers` file in project root — Netlify reads this automatically
+- Domain DNS managed at Squarespace (squarespace.com) — A record and CNAME pointing to Netlify
