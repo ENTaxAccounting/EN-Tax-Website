@@ -760,52 +760,7 @@
             <!-- Review cards — add new .review-card blocks here as reviews come in.
                  Set author-avatar initials to the client's first + last initial. -->
 
-            <div class="review-cards-grid">
-                <div class="review-card reveal">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"If you need help with your taxes Marija is the person to go with. She has been doing my taxes for years — I can't explain how helpful she is. Always explaining everything and answering all my questions."</p>
-                    <div class="review-author">
-                        <div class="author-avatar">DJ</div>
-                        <div>
-                            <div class="author-name">Desanka Jangelovska</div>
-                            <div class="author-type">Individual</div>
-                        </div>
-                    </div>
-                    <div class="review-source">via Google</div>
-                </div>
-
-                <div class="review-card reveal">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Marija has been handling my taxes for several years, and I can't recommend her highly enough. She is extremely knowledgeable, detail-oriented, and consistently makes the entire process easy and stress-free. Her professionalism, responsiveness, and genuine care for her clients truly set her apart. I completely trust her with my taxes and wouldn't go anywhere else. If you're looking for someone exceptional, Marija is the one!"</p>
-                    <div class="review-author">
-                        <div class="author-avatar">FS</div>
-                        <div>
-                            <div class="author-name">Frosina Stojchevska</div>
-                            <div class="author-type">Individual</div>
-                        </div>
-                    </div>
-                    <div class="review-source">via Google</div>
-                </div>
-            </div>
-
-            <!-- TEMPLATE (copy and paste a new .review-card block above when new reviews arrive):
-
-            <div class="review-cards-grid">
-                <div class="review-card reveal">
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Review text goes here."</p>
-                    <div class="review-author">
-                        <div class="author-avatar">AB</div>
-                        <div>
-                            <div class="author-name">First Last</div>
-                            <div class="author-type">Small Business Owner</div>
-                        </div>
-                    </div>
-                    <div class="review-source">via Google</div>
-                </div>
-            </div>
-
-            -->
+            <div id="reviews-container"></div>
 
         </div>
     </section>
@@ -874,6 +829,53 @@
     </footer>
 
     <script>
+        function escapeHtml(str) {
+            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        async function loadReviews() {
+            const container = document.getElementById('reviews-container');
+            try {
+                const res = await fetch('reviews-data.json');
+                if (!res.ok) throw new Error('not found');
+                const data = await res.json();
+
+                if (!data.reviews || data.reviews.length === 0) {
+                    container.innerHTML = '<p style="text-align:center;color:#6C757D;font-size:18px;padding:40px 0;">Reviews coming soon.</p>';
+                    return;
+                }
+
+                const cards = data.reviews
+                    .filter(r => r.text)
+                    .map(r => {
+                        const stars = '★'.repeat(r.rating || 5);
+                        const words = r.author_name.trim().split(/\s+/);
+                        const initials = (words[0][0] + (words.length > 1 ? words[words.length - 1][0] : '')).toUpperCase();
+                        const dateStr = r.time ? new Date(r.time * 1000).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : '';
+                        return `
+                        <div class="review-card reveal">
+                            <div class="review-stars">${stars}</div>
+                            <p class="review-text">"${escapeHtml(r.text)}"</p>
+                            <div class="review-author">
+                                <div class="author-avatar">${escapeHtml(initials)}</div>
+                                <div>
+                                    <div class="author-name">${escapeHtml(r.author_name)}</div>
+                                    ${dateStr ? `<div class="author-type">${dateStr}</div>` : ''}
+                                </div>
+                            </div>
+                            <div class="review-source">via Google</div>
+                        </div>`;
+                    }).join('');
+
+                container.innerHTML = `<div class="review-cards-grid">${cards}</div>`;
+                reveal();
+            } catch (e) {
+                console.error('Could not load reviews:', e);
+            }
+        }
+
+        loadReviews();
+
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');

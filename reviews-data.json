@@ -1,0 +1,23 @@
+{
+  "place_id": null,
+  "business_name": "E&N Tax and Accounting LLC",
+  "overall_rating": 5.0,
+  "total_reviews": 2,
+  "last_fetched": null,
+  "reviews": [
+    {
+      "author_name": "Desanka Jangelovska",
+      "rating": 5,
+      "text": "If you need help with your taxes Marija is the person to go with. She has been doing my taxes for years — I can't explain how helpful she is. Always explaining everything and answering all my questions.",
+      "time": 0,
+      "relative_time_description": "recently"
+    },
+    {
+      "author_name": "Frosina Stojchevska",
+      "rating": 5,
+      "text": "Marija has been handling my taxes for several years, and I can't recommend her highly enough. She is extremely knowledgeable, detail-oriented, and consistently makes the entire process easy and stress-free. Her professionalism, responsiveness, and genuine care for her clients truly set her apart. I completely trust her with my taxes and wouldn't go anywhere else. If you're looking for someone exceptional, Marija is the one!",
+      "time": 0,
+      "relative_time_description": "recently"
+    }
+  ]
+}
