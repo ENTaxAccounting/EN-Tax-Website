@@ -23,11 +23,9 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Fetch reviews from Google Business Profile API
+      - name: Fetch reviews via SerpApi
         env:
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
         run: node fetch-reviews.js
 
       - name: Commit updated reviews if changed
