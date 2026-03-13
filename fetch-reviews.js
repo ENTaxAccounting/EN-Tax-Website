@@ -54,9 +54,10 @@ async function gbpGet(accessToken, path) {
 }
 
 async function getAccountId(accessToken) {
+  // Use legacy mybusiness.googleapis.com endpoint to avoid quota issues with mybusinessaccountmanagement
   const data = await httpsRequest({
-    hostname: 'mybusinessaccountmanagement.googleapis.com',
-    path: '/v1/accounts',
+    hostname: 'mybusiness.googleapis.com',
+    path: '/v4/accounts',
     method: 'GET',
     headers: { Authorization: `Bearer ${accessToken}` }
   });
