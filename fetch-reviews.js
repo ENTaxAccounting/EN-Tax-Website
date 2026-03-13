@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 const BUSINESS_NAME = 'E&N Tax and Accounting LLC';
+const BUSINESS_PHONE = '(914) 483-0713';
 const DATA_FILE = 'reviews-data.json';
 
 function httpsGet(url) {
@@ -20,14 +21,19 @@ function httpsGet(url) {
 }
 
 async function findPlace() {
-  const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent(BUSINESS_NAME)}&inputtype=textquery&fields=place_id,name,rating,user_ratings_total&key=${API_KEY}`;
-  const data = await httpsGet(url);
-  if (data.status !== 'OK' || !data.candidates || !data.candidates.length) {
-    throw new Error(`findPlaceFromText failed: ${data.status} — ${JSON.stringify(data)}`);
+  // Try by phone number first (most reliable for service area businesses)
+  const queries = [BUSINESS_PHONE, BUSINESS_NAME, 'E&N Tax Accounting'];
+  for (const query of queries) {
+    const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent(query)}&inputtype=textquery&fields=place_id,name,rating,user_ratings_total&key=${API_KEY}`;
+    const data = await httpsGet(url);
+    if (data.status === 'OK' && data.candidates && data.candidates.length) {
+      const p = data.candidates[0];
+      console.log(`Found via "${query}": ${p.name} (${p.place_id})`);
+      return p;
+    }
+    console.log(`Query "${query}" returned ${data.status}, trying next...`);
   }
-  const p = data.candidates[0];
-  console.log(`Found: ${p.name} (${p.place_id})`);
-  return p;
+  throw new Error('Could not find business in Google Places. Check that the Places API is enabled and billing is active.');
 }
 
 async function getPlaceDetails(placeId) {
