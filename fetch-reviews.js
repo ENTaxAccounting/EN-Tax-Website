@@ -21,19 +21,28 @@ function httpsGet(url) {
 }
 
 async function findPlace() {
-  // Try by phone number first (most reliable for service area businesses)
-  const queries = [BUSINESS_PHONE, BUSINESS_NAME, 'E&N Tax Accounting'];
+  const queries = [BUSINESS_NAME, 'E&N Tax Accounting', BUSINESS_PHONE];
   for (const query of queries) {
     const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent(query)}&inputtype=textquery&fields=place_id,name,rating,user_ratings_total&key=${API_KEY}`;
     const data = await httpsGet(url);
     if (data.status === 'OK' && data.candidates && data.candidates.length) {
       const p = data.candidates[0];
+      // Safety check: make sure we found E&N Tax, not a different business
+      const nameMatch = p.name && (
+        p.name.toLowerCase().includes('e&n') ||
+        p.name.toLowerCase().includes('e and n') ||
+        p.name.toLowerCase().includes('en tax')
+      );
+      if (!nameMatch) {
+        console.log(`Query "${query}" matched wrong business: "${p.name}" — skipping`);
+        continue;
+      }
       console.log(`Found via "${query}": ${p.name} (${p.place_id})`);
       return p;
     }
     console.log(`Query "${query}" returned ${data.status}, trying next...`);
   }
-  throw new Error('Could not find business in Google Places. Check that the Places API is enabled and billing is active.');
+  throw new Error('Could not find E&N Tax business in Google Places. Hardcode the place_id in reviews-data.json to bypass lookup.');
 }
 
 async function getPlaceDetails(placeId) {
@@ -54,7 +63,14 @@ async function main() {
     existing = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
   }
 
-  const place = await findPlace();
+  // Use hardcoded place_id if available, otherwise look it up
+  let place;
+  if (existing.place_id) {
+    console.log(`Using hardcoded place_id: ${existing.place_id}`);
+    place = { place_id: existing.place_id };
+  } else {
+    place = await findPlace();
+  }
   const details = await getPlaceDetails(place.place_id);
   const freshReviews = details.reviews || [];
   console.log(`Got ${freshReviews.length} reviews from API`);
