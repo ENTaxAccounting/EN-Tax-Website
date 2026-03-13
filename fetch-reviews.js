@@ -1,132 +1,146 @@
 const https = require('https');
 const fs = require('fs');
 
-const API_KEY = process.env.GOOGLE_PLACES_API_KEY;
-const BUSINESS_NAME = 'E&N Tax and Accounting LLC';
-const BUSINESS_PHONE = '+19144830713';
+const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN } = process.env;
 const DATA_FILE = 'reviews-data.json';
 
-function httpsGet(url) {
-  return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
-      res.on('end', () => {
-        try { resolve(JSON.parse(data)); }
-        catch (e) { reject(new Error('Invalid JSON: ' + data.substring(0, 200))); }
-      });
-      res.on('error', reject);
-    }).on('error', reject);
-  });
-}
+const STAR_RATING = { ONE: 1, TWO: 2, THREE: 3, FOUR: 4, FIVE: 5 };
 
-function httpsPost(url, body, headers) {
+function httpsRequest(options, body) {
   return new Promise((resolve, reject) => {
-    const payload = JSON.stringify(body);
-    const urlObj = new URL(url);
-    const options = {
-      hostname: urlObj.hostname,
-      path: urlObj.pathname + urlObj.search,
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload), ...headers }
-    };
     const req = https.request(options, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
-        try { resolve(JSON.parse(data)); }
-        catch (e) { reject(new Error('Invalid JSON: ' + data.substring(0, 200))); }
+        try { resolve({ status: res.statusCode, body: JSON.parse(data) }); }
+        catch (e) { reject(new Error('Invalid JSON: ' + data.substring(0, 300))); }
       });
     });
     req.on('error', reject);
-    req.write(payload);
+    if (body) req.write(body);
     req.end();
   });
 }
 
-async function findPlace() {
-  // Attempt 1: phone number lookup with correct inputtype
-  console.log('Trying phone number lookup...');
-  const phoneUrl = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent(BUSINESS_PHONE)}&inputtype=phonenumber&fields=place_id,name,rating,user_ratings_total&key=${API_KEY}`;
-  const phoneData = await httpsGet(phoneUrl);
-  if (phoneData.status === 'OK' && phoneData.candidates && phoneData.candidates.length) {
-    const p = phoneData.candidates[0];
-    console.log(`Found via phone: ${p.name} (${p.place_id})`);
-    return p;
-  }
-  console.log(`Phone lookup: ${phoneData.status}`);
+async function getAccessToken() {
+  const body = [
+    `grant_type=refresh_token`,
+    `refresh_token=${encodeURIComponent(GOOGLE_REFRESH_TOKEN)}`,
+    `client_id=${encodeURIComponent(GOOGLE_CLIENT_ID)}`,
+    `client_secret=${encodeURIComponent(GOOGLE_CLIENT_SECRET)}`
+  ].join('&');
 
-  // Attempt 2: new Places API v1 text search
-  console.log('Trying Places API v1 text search...');
-  const v1Data = await httpsPost(
-    'https://places.googleapis.com/v1/places:searchText',
-    { textQuery: BUSINESS_NAME },
-    { 'X-Goog-Api-Key': API_KEY, 'X-Goog-FieldMask': 'places.id,places.displayName,places.rating,places.userRatingCount' }
-  );
-  if (v1Data.places && v1Data.places.length) {
-    const p = v1Data.places[0];
-    console.log(`Found via v1: ${p.displayName.text} (${p.id})`);
-    return { place_id: p.id, name: p.displayName.text, rating: p.rating, user_ratings_total: p.userRatingCount };
-  }
-  console.log(`v1 search result: ${JSON.stringify(v1Data).substring(0, 200)}`);
+  const res = await httpsRequest({
+    hostname: 'oauth2.googleapis.com',
+    path: '/token',
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': Buffer.byteLength(body) }
+  }, body);
 
-  throw new Error('All lookup methods failed. Set place_id manually in reviews-data.json.');
+  if (!res.body.access_token) throw new Error('Failed to get access token: ' + JSON.stringify(res.body));
+  console.log('Access token obtained.');
+  return res.body.access_token;
 }
 
-async function getPlaceDetails(placeId) {
-  const fields = 'reviews,rating,user_ratings_total';
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=${fields}&reviews_sort=newest&key=${API_KEY}`;
-  const data = await httpsGet(url);
-  if (data.status !== 'OK') {
-    throw new Error(`Place Details failed: ${data.status}`);
-  }
-  return data.result;
+async function gbpGet(accessToken, path) {
+  const res = await httpsRequest({
+    hostname: 'mybusiness.googleapis.com',
+    path,
+    method: 'GET',
+    headers: { Authorization: `Bearer ${accessToken}` }
+  });
+  if (res.status !== 200) throw new Error(`GBP API error ${res.status} at ${path}: ${JSON.stringify(res.body)}`);
+  return res.body;
+}
+
+async function getAccountId(accessToken) {
+  const data = await httpsRequest({
+    hostname: 'mybusinessaccountmanagement.googleapis.com',
+    path: '/v1/accounts',
+    method: 'GET',
+    headers: { Authorization: `Bearer ${accessToken}` }
+  });
+  if (data.status !== 200) throw new Error('Failed to get accounts: ' + JSON.stringify(data.body));
+  const accounts = data.body.accounts;
+  if (!accounts || !accounts.length) throw new Error('No accounts found');
+  console.log(`Account: ${accounts[0].name}`);
+  return accounts[0].name; // e.g. "accounts/123456789"
+}
+
+async function getLocationId(accessToken, accountId) {
+  const data = await gbpGet(accessToken, `/v4/${accountId}/locations?pageSize=10`);
+  const locations = data.locations;
+  if (!locations || !locations.length) throw new Error('No locations found on this account');
+  console.log(`Location: ${locations[0].locationName} (${locations[0].name})`);
+  return locations[0].name; // e.g. "accounts/123/locations/456"
+}
+
+async function getReviews(accessToken, locationId) {
+  const data = await gbpGet(accessToken, `/v4/${locationId}/reviews?pageSize=50&orderBy=updateTime%20desc`);
+  return {
+    reviews: data.reviews || [],
+    totalCount: data.totalReviewCount || 0,
+    averageRating: data.averageRating || 0
+  };
+}
+
+function normalizeReview(r) {
+  return {
+    author_name: r.reviewer.displayName || 'Anonymous',
+    profile_photo_url: r.reviewer.profilePhotoUrl || '',
+    rating: STAR_RATING[r.starRating] || 5,
+    text: r.comment || '',
+    time: Math.floor(new Date(r.createTime).getTime() / 1000),
+    review_id: r.reviewId
+  };
 }
 
 async function main() {
-  if (!API_KEY) throw new Error('GOOGLE_PLACES_API_KEY is not set');
+  if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET || !GOOGLE_REFRESH_TOKEN) {
+    throw new Error('Missing required env vars: GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN');
+  }
 
   let existing = { place_id: null, reviews: [] };
   if (fs.existsSync(DATA_FILE)) {
     existing = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
   }
 
-  let place;
-  if (existing.place_id) {
-    console.log(`Using saved place_id: ${existing.place_id}`);
-    place = { place_id: existing.place_id };
-  } else {
-    place = await findPlace();
-  }
+  const accessToken = await getAccessToken();
+  const accountId = await getAccountId(accessToken);
+  const locationId = await getLocationId(accessToken, accountId);
+  const { reviews: freshReviews, totalCount, averageRating } = await getReviews(accessToken, locationId);
 
-  const details = await getPlaceDetails(place.place_id);
-  const freshReviews = details.reviews || [];
-  console.log(`Got ${freshReviews.length} reviews from API`);
+  console.log(`Got ${freshReviews.length} reviews from GBP API`);
 
+  // Merge by review_id (most reliable) or author name fallback for seeded entries
+  const byId = {};
   const byAuthor = {};
   existing.reviews.forEach(r => {
+    if (r.review_id) byId[r.review_id] = r;
     byAuthor[r.author_name.toLowerCase()] = r;
   });
 
   let added = 0;
   freshReviews.forEach(r => {
-    const key = r.author_name.toLowerCase();
-    if (byAuthor[key]) {
-      Object.assign(byAuthor[key], r);
+    const normalized = normalizeReview(r);
+    if (byId[normalized.review_id]) {
+      Object.assign(byId[normalized.review_id], normalized);
+    } else if (byAuthor[normalized.author_name.toLowerCase()]) {
+      Object.assign(byAuthor[normalized.author_name.toLowerCase()], normalized);
     } else {
-      byAuthor[key] = r;
+      existing.reviews.push(normalized);
       added++;
     }
   });
 
-  const merged = Object.values(byAuthor).sort((a, b) => (b.time || 0) - (a.time || 0));
+  const merged = existing.reviews.sort((a, b) => (b.time || 0) - (a.time || 0));
   console.log(`${added} new review(s) added. Total: ${merged.length}`);
 
   const output = {
-    place_id: place.place_id,
-    business_name: BUSINESS_NAME,
-    overall_rating: details.rating || place.rating,
-    total_reviews: details.user_ratings_total || place.user_ratings_total,
+    place_id: existing.place_id,
+    business_name: 'E&N Tax and Accounting LLC',
+    overall_rating: averageRating,
+    total_reviews: totalCount,
     last_fetched: new Date().toISOString(),
     reviews: merged
   };

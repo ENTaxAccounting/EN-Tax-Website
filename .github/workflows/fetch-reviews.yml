@@ -23,9 +23,11 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Fetch reviews from Google Places API
+      - name: Fetch reviews from Google Business Profile API
         env:
-          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: node fetch-reviews.js
 
       - name: Commit updated reviews if changed
