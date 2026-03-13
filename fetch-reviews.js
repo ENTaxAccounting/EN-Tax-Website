@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 const BUSINESS_NAME = 'E&N Tax and Accounting LLC';
-const BUSINESS_PHONE = '(914) 483-0713';
+const BUSINESS_CID = '7523230781062330632'; // from Google Maps URL, guaranteed correct
 const DATA_FILE = 'reviews-data.json';
 
 function httpsGet(url) {
@@ -21,28 +21,15 @@ function httpsGet(url) {
 }
 
 async function findPlace() {
-  const queries = [BUSINESS_NAME, 'E&N Tax Accounting', BUSINESS_PHONE];
-  for (const query of queries) {
-    const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent(query)}&inputtype=textquery&fields=place_id,name,rating,user_ratings_total&key=${API_KEY}`;
-    const data = await httpsGet(url);
-    if (data.status === 'OK' && data.candidates && data.candidates.length) {
-      const p = data.candidates[0];
-      // Safety check: make sure we found E&N Tax, not a different business
-      const nameMatch = p.name && (
-        p.name.toLowerCase().includes('e&n') ||
-        p.name.toLowerCase().includes('e and n') ||
-        p.name.toLowerCase().includes('en tax')
-      );
-      if (!nameMatch) {
-        console.log(`Query "${query}" matched wrong business: "${p.name}" — skipping`);
-        continue;
-      }
-      console.log(`Found via "${query}": ${p.name} (${p.place_id})`);
-      return p;
-    }
-    console.log(`Query "${query}" returned ${data.status}, trying next...`);
+  // Look up by CID — guaranteed to match the exact business from the Maps URL
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?cid=${BUSINESS_CID}&fields=place_id,name,rating,user_ratings_total&key=${API_KEY}`;
+  const data = await httpsGet(url);
+  if (data.status === 'OK' && data.result) {
+    const p = data.result;
+    console.log(`Found via CID: ${p.name} (${p.place_id})`);
+    return p;
   }
-  throw new Error('Could not find E&N Tax business in Google Places. Hardcode the place_id in reviews-data.json to bypass lookup.');
+  throw new Error(`CID lookup failed: ${data.status} — ${JSON.stringify(data)}`);
 }
 
 async function getPlaceDetails(placeId) {
