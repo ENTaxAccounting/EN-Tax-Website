@@ -707,6 +707,71 @@
             line-height: 1.6;
         }
 
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 80px 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            margin: 40px auto;
+            max-width: 1200px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .testimonials-section h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .testimonials-section .section-subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.05rem;
+        }
+
+        .testimonial-card {
+            background: var(--text-light);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: left;
+            border-top: 3px solid var(--secondary-color);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .testimonial-stars {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin-bottom: 14px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .testimonials-link {
+            display: inline-block;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 2px;
+            transition: color 0.2s;
+        }
+
+        .testimonials-link:hover {
+            color: var(--secondary-color);
+        }
+
         /* CTA Section */
         .cta-section {
             padding: 80px 20px;
@@ -1277,6 +1342,18 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section reveal">
+        <h2>What Our Clients Say</h2>
+        <p class="section-subtitle">Trusted by individuals and families who value care and expertise.</p>
+        <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Marija has been handling my taxes for several years, and I can't recommend her highly enough. She is extremely knowledgeable, detail-oriented, and consistently makes the entire process easy and stress-free. Her professionalism, responsiveness, and genuine care for her clients truly set her apart."</p>
+            <div class="testimonial-author">Frosina Stojchevska</div>
+        </div>
+        <a href="reviews.html" class="testimonials-link">See all reviews →</a>
     </section>
 
     <!-- CTA Section -->

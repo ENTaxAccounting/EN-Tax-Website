@@ -763,6 +763,77 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         }
 
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 80px 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            margin: 40px auto;
+            max-width: 1200px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .testimonials-section h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .testimonials-section .section-subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.05rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--text-light);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: left;
+            border-top: 3px solid var(--secondary-color);
+        }
+
+        .testimonial-stars {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin-bottom: 14px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .testimonials-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 2px;
+            transition: color 0.2s;
+        }
+
+        .testimonials-link:hover {
+            color: var(--secondary-color);
+        }
+
         /* CTA Section */
         .cta-section {
             padding: 80px 20px;
@@ -1117,6 +1188,12 @@
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tax Consulting" } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Quarterly Tax Estimates" } }
         ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "3",
+        "bestRating": "5"
       }
     }
     </script>
@@ -1276,6 +1353,25 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section reveal">
+        <h2>What Our Clients Say</h2>
+        <p class="section-subtitle">Real experiences from real clients.</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"I've never had a tax preparer who was this attentive and thorough. Marija gives you her full attention, answers every question, and clearly loves what she does. Highly recommend."</p>
+                <div class="testimonial-author">Amy Rubin</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"If you need help with your taxes Marija is the person to go with. She has been doing my taxes for years — I can't explain how helpful she is. Always explaining everything and answering all my questions."</p>
+                <div class="testimonial-author">Desanka Jangelovska</div>
+            </div>
+        </div>
+        <a href="reviews.html" class="testimonials-link">See all reviews →</a>
     </section>
 
     <!-- CTA Section -->
