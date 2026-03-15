@@ -9,9 +9,10 @@ const BUSINESS_QUERY = 'E&N Tax and Accounting LLC';
 function httpsGet(url) {
   return new Promise((resolve, reject) => {
     https.get(url, (res) => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
+      const chunks = [];
+      res.on('data', chunk => chunks.push(chunk));
       res.on('end', () => {
+        const data = Buffer.concat(chunks).toString('utf8');
         try { resolve({ status: res.statusCode, body: JSON.parse(data) }); }
         catch (e) { reject(new Error('Invalid JSON: ' + data.substring(0, 300))); }
       });
