@@ -702,9 +702,19 @@
             .client-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .client-card {
                 height: 300px;
+            }
+
+            .client-card h4 {
+                font-size: 26px;
+            }
+
+            .client-card p {
+                font-size: 13px;
+                line-height: 1.5;
+                width: 88%;
             }
         }
 
@@ -1631,11 +1641,16 @@
 
         // Tap-to-reveal for client cards on touch devices
         document.querySelectorAll('.client-card').forEach(card => {
-            card.addEventListener('click', () => {
+            let touchMoved = false;
+            card.addEventListener('touchstart', () => { touchMoved = false; }, { passive: true });
+            card.addEventListener('touchmove', () => { touchMoved = true; }, { passive: true });
+            card.addEventListener('touchend', (e) => {
+                if (touchMoved) return;
+                e.preventDefault(); // prevents ghost click firing after touchend
                 const isTapped = card.classList.contains('tapped');
                 document.querySelectorAll('.client-card').forEach(c => c.classList.remove('tapped'));
                 if (!isTapped) card.classList.add('tapped');
-            });
+            }, { passive: false });
         });
 
     </script>
