@@ -107,6 +107,18 @@ async function main() {
   };
 
   fs.writeFileSync(DATA_FILE, JSON.stringify(output, null, 2));
+
+  // Keep index.html schema reviewCount in sync
+  const INDEX_FILE = 'index.html';
+  if (fs.existsSync(INDEX_FILE)) {
+    const html = fs.readFileSync(INDEX_FILE, 'utf8');
+    const updated = html.replace(/"reviewCount": "\d+"/, `"reviewCount": "${merged.length}"`);
+    if (updated !== html) {
+      fs.writeFileSync(INDEX_FILE, updated);
+      console.log(`Updated index.html reviewCount to ${merged.length}`);
+    }
+  }
+
   console.log('Done.');
 }
 

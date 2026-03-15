@@ -247,7 +247,7 @@
             padding: 80px 20px;
             position: relative;
             overflow: hidden;
-            background-image: url('images/backgrounds/contact-us.png');
+            background-image: url('images/backgrounds/contact-us.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -900,6 +900,38 @@
                 font-size: 17px;
             }
         }
+
+        /* Mobile Sticky CTA */
+        .mobile-sticky-cta {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-sticky-cta {
+                display: block;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: var(--primary-color);
+                padding: 14px 20px;
+                text-align: center;
+                z-index: 998;
+                box-shadow: 0 -2px 12px rgba(0,0,0,0.15);
+            }
+
+            .mobile-sticky-cta a {
+                display: block;
+                color: var(--primary-color);
+                background: var(--secondary-color);
+                font-weight: 700;
+                font-size: 16px;
+                text-decoration: none;
+                padding: 12px 0;
+                border-radius: 8px;
+                letter-spacing: 0.02em;
+            }
+        }
     </style>
 
     <!-- Schema.org structured data -->
@@ -919,6 +951,46 @@
         "areaServed": "US",
         "availableLanguage": "English"
       }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What types of clients does E&N Tax & Accounting serve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "E&N specializes in serving individuals, small businesses (under $1M in revenue), startups, and small portfolio real estate investors."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does E&N's pricing work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "E&N uses value-based pricing with flat rates determined after an initial consultation. No hourly billing means no surprise costs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can E&N help with both personal and business taxes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely! E&N provides comprehensive services for both individual tax returns and business tax preparation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does E&N provide client consultations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "E&N offers virtual meetings to give clients ultimate flexibility and ensure the most convenient service delivery."
+          }
+        }
+      ]
     }
     </script>
 </head>
@@ -1031,7 +1103,7 @@
                         <div class="info-content">
                             <h4>Email</h4>
                             <p><a href="mailto:info@entaxaccounting.com">info@entaxaccounting.com</a></p>
-                            <p>We typically responds within 24-48 business hours</p>
+                            <p>We typically respond within 24–48 business hours</p>
                         </div>
                     </div>
 
@@ -1039,7 +1111,7 @@
                         <div class="info-icon">📍</div>
                         <div class="info-content">
                             <h4>Service Area</h4>
-                            <p>E&N Tax & Accounting is a fully-virtual firm serving clients nationwide. Our cloud-based approach allows us to provide exceptional tax and accounting services to individuals and businesses remotely, with seamless virtual consultations and secure document sharing.</p>
+                            <p>E&N Tax & Accounting is a fully virtual firm serving clients nationwide. Our cloud-based approach allows us to provide exceptional tax and accounting services to individuals and businesses remotely, with seamless virtual consultations and secure document sharing.</p>
                         </div>
                     </div>
 
@@ -1080,7 +1152,7 @@
             </div>
             <div class="faq-item reveal">
                 <h4>How does E&N provide client consultations?</h4>
-                <p>E&N offers virtual meetings to provide clients ultimate flexibility and ensure the most convenient service delivery.</p>
+                <p>E&N offers virtual meetings to give clients ultimate flexibility and ensure the most convenient service delivery.</p>
             </div>
         </div>
     </section>
@@ -1234,5 +1306,10 @@
             });
         });
     </script>
+
+    <!-- Mobile Sticky CTA -->
+    <div class="mobile-sticky-cta">
+        <a href="#contact-form">Book a Free Consultation</a>
+    </div>
 </body>
 </html>

@@ -17,7 +17,7 @@
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="E&N Tax & Accounting - Nurturing your financial growth with care and expertise. Professional tax preparation and accounting services that help you flourish.">
-    <meta name="keywords" content="tax preparation, small business accounting, startup taxes, real estate investor taxes, bookkeeping, tax planning">
+    <meta name="keywords" content="tax preparation, small business accounting, startup taxes, real estate investor taxes, bookkeeping">
     <meta name="author" content="E&N Tax & Accounting">
     
     <style>
@@ -1159,6 +1159,81 @@
                 font-size: 17px;
             }
         }
+
+        /* Trust Bar */
+        .trust-bar {
+            background: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 15px;
+            letter-spacing: 0.01em;
+        }
+
+        .trust-bar a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .trust-bar a:hover {
+            text-decoration: underline;
+        }
+
+        .trust-bar .trust-stars {
+            color: var(--secondary-color);
+            margin-right: 6px;
+        }
+
+        /* Why Choose E&N Section */
+        .why-en-section {
+            padding: 60px 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            margin: 40px auto;
+            max-width: 1440px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .why-en-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 36px;
+        }
+
+        .why-en-card {
+            text-align: center;
+            padding: 32px 24px;
+            border-radius: 12px;
+            background: rgba(0, 51, 102, 0.04);
+            border: 1px solid rgba(0, 51, 102, 0.08);
+        }
+
+        .why-en-icon {
+            font-size: 36px;
+            margin-bottom: 14px;
+        }
+
+        .why-en-card h4 {
+            color: var(--primary-color);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .why-en-card p {
+            color: var(--text-dark);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .why-en-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 
     <!-- Schema.org structured data -->
@@ -1192,7 +1267,7 @@
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "5",
-        "reviewCount": "3",
+        "reviewCount": "5",
         "bestRating": "5"
       }
     }
@@ -1238,33 +1313,33 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-backgrounds">
-            <div class="hero-bg-image active" style="background-image: url('images/backgrounds/city.png')"></div>
-            <div class="hero-bg-image" style="background-image: url('images/backgrounds/flowers.png')"></div>
-            <div class="hero-bg-image" style="background-image: url('images/backgrounds/lady-liberty.jpeg')"></div>
-            <div class="hero-bg-image" style="background-image: url('images/backgrounds/lighthouse.png')"></div>
-            <div class="hero-bg-image" style="background-image: url('images/backgrounds/waterfall.png')"></div>
+            <div class="hero-bg-image active" style="background-image: url('images/backgrounds/city.jpg')"></div>
+            <div class="hero-bg-image" style="background-image: url('images/backgrounds/flowers.jpg')"></div>
+            <div class="hero-bg-image" style="background-image: url('images/backgrounds/lady-liberty.jpg')"></div>
+            <div class="hero-bg-image" style="background-image: url('images/backgrounds/lighthouse.jpg')"></div>
+            <div class="hero-bg-image" style="background-image: url('images/backgrounds/waterfall.jpg')"></div>
         </div>
         <div class="hero-content">
             <div class="hero-text-wrapper">
                 <div class="hero-text-item active">
-                    <h1>Building Financial Success</h1>
-                    <p>Navigate complex urban tax landscapes with confidence & expertise</p>
+                    <h1>Tax & Accounting Services for Real People</h1>
+                    <p>Serving individuals, families, and small businesses — virtually, nationwide.</p>
                 </div>
                 <div class="hero-text-item">
                     <h1>Helping Your Business Bloom & Flourish</h1>
-                    <p>Nurturing financial growth through every season of your journey</p>
+                    <p>From bookkeeping to tax prep, we bring expertise and genuine care to every client.</p>
                 </div>
                 <div class="hero-text-item">
-                    <h1>Your Liberty to Pursue Financial Dreams</h1>
-                    <p>Empowering entrepreneurs & families to achieve financial independence</p>
+                    <h1>Where Every Client Becomes Family</h1>
+                    <p>Named after twin daughters Emma and Nina — personal attention is what we do.</p>
                 </div>
                 <div class="hero-text-item">
-                    <h1>Guiding You Safely Through Tax Complexity</h1>
-                    <p>Your trusted beacon in navigating financial regulations & opportunities</p>
+                    <h1>A Trusted Guide Through Tax Season</h1>
+                    <p>Clear answers, honest pricing, and an advisor who's always in your corner.</p>
                 </div>
                 <div class="hero-text-item">
-                    <h1>Flowing Toward Greater Financial Success</h1>
-                    <p>Harnessing the power of intelligent solutions for continuous growth</p>
+                    <h1>Tax Done Simply. Done Right.</h1>
+                    <p>Transparent pricing, expert preparation, and zero surprises — every time.</p>
                 </div>
             </div>
             <div class="hero-buttons">
@@ -1274,25 +1349,28 @@
         </div>
     </section>
 
-
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <span class="trust-stars">★★★★★</span> Rated 5.0 on Google &nbsp;·&nbsp; <a href="reviews.html">See All Reviews</a>
+    </div>
 
     <!-- About Section -->
     <section class="content-section">
         <div class="about-section">
             <div class="section-header reveal">
                 <h2>Building Your Financial Future</h2>
-                <p>At E&N Tax & Accounting, we believe that financial success comes from meticulous planning, expert guidance, and a commitment to helping you thrive. We tailor our approach to your specific financial needs, ensuring you retain more of what you earn through every tax season and beyond.</p>
+                <p>At E&N Tax & Accounting, we believe that financial success comes from expert guidance, personal attention, and a genuine commitment to helping you thrive. We tailor our approach to your specific situation, ensuring you retain more of what you earn — through every tax season and beyond.</p>
             </div>
 
             <div class="story-grid">
                 <div class="story-content reveal">
                     <h3>Who We Are</h3>
-                    <p>E&N Tax & Accounting represents more than just a business—it's a testament to family values and professional dedication. Named after twin daughters Emma and Nina, the firm embodies the care, attention, and commitment brought to every client relationship.</p>
-                    <p>We believe that behind every tax return is a story, a family, or a dream. That's why E&N approaches each client with the same care and attention given to family. This commitment to excellence ensures that clients receive not just accurate tax services, but a trusted partner in their financial journey.</p>
+                    <p>E&N Tax & Accounting is named after twin daughters Emma and Nina — a daily reminder that family is at the heart of everything we do. That same care and dedication shapes every client relationship we build.</p>
+                    <p>Behind every tax return is a real person with real goals. That's why E&N treats each client as an individual, not a case number. You get accurate, expert work and someone who genuinely has your back.</p>
                     <div class="company-quote">
                         "When clients work with E&N, they're not just another number. They become part of an extended family, and their success is E&N's success."
                     </div>
-                    <p>E&N is committed to thoughtful growth while maintaining the personal touch that sets the firm apart, welcoming new clients who value the same dedication to excellence and family-centered approach.</p>
+                    <p>E&N is committed to thoughtful growth while maintaining the personal touch that sets the firm apart, welcoming new clients who value the same dedication to excellence and a family-centered approach.</p>
                     <p>Whether you're a family navigating tax season, a small business owner pursuing growth, or someone planning for the future, E&N brings both professional expertise and genuine care to help you succeed. Because when you treat clients like family, everyone thrives together.</p>
                 </div>
                 <div class="reveal">
@@ -1306,6 +1384,31 @@
 
 
 
+
+    <!-- Why Choose E&N Section -->
+    <section class="why-en-section">
+        <div class="section-header reveal">
+            <h2>Why Choose E&N?</h2>
+            <p>We're not a big firm with a rotating door of staff. We're a small, focused practice — and that's exactly the point.</p>
+        </div>
+        <div class="why-en-grid">
+            <div class="why-en-card reveal">
+                <div class="why-en-icon">🤝</div>
+                <h4>Personal Attention</h4>
+                <p>You work directly with Marija — not a junior associate or a call center. Every client gets focused, one-on-one service from someone who knows your name and your situation.</p>
+            </div>
+            <div class="why-en-card reveal">
+                <div class="why-en-icon">💎</div>
+                <h4>Transparent Pricing</h4>
+                <p>Flat-rate fees agreed upfront, based on your actual needs. No hourly billing, no watching the clock, no surprise charges when the invoice arrives.</p>
+            </div>
+            <div class="why-en-card reveal">
+                <div class="why-en-icon">💻</div>
+                <h4>Virtual Convenience</h4>
+                <p>Meet from anywhere via video, share documents securely online, and get expert service without ever leaving home. We serve clients across the country.</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Client Types Section -->
     <section class="clients-section">
