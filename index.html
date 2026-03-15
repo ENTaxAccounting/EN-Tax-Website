@@ -650,18 +650,18 @@
         }
 
         .client-card:hover p,
-        .client-card.active p {
+        .client-card.tapped p {
             opacity: 1;
         }
 
         .client-card:hover h4,
-        .client-card.active h4 {
+        .client-card.tapped h4 {
             opacity: 0;
             transform: translateY(20px);
         }
 
         .client-card:hover::before,
-        .client-card.active::before {
+        .client-card.tapped::before {
             background: rgba(0, 0, 0, 0.6);
         }
 
@@ -678,7 +678,7 @@
                 text-transform: uppercase;
             }
 
-            .client-card.active h4::after {
+            .client-card.tapped h4::after {
                 display: none;
             }
         }
@@ -1632,9 +1632,9 @@
         // Tap-to-reveal for client cards on touch devices
         document.querySelectorAll('.client-card').forEach(card => {
             card.addEventListener('click', () => {
-                const isActive = card.classList.contains('active');
-                document.querySelectorAll('.client-card').forEach(c => c.classList.remove('active'));
-                if (!isActive) card.classList.add('active');
+                const isTapped = card.classList.contains('tapped');
+                document.querySelectorAll('.client-card').forEach(c => c.classList.remove('tapped'));
+                if (!isTapped) card.classList.add('tapped');
             });
         });
 
