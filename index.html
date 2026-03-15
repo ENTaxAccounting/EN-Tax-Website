@@ -649,13 +649,38 @@
             font-size: 19px; /* Increased by 20% from base */
         }
 
-        .client-card:hover p {
+        .client-card:hover p,
+        .client-card.active p {
             opacity: 1;
         }
 
-        .client-card:hover h4 {
+        .client-card:hover h4,
+        .client-card.active h4 {
             opacity: 0;
             transform: translateY(20px);
+        }
+
+        .client-card:hover::before,
+        .client-card.active::before {
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Tap hint — touch devices only */
+        @media (hover: none) {
+            .client-card h4::after {
+                content: 'Tap to learn more';
+                display: block;
+                font-size: 12px;
+                font-weight: 400;
+                opacity: 0.75;
+                margin-top: 6px;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+            }
+
+            .client-card.active h4::after {
+                display: none;
+            }
         }
 
         /* Specific background images */
@@ -1603,6 +1628,15 @@
 
         // Start the carousel
         setInterval(rotateHeroContent, slideInterval);
+
+        // Tap-to-reveal for client cards on touch devices
+        document.querySelectorAll('.client-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const isActive = card.classList.contains('active');
+                document.querySelectorAll('.client-card').forEach(c => c.classList.remove('active'));
+                if (!isActive) card.classList.add('active');
+            });
+        });
 
     </script>
 </body>
