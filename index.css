@@ -52,14 +52,17 @@
         }
 
         .hero-text-item {
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
             display: none;
         }
 
         .hero-text-item.active {
-            opacity: 1;
             display: block;
+            animation: fadeInText 0.8s ease;
+        }
+
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .hero-text-item h1 {

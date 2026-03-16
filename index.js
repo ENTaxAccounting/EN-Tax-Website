@@ -1,28 +1,22 @@
 // Hero carousel functionality
-let currentSlide = 0;
-const totalSlides = 5;
-const slideInterval = 8000; // 8 seconds
+(function() {
+    const bgImages = Array.from(document.querySelectorAll('.hero-bg-image'));
+    const textItems = Array.from(document.querySelectorAll('.hero-text-item'));
+    const total = bgImages.length;
+    if (total === 0 || textItems.length === 0) return;
 
-function rotateHeroContent() {
-    // Hide current slide
-    document.querySelectorAll('.hero-bg-image')[currentSlide].classList.remove('active');
-    document.querySelectorAll('.hero-text-item')[currentSlide].classList.remove('active');
+    let current = 0;
 
-    // Move to next slide
-    currentSlide = (currentSlide + 1) % totalSlides;
+    function rotateHeroContent() {
+        bgImages[current].classList.remove('active');
+        textItems[current].classList.remove('active');
+        current = (current + 1) % total;
+        bgImages[current].classList.add('active');
+        textItems[current].classList.add('active');
+    }
 
-    // Show next slide
-    document.querySelectorAll('.hero-bg-image')[currentSlide].classList.add('active');
-    document.querySelectorAll('.hero-text-item')[currentSlide].classList.add('active');
-}
-
-// Start the carousel — pauses on hover
-let carouselTimer = setInterval(rotateHeroContent, slideInterval);
-const heroSection = document.querySelector('.hero');
-heroSection.addEventListener('mouseenter', () => clearInterval(carouselTimer));
-heroSection.addEventListener('mouseleave', () => {
-    carouselTimer = setInterval(rotateHeroContent, slideInterval);
-});
+    setInterval(rotateHeroContent, 8000);
+})();
 
 // Tap-to-reveal for client cards on touch devices
 document.querySelectorAll('.client-card').forEach(card => {
