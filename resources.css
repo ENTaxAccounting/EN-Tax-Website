@@ -1,0 +1,275 @@
+        /* Hero — resources page uses background-image on .hero directly (no .hero-bg-image) */
+        .hero {
+            background-image: url('images/backgrounds/tools.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 51, 102, 0.7);
+            z-index: 1;
+        }
+
+        .hero-content {
+            justify-content: flex-start;
+            padding-top: 20px;
+        }
+
+        .section-header p {
+            font-weight: 400;
+        }
+
+        /* Tools Section */
+        .tools-section {
+            padding: 80px 40px;
+            max-width: 1440px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Resource Categories */
+        .resource-category {
+            margin-bottom: 80px;
+        }
+
+        .category-header {
+            background: var(--text-light);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .category-header h3 {
+            font-size: 38px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .category-header p {
+            color: #6C757D;
+            font-size: 22px;
+        }
+
+        /* Resources Grid */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--secondary-color);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .resource-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .resource-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .resource-card h4 {
+            color: var(--text-dark);
+            margin: 0;
+            font-size: 29px;
+        }
+
+        .resource-card p {
+            color: #6C757D;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-size: 19px;
+        }
+
+        .resource-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+            font-size: 19px;
+        }
+
+        .resource-link:hover {
+            gap: 10px;
+            color: var(--primary-color);
+        }
+
+        /* Featured Tools Section */
+        .featured-tools {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            margin: 40px auto;
+            max-width: 1440px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 80px 40px;
+        }
+
+        .featured-tools h3 {
+            text-align: center;
+            font-size: 43px;
+            color: var(--primary-color);
+            margin-bottom: 50px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .tool-item {
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tool-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+            font-weight: 700;
+        }
+
+        .tool-item:hover .tool-icon {
+            transform: scale(1.1);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tool-item h4 {
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .tool-item p {
+            color: #6C757D;
+            font-size: 19px;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            background: var(--primary-color);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 80px;
+            max-width: 1440px;
+            margin: 80px auto 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .newsletter-section h3 {
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-section p {
+            font-size: 22px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .email-note {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 19px;
+        }
+
+        /* Mobile media queries specific to resources */
+        @media (max-width: 1024px) {
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-header h2 {
+                font-size: 32px;
+            }
+
+            .resource-card {
+                padding: 30px;
+            }
+
+            .tool-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 28px;
+            }
+        }
