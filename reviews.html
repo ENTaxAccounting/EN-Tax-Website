@@ -8,12 +8,9 @@
     <meta property="og:image" content="https://www.entaxaccounting.com/images/og-image.png">
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D0XKT34FRR"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-D0XKT34FRR');
-    </script>
+    <script defer src="analytics.js"></script>
+    <script defer src="main.js"></script>
+    <script defer src="reviews.js"></script>
 
     <!-- SEO Meta Tags -->
     <meta name="description" content="Client reviews and testimonials for E&N Tax & Accounting. See what clients say about our professional tax preparation and accounting services.">
@@ -62,7 +59,7 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <a href="contact.html" class="nav-cta">Book Consultation</a>
-            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" onclick="toggleMenu()">
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -158,88 +155,5 @@
         </div>
     </footer>
 
-    <script>
-        function escapeHtml(str) {
-            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-        }
-
-        async function loadReviews() {
-            const container = document.getElementById('reviews-container');
-            try {
-                const res = await fetch('reviews-data.json');
-                if (!res.ok) throw new Error('not found');
-                const data = await res.json();
-
-                if (!data.reviews || data.reviews.length === 0) {
-                    container.innerHTML = '<p style="text-align:center;color:#6C757D;font-size:18px;padding:40px 0;">Reviews coming soon.</p>';
-                    return;
-                }
-
-                const cards = data.reviews
-                    .filter(r => r.text)
-                    .map(r => {
-                        const stars = '★'.repeat(r.rating || 5);
-                        const words = r.author_name.trim().split(/\s+/);
-                        const initials = (words[0][0] + (words.length > 1 ? words[words.length - 1][0] : '')).toUpperCase();
-                        const dateStr = r.time ? new Date(r.time * 1000).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : '';
-                        return `
-                        <div class="review-card reveal">
-                            <div class="review-stars">${stars}</div>
-                            <p class="review-text">"${escapeHtml(r.text)}"</p>
-                            <div class="review-author">
-                                <div class="author-avatar">${escapeHtml(initials)}</div>
-                                <div>
-                                    <div class="author-name">${escapeHtml(r.author_name)}</div>
-                                    ${dateStr ? `<div class="author-type">${dateStr}</div>` : ''}
-                                </div>
-                            </div>
-                            <div class="review-source">via Google</div>
-                        </div>`;
-                    }).join('');
-
-                container.innerHTML = `<div class="review-cards-grid">${cards}</div>`;
-                reveal();
-            } catch (e) {
-                console.error('Could not load reviews:', e);
-            }
-        }
-
-        loadReviews();
-
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const toggle = document.querySelector('.menu-toggle');
-            navLinks.classList.toggle('active');
-            toggle.setAttribute('aria-expanded', navLinks.classList.contains('active'));
-        }
-
-        function reveal() {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(element => {
-                const windowHeight = window.innerHeight;
-                const elementTop = element.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 150) {
-                    element.classList.add('active');
-                }
-            });
-        }
-
-        // Throttled scroll handler (combines reveal + header shadow)
-        let scrollTicking = false;
-        window.addEventListener('scroll', function() {
-            if (!scrollTicking) {
-                requestAnimationFrame(function() {
-                    reveal();
-                    const header = document.querySelector('header');
-                    header.style.boxShadow = window.scrollY > 50
-                        ? '0 4px 20px rgba(0,0,0,0.1)'
-                        : '0 2px 8px rgba(0,0,0,0.08)';
-                    scrollTicking = false;
-                });
-                scrollTicking = true;
-            }
-        });
-        reveal();
-    </script>
 </body>
 </html>
