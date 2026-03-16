@@ -162,10 +162,19 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
+        /* Focus indicator for keyboard navigation */
+        *:focus-visible {
+            outline: 2px solid var(--secondary-color);
+            outline-offset: 2px;
+        }
+
         .menu-toggle {
             display: none;
             flex-direction: column;
             cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
         }
 
         .menu-toggle span {
@@ -732,11 +741,11 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <a href="contact.html" class="nav-cta">Book Consultation</a>
-            <div class="menu-toggle" onclick="toggleMenu()">
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </nav>
     </header>
 
@@ -878,7 +887,9 @@
 
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
+            const toggle = document.querySelector('.menu-toggle');
             navLinks.classList.toggle('active');
+            toggle.setAttribute('aria-expanded', navLinks.classList.contains('active'));
         }
 
         function reveal() {
@@ -892,15 +903,22 @@
             });
         }
 
-        window.addEventListener('scroll', reveal);
-        reveal();
-
+        // Throttled scroll handler (combines reveal + header shadow)
+        let scrollTicking = false;
         window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            header.style.boxShadow = window.scrollY > 50
-                ? '0 4px 20px rgba(0,0,0,0.1)'
-                : '0 2px 8px rgba(0,0,0,0.08)';
+            if (!scrollTicking) {
+                requestAnimationFrame(function() {
+                    reveal();
+                    const header = document.querySelector('header');
+                    header.style.boxShadow = window.scrollY > 50
+                        ? '0 4px 20px rgba(0,0,0,0.1)'
+                        : '0 2px 8px rgba(0,0,0,0.08)';
+                    scrollTicking = false;
+                });
+                scrollTicking = true;
+            }
         });
+        reveal();
     </script>
 </body>
 </html>
