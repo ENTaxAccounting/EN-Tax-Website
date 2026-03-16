@@ -34,6 +34,13 @@
             opacity: 1;
         }
 
+        /* Background images — moved from inline style attributes for CSP compliance */
+        .hero-bg-image:nth-child(1) { background-image: url('images/backgrounds/city.jpg'); }
+        .hero-bg-image:nth-child(2) { background-image: url('images/backgrounds/flowers.jpg'); }
+        .hero-bg-image:nth-child(3) { background-image: url('images/backgrounds/lady-liberty.jpg'); }
+        .hero-bg-image:nth-child(4) { background-image: url('images/backgrounds/lighthouse.jpg'); }
+        .hero-bg-image:nth-child(5) { background-image: url('images/backgrounds/waterfall.jpg'); }
+
         .hero-content {
             justify-content: flex-start;
         }

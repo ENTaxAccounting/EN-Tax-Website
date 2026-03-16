@@ -255,7 +255,7 @@
             padding-top: 20px;
         }
 
-        .hero h1 {
+        .hero h1, .hero h2 {
             font-size: 58px;
             margin-bottom: 24px;
             font-weight: 700;
@@ -521,7 +521,7 @@
 
             .nav-links.active { display: flex; }
 
-            .hero h1 { font-size: 36px; }
+            .hero h1, .hero h2 { font-size: 36px; }
             .hero p { font-size: 18px; }
             .nav-cta { display: none; }
 
@@ -545,7 +545,7 @@
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 32px; }
+            .hero h1, .hero h2 { font-size: 32px; }
             .hero p { font-size: 18px; }
 
             .btn-cta {

@@ -66,6 +66,17 @@
             margin-bottom: 25px;
         }
 
+        .form-error-msg {
+            display: none;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;

@@ -8,9 +8,7 @@
     <meta property="og:image" content="https://www.entaxaccounting.com/images/og-image.png">
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D0XKT34FRR"></script>
-    <script defer src="analytics.js"></script>
-    <script defer src="main.js"></script>
-    <script defer src="contact.js"></script>
+    <script async src="analytics.js"></script>
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Contact E&N Tax & Accounting for professional tax and accounting services. Get in touch for inquiries about our services.">
@@ -144,8 +142,8 @@
                     <form id="contactForm" name="contact">
                         <!-- Formspree config fields -->
                         <input type="hidden" name="_subject" value="New Contact Form Submission — E&N Tax & Accounting">
-                        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-                        <div id="form-error" style="display:none;background:#fff3cd;border:1px solid #ffc107;color:#856404;padding:15px 20px;border-radius:10px;margin-bottom:20px;font-size:16px;">Something went wrong. Please try again or email us directly at <a href="mailto:info@entaxaccounting.com">info@entaxaccounting.com</a>.</div>
+                        <input type="hidden" name="_gotcha" tabindex="-1" autocomplete="off">
+                        <div id="form-error" class="form-error-msg">Something went wrong. Please try again or email us directly at <a href="mailto:info@entaxaccounting.com">info@entaxaccounting.com</a>.</div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name <span class="required">*</span></label>
@@ -295,5 +293,8 @@
     <div class="mobile-sticky-cta">
         <a href="#contact-form">Book a Free Consultation</a>
     </div>
+
+    <script src="main.js"></script>
+    <script src="contact.js"></script>
 </body>
 </html>
