@@ -132,7 +132,7 @@ Target: begin after `WP-D2`; continue monthly.
 
 ## Development Track
 
-### [ ] WP-D1 — Crawl and Canonical Foundation
+### [x] WP-D1 — Crawl and Canonical Foundation
 
 Dependencies: hostname choice from `WP-O1` is preferred; if unavailable, use `www` consistently and flag the dashboard redirect.
 
