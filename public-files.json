@@ -42,9 +42,13 @@
         "sitemap.xml",
         "styles.css"
     ],
+    "deploymentSources": [
+        "functions/**"
+    ],
     "repositoryOnly": [
         ".claude/**",
         ".codex/**",
+        ".git/**",
         ".github/**",
         ".gitignore",
         "AGENTS.md",

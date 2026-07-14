@@ -22,8 +22,18 @@ async function build() {
         fs.copyFileSync(sourcePath, outputPath);
     }
 
+    const routes = {
+        version: 1,
+        include: manifest.blockedRoutes,
+        exclude: []
+    };
+    fs.writeFileSync(
+        path.join(outputRoot, '_routes.json'),
+        `${JSON.stringify(routes, null, 4)}\n`
+    );
+
     await checkArtifact(projectRoot, outputRoot);
-    console.log(`Built and verified ${manifest.publicFiles.length} public files in dist/`);
+    console.log(`Built and verified ${manifest.publicFiles.length} public files and the Pages route guard in dist/`);
 }
 
 build().catch(error => {

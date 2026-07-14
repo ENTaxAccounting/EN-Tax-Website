@@ -4,6 +4,8 @@ const path = require('path');
 const { URL } = require('url');
 
 const publicOrigin = 'https://www.entaxaccounting.com';
+const generatedPlatformFiles = ['_routes.json'];
+const privatePlatformFiles = new Set(['_headers', ...generatedPlatformFiles]);
 const textExtensions = new Set(['.css', '.html', '.js', '.json', '.txt', '.xml', '']);
 const publicPages = [
     'index.html',
@@ -21,16 +23,29 @@ const privateTestPaths = [
     '/fetch-reviews.js',
     '/auth.js',
     '/.github/workflows/fetch-reviews.yml',
+    '/.gitignore',
+    '/public-files.json',
+    '/scripts/build-public.js',
+    '/images/backgrounds/shop.jpg',
     '/images/high-rez-original/lady-liberty.jpeg',
     '/does-not-exist-wpd1a'
 ];
+
+function repositoryPatternToRoute(pattern) {
+    if (pattern.endsWith('/**')) return `/${pattern.slice(0, -3)}/*`;
+    return `/${pattern}`;
+}
 
 function loadManifest(projectRoot) {
     const manifestPath = path.join(projectRoot, 'public-files.json');
     const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 
-    if (!Array.isArray(manifest.publicFiles) || !Array.isArray(manifest.repositoryOnly)) {
-        throw new Error('public-files.json must define publicFiles and repositoryOnly arrays');
+    if (
+        !Array.isArray(manifest.publicFiles)
+        || !Array.isArray(manifest.deploymentSources)
+        || !Array.isArray(manifest.repositoryOnly)
+    ) {
+        throw new Error('public-files.json must define publicFiles, deploymentSources, and repositoryOnly arrays');
     }
 
     if (new Set(manifest.publicFiles).size !== manifest.publicFiles.length) {
@@ -45,6 +60,15 @@ function loadManifest(projectRoot) {
     }
 
     manifest.publicFiles.sort();
+    manifest.deploymentSources.sort();
+    manifest.blockedRoutes = manifest.repositoryOnly.map(repositoryPatternToRoute).sort();
+
+    if (manifest.blockedRoutes.length > 100) {
+        throw new Error('Cloudflare Pages allows at most 100 Function include/exclude rules');
+    }
+    if (new Set(manifest.blockedRoutes).size !== manifest.blockedRoutes.length) {
+        throw new Error('Repository-only paths generate duplicate Cloudflare Function routes');
+    }
 
     return manifest;
 }
@@ -97,6 +121,7 @@ function verifySourceClassification(projectRoot, manifest) {
     const publicSet = new Set(manifest.publicFiles);
     const unclassified = sourceFiles.filter(relativePath => (
         !publicSet.has(relativePath)
+        && !matchesRepositoryOnly(relativePath, manifest.deploymentSources)
         && !matchesRepositoryOnly(relativePath, manifest.repositoryOnly)
     ));
 
@@ -174,6 +199,8 @@ function verifyTextContent(outputRoot, artifactFiles) {
     ];
 
     for (const relativePath of artifactFiles) {
+        if (generatedPlatformFiles.includes(relativePath)) continue;
+
         const extension = path.extname(relativePath);
         if (!textExtensions.has(extension)) continue;
 
@@ -206,6 +233,7 @@ function verifyRequiredBehavior(outputRoot) {
     const headers = fs.readFileSync(path.join(outputRoot, '_headers'), 'utf8');
     const contactHtml = fs.readFileSync(path.join(outputRoot, 'contact.html'), 'utf8');
     const contactJs = fs.readFileSync(path.join(outputRoot, 'contact.js'), 'utf8');
+    const routes = JSON.parse(fs.readFileSync(path.join(outputRoot, '_routes.json'), 'utf8'));
 
     if (!headers.includes('Content-Security-Policy:')) {
         throw new Error('_headers is missing the Content-Security-Policy');
@@ -218,6 +246,12 @@ function verifyRequiredBehavior(outputRoot) {
     }
     if (!contactHtml.includes('id="contactForm"') || !contactJs.includes('https://formspree.io/f/')) {
         throw new Error('Formspree contact-form wiring is incomplete');
+    }
+    if (routes.version !== 1 || !Array.isArray(routes.include) || !Array.isArray(routes.exclude)) {
+        throw new Error('_routes.json is not a valid Cloudflare Pages routing configuration');
+    }
+    if (routes.exclude.length !== 0) {
+        throw new Error('Repository-only route protection must not define exclusions');
     }
 }
 
@@ -237,7 +271,7 @@ function createArtifactServer(outputRoot) {
         const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
         const relativePath = pathname === '/' ? 'index.html' : pathname.slice(1);
         const candidatePath = path.resolve(outputRoot, relativePath);
-        const isPrivatePlatformFile = relativePath === '_headers';
+        const isPrivatePlatformFile = privatePlatformFiles.has(relativePath);
         const isInsideOutput = candidatePath.startsWith(`${path.resolve(outputRoot)}${path.sep}`);
 
         if (!isPrivatePlatformFile && isInsideOutput && fs.existsSync(candidatePath) && fs.statSync(candidatePath).isFile()) {
@@ -272,7 +306,9 @@ async function verifyLocalResponses(outputRoot, artifactFiles) {
 
     try {
         const port = server.address().port;
-        const publicRoutes = ['/', ...artifactFiles.filter(file => file !== '_headers').map(file => `/${file}`)];
+        const publicRoutes = ['/', ...artifactFiles
+            .filter(file => !privatePlatformFiles.has(file))
+            .map(file => `/${file}`)];
 
         for (const route of publicRoutes) {
             const response = await requestStatus(port, route);
@@ -294,10 +330,11 @@ async function checkArtifact(projectRoot, outputRoot) {
     verifySourceClassification(projectRoot, manifest);
 
     const artifactFiles = walkFiles(outputRoot);
-    if (JSON.stringify(artifactFiles) !== JSON.stringify(manifest.publicFiles)) {
-        const expected = new Set(manifest.publicFiles);
+    const expectedFiles = [...manifest.publicFiles, ...generatedPlatformFiles].sort();
+    if (JSON.stringify(artifactFiles) !== JSON.stringify(expectedFiles)) {
+        const expected = new Set(expectedFiles);
         const actual = new Set(artifactFiles);
-        const missing = manifest.publicFiles.filter(file => !actual.has(file));
+        const missing = expectedFiles.filter(file => !actual.has(file));
         const unexpected = artifactFiles.filter(file => !expected.has(file));
         throw new Error(`Artifact allowlist mismatch. Missing: ${missing.join(', ') || 'none'}. Unexpected: ${unexpected.join(', ') || 'none'}.`);
     }
@@ -308,6 +345,11 @@ async function checkArtifact(projectRoot, outputRoot) {
 
     verifyTextContent(outputRoot, artifactFiles);
     verifyRequiredBehavior(outputRoot);
+
+    const routes = JSON.parse(fs.readFileSync(path.join(outputRoot, '_routes.json'), 'utf8'));
+    if (JSON.stringify(routes.include) !== JSON.stringify(manifest.blockedRoutes)) {
+        throw new Error('_routes.json does not cover every repository-only path');
+    }
     await verifyLocalResponses(outputRoot, artifactFiles);
 }
 
