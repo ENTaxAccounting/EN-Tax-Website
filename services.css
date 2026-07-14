@@ -126,64 +126,6 @@
             font-size: 19px;
         }
 
-        /* Service Categories */
-        .service-categories {
-            padding: 80px 40px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(5px);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            max-width: 1440px;
-            margin: 40px auto;
-        }
-
-        .service-categories h3 {
-            text-align: center;
-            color: var(--primary-color);
-            font-size: 43px;
-            margin-bottom: 40px;
-            font-weight: 600;
-        }
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .category-item {
-            text-align: center;
-            padding: 40px 30px;
-            background: var(--text-light);
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            border: 2px solid rgba(0,0,0,0.05);
-        }
-
-        .category-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-        }
-
-        .category-icon {
-            font-size: 58px;
-            margin-bottom: 20px;
-        }
-
-        .category-item h4 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: 24px;
-            font-weight: 600;
-        }
-
-        .category-item p {
-            color: #6C757D;
-            font-size: 17px;
-            line-height: 1.6;
-        }
-
         /* Pricing Section */
         .pricing-section {
             padding: 80px 40px;
@@ -438,10 +380,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
             .pricing-benefits-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -452,10 +390,6 @@
         }
 
         @media (max-width: 768px) {
-            .category-grid {
-                grid-template-columns: 1fr;
-            }
-
             .services-grid {
                 grid-template-columns: 1fr;
             }

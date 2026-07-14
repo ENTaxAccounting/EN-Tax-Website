@@ -12,6 +12,7 @@ Improve the site's crawlability, search visibility, AI-search eligibility, perfo
 - The owner may work in parallel on external dashboards and an offline worksheet. Do not edit repository files on `main` while a development package is active.
 - If owner repository edits are unavoidable, use a separate branch and tell the development chat before it begins.
 - Preserve unrelated work. In particular, do not stage or modify `images/high-rez-original/` unless a work package explicitly requires it.
+- Treat every file in the production artifact and every comment in shipped HTML, CSS, and JavaScript as public. Do not ship private notes, draft copy, commented-out features, dead code, credentials, or operational instructions; use Git history for removed code and a private tracker or offline note for internal lessons.
 - Every completed development package must end with a scoped commit, a successful push, and the exact next-chat prompt. Do not create empty or partial commits when blocked.
 
 ## Responsibility Split
@@ -28,6 +29,7 @@ By implementation volume, roughly 75–85% can be handled by Codex. The remainin
 |---|---|---|
 | `www` and apex hostnames both serve content | Duplicate URL signals | `WP-D1` canonicals; `WP-O1` production redirect |
 | No repository `robots.txt`; live response includes managed rules plus homepage HTML | Ambiguous crawler instructions | `WP-D1` clean crawler file; `WP-O1` Cloudflare review |
+| Repository-only files and commented-out product copy are reachable in production | Internal process material, unpublished features, and unnecessary source are publicly exposed | `WP-D1A` explicit deployment artifact and source hygiene |
 | Exact-name/domain search test favored third-party listings | Possible weak or incomplete indexing | `WP-O2` verification and URL inspection |
 | Generic titles and incomplete social metadata | Weak relevance and sharing previews | `WP-D2` |
 | Resources metadata/schema promises unavailable calculators | Trust and relevance mismatch | `WP-D2` |
@@ -48,15 +50,17 @@ Every development chat must follow this protocol.
 3. Confirm the branch is `main`. Fetch `origin` and confirm local `main` is not behind. Do not pull across uncommitted overlapping work.
 4. Treat all baseline changes as user-owned unless clearly created by a prior roadmap package. Stop only if they overlap the package.
 5. Confirm all prerequisite owner decisions listed for the package. If a material decision is missing, report the blocker instead of guessing.
-6. In Plan mode, show the implementation and verification plan and wait for approval before editing.
+6. Treat the current deployment boundary as untrusted until `WP-D1A` passes. Check planned changes for private notes, draft copy, commented-out features, dead code, credentials, and repository-only files that could become public.
+7. In Plan mode, show the implementation and verification plan and wait for approval before editing.
 
 ### 2. Execution
 
 1. Implement only the named work package.
 2. Preserve current brand voice, CSP restrictions, responsive behavior, and Formspree integration.
-3. Run package-specific tests plus `git diff --check`.
-4. Review the full diff and verify that no unrelated file is staged.
-5. Mark the package complete in this roadmap only after acceptance criteria pass.
+3. Keep shipped comments only when they provide concise, non-sensitive maintenance value. Delete obsolete or commented-out UI/copy instead of archiving it in public source.
+4. Run package-specific tests plus `git diff --check`.
+5. Review the full diff and verify that no unrelated file is staged and no internal-only material enters the production artifact.
+6. Mark the package complete in this roadmap only after acceptance criteria pass.
 
 ### 3. Delivery
 
@@ -150,11 +154,32 @@ Commit: `Add crawl and canonical SEO controls`
 
 Next prompt:
 
+> Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and if it passes, do WP-D1A in Plan mode. Show me the plan and wait for approval before implementing. Complete only WP-D1A, verify its acceptance criteria, commit, push, and end with the exact WP-D2 prompt from the roadmap.
+
+### [x] WP-D1A — Public Deployment and Source Hygiene
+
+Dependencies: `WP-D1`; confirmation of the Cloudflare Pages build command and output-directory settings from `WP-O1` before changing the deployment boundary.
+
+Implementation:
+
+- Inventory every file reachable on the production hostname and classify it as a public page/asset or repository-only material.
+- Configure an explicit, reproducible public deployment artifact containing only approved pages, assets, crawler files, and required platform configuration; keep repository documentation, maintenance scripts, source data, credentials tooling, and development-only files out of it.
+- Remove commented-out navigation, CTAs, service blocks, draft copy, and other dead code from shipped HTML, CSS, and JavaScript. Retain only concise implementation comments that are safe and useful to a public-source maintainer.
+- Use Git history as the archive for removed code. Record non-sensitive lessons in a private owner note or private tracker, not in the production artifact; never preserve secrets or private client/business information in Git history.
+- Add a repeatable deployment-artifact check that fails on unexpected files, commented-out elements/copy, credential patterns, or other internal-only material.
+- Crawl the local artifact and production deployment, confirming all public routes/assets work and repository-only files return `404` rather than a soft-`200` homepage fallback.
+
+Acceptance: production exposes only the approved public artifact; known repository-only paths return true `404` responses; no commented-out features, draft copy, credentials, or internal instructions remain in shipped source; site pages, forms, crawler files, CSP, and responsive behavior remain regression-free.
+
+Commit: `Restrict production files and clean public source`
+
+Next prompt:
+
 > Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and if it passes, do WP-D2 in Plan mode. Show me the plan and wait for approval before implementing. Complete only WP-D2, verify its acceptance criteria, commit, push, and end with the exact WP-D3 prompt from the roadmap.
 
 ### [ ] WP-D2 — Metadata and Entity Schema
 
-Dependencies: `WP-D1`; verified facts from `WP-O3`.
+Dependencies: `WP-D1A`; verified facts from `WP-O3`.
 
 Implementation:
 
@@ -315,6 +340,7 @@ Maintenance prompt:
 | Development session | Owner work that can happen simultaneously |
 |---|---|
 | `WP-D1` | `WP-O1`, start `WP-O2` |
+| `WP-D1A` | Confirm the Cloudflare Pages build command and output directory; continue `WP-O2` |
 | `WP-D2` | Finish `WP-O3` and provide verified profiles |
 | `WP-D3` | Complete `WP-O4`; draft service FAQs |
 | `WP-D4` | Prepare `WP-O5` decisions |
@@ -325,6 +351,7 @@ Maintenance prompt:
 ## Success Measures
 
 - One canonical HTTPS hostname and clean crawler directives.
+- Only approved public pages/assets are deployed; repository-only files and dead/commented-out features are not production-accessible.
 - All intended URLs indexed without duplicate-host or canonical conflicts.
 - Good Core Web Vitals or a documented path to field-data improvement.
 - Accurate entity data across the site and major business profiles.

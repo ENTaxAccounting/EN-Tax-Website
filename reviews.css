@@ -34,37 +34,6 @@
             line-height: 1.8;
         }
 
-        /* Coming Soon Block */
-        .coming-soon-block {
-            text-align: center;
-            padding: 80px 40px;
-            background: rgba(0, 51, 102, 0.03);
-            border-radius: 20px;
-            border: 2px dashed rgba(0, 51, 102, 0.15);
-            margin-bottom: 60px;
-        }
-
-        .coming-soon-icon {
-            font-size: 72px;
-            margin-bottom: 30px;
-            display: block;
-        }
-
-        .coming-soon-block h3 {
-            font-size: 38px;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .coming-soon-block p {
-            font-size: 22px;
-            color: #6C757D;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            line-height: 1.8;
-        }
-
         /* Review Cards Grid */
         .review-cards-grid {
             display: grid;

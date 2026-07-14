@@ -149,113 +149,12 @@
             color: var(--primary-color);
         }
 
-        /* Featured Tools Section */
-        .featured-tools {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            margin: 40px auto;
-            max-width: 1440px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            padding: 80px 40px;
-        }
-
-        .featured-tools h3 {
-            text-align: center;
-            font-size: 43px;
-            color: var(--primary-color);
-            margin-bottom: 50px;
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-        }
-
-        .tool-item {
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .tool-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--secondary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 36px;
-            color: var(--primary-color);
-            transition: all 0.3s ease;
-            font-weight: 700;
-        }
-
-        .tool-item:hover .tool-icon {
-            transform: scale(1.1);
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .tool-item h4 {
-            color: var(--text-dark);
-            margin-bottom: 10px;
-            font-size: 24px;
-        }
-
-        .tool-item p {
-            color: #6C757D;
-            font-size: 19px;
-        }
-
-        /* Newsletter Section */
-        .newsletter-section {
-            background: var(--primary-color);
-            color: white;
-            padding: 60px 40px;
-            border-radius: 20px;
-            text-align: center;
-            margin-top: 80px;
-            max-width: 1440px;
-            margin: 80px auto 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            position: relative;
-            border-left: 4px solid var(--secondary-color);
-        }
-
-        .newsletter-section h3 {
-            font-size: 38px;
-            margin-bottom: 20px;
-        }
-
-        .newsletter-section p {
-            font-size: 22px;
-            margin-bottom: 30px;
-            opacity: 0.95;
-        }
-
-        .email-note {
-            display: inline-block;
-            background: var(--secondary-color);
-            color: var(--primary-color);
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 19px;
-        }
-
         /* Mobile media queries specific to resources */
         @media (max-width: 1024px) {
             .resources-grid {
                 grid-template-columns: 1fr;
             }
 
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
         @media (max-width: 768px) {
@@ -267,9 +166,4 @@
                 padding: 30px;
             }
 
-            .tool-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 28px;
-            }
         }
