@@ -68,7 +68,7 @@ Every development chat must follow this protocol.
 
 ## Parallel Owner Track
 
-These tasks can run while development packages are underway because they occur outside the repository. Keep the results in an offline note and paste the relevant answers into the next development chat.
+These tasks can run while development packages are underway because they occur outside the repository. Follow the detailed steps in `owner-work-packages.md`, keep the results in an offline note, and paste the relevant answers into the next development chat.
 
 ### WP-O1 — Domain and Cloudflare Decisions
 
