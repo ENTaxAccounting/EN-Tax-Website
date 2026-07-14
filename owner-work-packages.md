@@ -167,6 +167,8 @@ Date checked:
 
 Goal: give `WP-D2` accurate public information without exposing private or unsupported facts.
 
+Status: completed and owner-approved on July 14, 2026. Use the repository-only `verified-business-facts.md` as the source of truth for `WP-D2` and later packages.
+
 Create an offline document and fill in the following. Use `Not public` or `Needs confirmation` instead of guessing.
 
 ```text

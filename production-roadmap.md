@@ -94,9 +94,11 @@ Target: start immediately; complete before `WP-D9`.
 - Set up Bing Webmaster Tools, preferably by importing Search Console, and submit the sitemap.
 - After `WP-D1` deploys, request indexing for the canonical pages.
 
-### WP-O3 — Verified Business Fact Sheet
+### [x] WP-O3 — Verified Business Fact Sheet
 
 Target: complete before `WP-D2`.
+
+Status: completed and owner-approved on July 14, 2026. The repository-only source of truth is `verified-business-facts.md`.
 
 Provide only facts approved for public display:
 
