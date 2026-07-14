@@ -3,83 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - E&N Tax & Accounting</title>
-    <link rel="icon" type="image/png" href="images/E_N_LOGO.png">
-    <meta property="og:image" content="https://www.entaxaccounting.com/images/og-image.png">
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D0XKT34FRR"></script>
-    <script async src="analytics.js"></script>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Professional tax and accounting services for individuals & families, small businesses, startups, real estate investors, retirees, and gig economy workers. Individual tax prep, bookkeeping, business entity selection, and more.">
-    <meta name="keywords" content="tax services, business tax preparation, bookkeeping services, quarterly estimates, business entity selection">
+    <title>Tax Preparation & Bookkeeping Services | E&N Tax & Accounting</title>
+    <meta name="description" content="Explore virtual individual and business tax preparation, bookkeeping, quarterly tax estimates, and tax consulting from E&N Tax & Accounting.">
     <meta name="author" content="E&N Tax & Accounting">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.entaxaccounting.com/services.html">
-    
+
     <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Services - E&N Tax & Accounting">
-    <meta property="og:description" content="Comprehensive tax and accounting services tailored for individuals and small businesses. Expert guidance with a personal touch.">
+    <meta property="og:title" content="Tax Preparation & Bookkeeping Services | E&N Tax & Accounting">
+    <meta property="og:description" content="Explore virtual individual and business tax preparation, bookkeeping, quarterly tax estimates, and tax consulting from E&N Tax & Accounting.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.entaxaccounting.com/services.html">
-    
+    <meta property="og:site_name" content="E&N Tax & Accounting">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://www.entaxaccounting.com/images/og-image.png">
+    <meta property="og:image:alt" content="E&N Tax & Accounting — Personal Service, Professional Results">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tax Preparation & Bookkeeping Services | E&N Tax & Accounting">
+    <meta name="twitter:description" content="Explore virtual individual and business tax preparation, bookkeeping, quarterly tax estimates, and tax consulting from E&N Tax & Accounting.">
+    <meta name="twitter:image" content="https://www.entaxaccounting.com/images/og-image.png">
+    <meta name="twitter:image:alt" content="E&N Tax & Accounting — Personal Service, Professional Results">
+
+    <link rel="icon" type="image/png" href="images/E_N_LOGO.png">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D0XKT34FRR"></script>
+    <script async src="analytics.js"></script>
 
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "AccountingService",
-      "name": "E&N Tax & Accounting",
-      "url": "https://www.entaxaccounting.com/",
-      "email": "info@entaxaccounting.com",
-      "description": "Professional tax preparation, bookkeeping, quarterly tax estimates, and tax consulting for individuals, families, and small businesses nationwide.",
-      "areaServed": "US",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Tax and Accounting Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Individual Tax Preparation",
-              "description": "Comprehensive tax preparation for individuals and families."
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "AccountingService",
+                "@id": "https://www.entaxaccounting.com/#organization",
+                "name": "E&N Tax & Accounting",
+                "legalName": "E&N Tax & Accounting LLC",
+                "url": "https://www.entaxaccounting.com/",
+                "logo": { "@id": "https://www.entaxaccounting.com/#logo" },
+                "image": { "@id": "https://www.entaxaccounting.com/#logo" },
+                "email": "marija@entaxaccounting.com",
+                "telephone": "+1-914-483-0713",
+                "description": "E&N Tax & Accounting is a fully virtual tax and accounting firm serving individuals, families, and small businesses nationwide.",
+                "foundingDate": "2024",
+                "founder": { "@id": "https://www.entaxaccounting.com/#founder" },
+                "contactPoint": { "@id": "https://www.entaxaccounting.com/#contact-point" },
+                "areaServed": [
+                    { "@type": "Country", "name": "United States" },
+                    { "@type": "AdministrativeArea", "name": "Westchester County, New York" },
+                    { "@type": "AdministrativeArea", "name": "New York's Hudson Valley" },
+                    { "@type": "AdministrativeArea", "name": "Fairfield County, Connecticut" }
+                ],
+                "knowsLanguage": ["English", "Serbian", "Macedonian"],
+                "sameAs": ["https://g.page/r/CQg5gRyJ4mdoEAE/"],
+                "hasOfferCatalog": { "@id": "https://www.entaxaccounting.com/services.html#offer-catalog" }
+            },
+            {
+                "@type": "ImageObject",
+                "@id": "https://www.entaxaccounting.com/#logo",
+                "url": "https://www.entaxaccounting.com/images/E_N_LOGO.png",
+                "contentUrl": "https://www.entaxaccounting.com/images/E_N_LOGO.png",
+                "width": 500,
+                "height": 500,
+                "caption": "E&N Tax & Accounting logo"
+            },
+            {
+                "@type": "ImageObject",
+                "@id": "https://www.entaxaccounting.com/#social-image",
+                "url": "https://www.entaxaccounting.com/images/og-image.png",
+                "contentUrl": "https://www.entaxaccounting.com/images/og-image.png",
+                "width": 1536,
+                "height": 1024,
+                "caption": "E&N Tax & Accounting — Personal Service, Professional Results"
+            },
+            {
+                "@type": "Person",
+                "@id": "https://www.entaxaccounting.com/#founder",
+                "name": "Marija Sparano",
+                "jobTitle": "Founder & CEO",
+                "worksFor": { "@id": "https://www.entaxaccounting.com/#organization" }
+            },
+            {
+                "@type": "ContactPoint",
+                "@id": "https://www.entaxaccounting.com/#contact-point",
+                "contactType": "customer service",
+                "email": "marija@entaxaccounting.com",
+                "telephone": "+1-914-483-0713",
+                "areaServed": { "@type": "Country", "name": "United States" },
+                "availableLanguage": ["English", "Serbian", "Macedonian"]
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://www.entaxaccounting.com/#website",
+                "url": "https://www.entaxaccounting.com/",
+                "name": "E&N Tax & Accounting",
+                "publisher": { "@id": "https://www.entaxaccounting.com/#organization" },
+                "inLanguage": "en-US"
+            },
+            {
+                "@type": "WebPage",
+                "@id": "https://www.entaxaccounting.com/services.html#webpage",
+                "url": "https://www.entaxaccounting.com/services.html",
+                "name": "Tax Preparation & Bookkeeping Services | E&N Tax & Accounting",
+                "description": "Explore virtual individual and business tax preparation, bookkeeping, quarterly tax estimates, and tax consulting from E&N Tax & Accounting.",
+                "isPartOf": { "@id": "https://www.entaxaccounting.com/#website" },
+                "about": { "@id": "https://www.entaxaccounting.com/#organization" },
+                "mainEntity": { "@id": "https://www.entaxaccounting.com/services.html#offer-catalog" },
+                "breadcrumb": { "@id": "https://www.entaxaccounting.com/services.html#breadcrumb" },
+                "primaryImageOfPage": { "@id": "https://www.entaxaccounting.com/#social-image" },
+                "inLanguage": "en-US"
+            },
+            {
+                "@type": "BreadcrumbList",
+                "@id": "https://www.entaxaccounting.com/services.html#breadcrumb",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://www.entaxaccounting.com/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Services",
+                        "item": "https://www.entaxaccounting.com/services.html"
+                    }
+                ]
+            },
+            {
+                "@type": "OfferCatalog",
+                "@id": "https://www.entaxaccounting.com/services.html#offer-catalog",
+                "name": "Tax and Accounting Services",
+                "itemListElement": [
+                    { "@type": "Offer", "itemOffered": { "@id": "https://www.entaxaccounting.com/services.html#individual-tax-preparation" } },
+                    { "@type": "Offer", "itemOffered": { "@id": "https://www.entaxaccounting.com/services.html#business-tax-preparation" } },
+                    { "@type": "Offer", "itemOffered": { "@id": "https://www.entaxaccounting.com/services.html#bookkeeping" } },
+                    { "@type": "Offer", "itemOffered": { "@id": "https://www.entaxaccounting.com/services.html#tax-consulting" } },
+                    { "@type": "Offer", "itemOffered": { "@id": "https://www.entaxaccounting.com/services.html#quarterly-tax-estimates" } }
+                ]
+            },
+            {
+                "@type": "Service",
+                "@id": "https://www.entaxaccounting.com/services.html#individual-tax-preparation",
+                "name": "Individual Tax Preparation",
+                "description": "Tax preparation services for individuals and families.",
+                "provider": { "@id": "https://www.entaxaccounting.com/#organization" },
+                "areaServed": { "@type": "Country", "name": "United States" }
+            },
+            {
+                "@type": "Service",
+                "@id": "https://www.entaxaccounting.com/services.html#business-tax-preparation",
+                "name": "Business Tax Preparation",
+                "description": "Tax preparation services for small businesses.",
+                "provider": { "@id": "https://www.entaxaccounting.com/#organization" },
+                "areaServed": { "@type": "Country", "name": "United States" }
+            },
+            {
+                "@type": "Service",
+                "@id": "https://www.entaxaccounting.com/services.html#bookkeeping",
+                "name": "Bookkeeping Services",
+                "description": "Bookkeeping services including monthly financial statements, account reconciliation, general ledger support, and transaction recording.",
+                "provider": { "@id": "https://www.entaxaccounting.com/#organization" },
+                "areaServed": { "@type": "Country", "name": "United States" }
+            },
+            {
+                "@type": "Service",
+                "@id": "https://www.entaxaccounting.com/services.html#tax-consulting",
+                "name": "Tax Consulting",
+                "description": "Tax consulting for business structure, setup, and tax-related decisions.",
+                "provider": { "@id": "https://www.entaxaccounting.com/#organization" },
+                "areaServed": { "@type": "Country", "name": "United States" }
+            },
+            {
+                "@type": "Service",
+                "@id": "https://www.entaxaccounting.com/services.html#quarterly-tax-estimates",
+                "name": "Quarterly Tax Estimates",
+                "description": "Quarterly tax estimate calculations and payment guidance.",
+                "provider": { "@id": "https://www.entaxaccounting.com/#organization" },
+                "areaServed": { "@type": "Country", "name": "United States" }
             }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Business Tax Preparation",
-              "description": "Tax preparation for small businesses under $1M in revenue."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Bookkeeping Services",
-              "description": "Monthly statements, reconciliation, and ledger management."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Tax Consulting",
-              "description": "Entity selection, new business setup, and one-time or ongoing advisory."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Quarterly Tax Estimates",
-              "description": "Tax projections, safe harbor calculations, and payment vouchers."
-            }
-          }
         ]
-      }
     }
     </script>
     <link rel="stylesheet" href="styles.css">
@@ -121,7 +226,7 @@
             <p>Comprehensive solutions tailored to help individuals and businesses thrive</p>
             <div class="hero-buttons">
                 <a href="contact.html" class="btn-cta">Book Consultation</a>
-                <a href="resources.html" class="btn-cta btn-secondary">View Tools</a>
+                <a href="resources.html" class="btn-cta btn-secondary">View Resources</a>
             </div>
         </div>
     </section>
@@ -152,7 +257,7 @@
                 <div class="service-card reveal">
                     <div class="service-icon">🏢</div>
                     <h3>Business Tax Prep</h3>
-                    <p>Expert tax preparation and guidance specifically designed for small businesses under $1M in revenue, helping navigate complex regulations while minimizing tax liability.</p>
+                    <p>Tax preparation and guidance designed for small businesses, helping owners navigate filing requirements and understand relevant tax considerations.</p>
                     <ul class="service-features">
                         <li>Corporate & partnership returns</li>                        <li>Business expense optimization</li>
                         <li>Vast business tax knowledge</li>
@@ -207,16 +312,16 @@
         <div class="pricing-section">
             <div class="section-header reveal">
                 <h2>Transparent Pricing Philosophy</h2>
-                <p>At E&N Tax & Accounting, we believe in complete transparency when it comes to pricing. That's why we've adopted a value-based pricing model that benefits both our firm and our clients.</p>
+                <p>At E&N Tax & Accounting, pricing varies based on the services requested and the complexity of each client's situation.</p>
             </div>
 
-            <!-- Value-Based Pricing Explanation -->
+            <!-- Individualized Pricing Explanation -->
             <div class="value-based-content reveal">
-                <h3>Value-Based Pricing</h3>
+                <h3>Individualized Pricing</h3>
                 <p>Every client's financial situation is unique, which is why we take the time to understand your specific needs before proposing a solution. Our transparent pricing process ensures you know exactly what to expect from the start.</p>
                 <p>We begin with an initial consultation to learn about your tax situation, business structure, and specific requirements. Based on this understanding, we provide a customized proposal with clear, upfront pricing tailored to your needs.</p>
                 <div class="pricing-highlight">
-                    <p>No hourly billing, no surprise charges, no watching the clock. Just honest, transparent pricing based on the value we deliver to your unique situation.</p>
+                    <p>After an initial discussion, E&N provides an individualized quote based on the services requested and the complexity of your situation.</p>
                 </div>
             </div>
 
@@ -224,13 +329,13 @@
             <div class="pricing-benefits-grid">
                 <div class="pricing-benefit-card reveal">
                     <div class="benefit-icon">💎</div>
-                    <h4>No Surprises</h4>
-                    <p>Know exactly what your services will cost upfront. The quoted price is the final price — no hidden fees, no unexpected charges.</p>
+                    <h4>Clear Quote</h4>
+                    <p>Your individualized quote reflects the agreed service scope and the complexity of your situation.</p>
                 </div>
                 <div class="pricing-benefit-card reveal">
                     <div class="benefit-icon">⏰</div>
-                    <h4>Available for You</h4>
-                    <p>Without hourly billing, clients can ask simple questions and seek clarification without watching the clock or worrying about additional charges.</p>
+                    <h4>Confirmed Scope</h4>
+                    <p>The engagement agreement confirms the service scope before secure document collection and service delivery begin.</p>
                 </div>
                 <div class="pricing-benefit-card reveal">
                     <div class="benefit-icon">🎯</div>
@@ -261,7 +366,7 @@
                     <div class="pricing-process-step">
                         <div class="step-number">4</div>
                         <h4>Work Begins</h4>
-                        <p>Once you approve the proposal, we begin working with complete price transparency and no hourly billing</p>
+                        <p>Once you approve the proposal, the engagement agreement confirms the service scope and pricing</p>
                     </div>
                 </div>
             </div>
@@ -313,7 +418,8 @@
             </div>
             <div class="footer-section">
                 <h4>Contact</h4>
-                <p><a href="mailto:info@entaxaccounting.com">info@entaxaccounting.com</a></p>
+                <p><a href="mailto:marija@entaxaccounting.com">marija@entaxaccounting.com</a></p>
+                <p><a href="tel:+19144830713">+1 (914) 483-0713</a></p>
                 <p>Welcoming new clients</p>
             </div>
         </div>

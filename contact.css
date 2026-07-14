@@ -184,6 +184,7 @@
             color: var(--secondary-color);
             text-decoration: none;
             font-weight: 500;
+            overflow-wrap: anywhere;
         }
 
         .info-content a:hover {

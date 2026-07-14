@@ -179,7 +179,7 @@ Next prompt:
 
 > Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and if it passes, do WP-D2 in Plan mode. Show me the plan and wait for approval before implementing. Complete only WP-D2, verify its acceptance criteria, commit, push, and end with the exact WP-D3 prompt from the roadmap.
 
-### [ ] WP-D2 — Metadata and Entity Schema
+### [x] WP-D2 — Metadata and Entity Schema
 
 Dependencies: `WP-D1A`; verified facts from `WP-O3`.
 

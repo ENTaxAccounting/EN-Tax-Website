@@ -15,6 +15,16 @@ const publicPages = [
     'contact.html',
     '404.html'
 ];
+const seoPages = publicPages.filter(page => page !== '404.html');
+const canonicalUrls = {
+    'index.html': `${publicOrigin}/`,
+    'services.html': `${publicOrigin}/services.html`,
+    'resources.html': `${publicOrigin}/resources.html`,
+    'reviews.html': `${publicOrigin}/reviews.html`,
+    'contact.html': `${publicOrigin}/contact.html`
+};
+const organizationId = `${publicOrigin}/#organization`;
+const socialImageUrl = `${publicOrigin}/images/og-image.png`;
 const privateTestPaths = [
     '/_headers',
     '/AGENTS.md',
@@ -229,6 +239,221 @@ function verifyTextContent(outputRoot, artifactFiles) {
     }
 }
 
+function escapeRegExp(value) {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function getSingleTag(content, pattern, description, relativePath) {
+    const matches = [...content.matchAll(pattern)];
+    if (matches.length !== 1) {
+        throw new Error(`${relativePath} must contain exactly one ${description}`);
+    }
+    return matches[0];
+}
+
+function getMetaContent(content, attribute, value, relativePath) {
+    const escapedValue = escapeRegExp(value);
+    const tag = getSingleTag(
+        content,
+        new RegExp(`<meta\\b(?=[^>]*\\b${attribute}=["']${escapedValue}["'])[^>]*>`, 'gi'),
+        `${attribute}="${value}" meta tag`,
+        relativePath
+    )[0];
+    const contentMatch = tag.match(/\bcontent=(["'])(.*?)\1/i);
+    if (!contentMatch || !contentMatch[2].trim()) {
+        throw new Error(`${relativePath} has an empty ${attribute}="${value}" meta tag`);
+    }
+    return contentMatch[2].trim();
+}
+
+function collectJsonLd(content, relativePath) {
+    const scripts = [...content.matchAll(
+        /<script\b(?=[^>]*\btype=["']application\/ld\+json["'])[^>]*>([\s\S]*?)<\/script>/gi
+    )];
+    if (scripts.length === 0) throw new Error(`${relativePath} is missing JSON-LD`);
+
+    return scripts.flatMap(script => {
+        let parsed;
+        try {
+            parsed = JSON.parse(script[1]);
+        } catch (error) {
+            throw new Error(`${relativePath} contains invalid JSON-LD: ${error.message}`);
+        }
+        return Array.isArray(parsed['@graph']) ? parsed['@graph'] : [parsed];
+    });
+}
+
+function schemaHasType(node, type) {
+    return node['@type'] === type || (Array.isArray(node['@type']) && node['@type'].includes(type));
+}
+
+function verifyMetadataAndSchema(outputRoot) {
+    const titles = new Set();
+    const descriptions = new Set();
+
+    for (const relativePath of seoPages) {
+        const content = fs.readFileSync(path.join(outputRoot, relativePath), 'utf8');
+        const title = getSingleTag(
+            content,
+            /<title>([^<]+)<\/title>/gi,
+            'title',
+            relativePath
+        )[1].trim();
+        const description = getMetaContent(content, 'name', 'description', relativePath);
+        const canonicalTag = getSingleTag(
+            content,
+            /<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>/gi,
+            'canonical link',
+            relativePath
+        )[0];
+        const canonicalMatch = canonicalTag.match(/\bhref=["']([^"']+)["']/i);
+        const canonical = canonicalMatch && canonicalMatch[1];
+
+        if (!title || titles.has(title)) throw new Error(`${relativePath} has a missing or duplicate title`);
+        if (!description || descriptions.has(description)) {
+            throw new Error(`${relativePath} has a missing or duplicate meta description`);
+        }
+        titles.add(title);
+        descriptions.add(description);
+
+        if (/<meta\b(?=[^>]*\bname=["']keywords["'])/i.test(content)) {
+            throw new Error(`${relativePath} contains obsolete keyword metadata`);
+        }
+        if (canonical !== canonicalUrls[relativePath]) {
+            throw new Error(`${relativePath} has an unexpected canonical URL: ${canonical || 'missing'}`);
+        }
+
+        const expectedMeta = [
+            ['property', 'og:title', title],
+            ['property', 'og:description', description],
+            ['property', 'og:type', 'website'],
+            ['property', 'og:url', canonical],
+            ['property', 'og:site_name', 'E&N Tax & Accounting'],
+            ['property', 'og:locale', 'en_US'],
+            ['property', 'og:image', socialImageUrl],
+            ['property', 'og:image:alt', 'E&N Tax & Accounting — Personal Service, Professional Results'],
+            ['name', 'twitter:card', 'summary_large_image'],
+            ['name', 'twitter:title', title],
+            ['name', 'twitter:description', description],
+            ['name', 'twitter:image', socialImageUrl],
+            ['name', 'twitter:image:alt', 'E&N Tax & Accounting — Personal Service, Professional Results']
+        ];
+        for (const [attribute, value, expected] of expectedMeta) {
+            const actual = getMetaContent(content, attribute, value, relativePath);
+            if (actual !== expected) {
+                throw new Error(`${relativePath} has unexpected ${value} content`);
+            }
+        }
+
+        if (content.includes('info@entaxaccounting.com')) {
+            throw new Error(`${relativePath} contains an unapproved contact email`);
+        }
+        if (!content.includes('mailto:marija@entaxaccounting.com') || !content.includes('tel:+19144830713')) {
+            throw new Error(`${relativePath} is missing approved visible contact details`);
+        }
+        if (/under \$1M|flat[- ]rate|no hourly billing/i.test(content)) {
+            throw new Error(`${relativePath} contains an unapproved client-limit or pricing claim`);
+        }
+
+        const schemaNodes = collectJsonLd(content, relativePath);
+        const serializedSchema = JSON.stringify(schemaNodes);
+        if (/AggregateRating|reviewCount|ratingValue/.test(serializedSchema)) {
+            throw new Error(`${relativePath} contains self-serving review rating markup`);
+        }
+
+        const organization = schemaNodes.find(node => node['@id'] === organizationId);
+        if (!organization || !schemaHasType(organization, 'AccountingService')) {
+            throw new Error(`${relativePath} is missing the stable AccountingService entity`);
+        }
+        const expectedOrganizationValues = {
+            name: 'E&N Tax & Accounting',
+            legalName: 'E&N Tax & Accounting LLC',
+            url: `${publicOrigin}/`,
+            email: 'marija@entaxaccounting.com',
+            telephone: '+1-914-483-0713',
+            foundingDate: '2024'
+        };
+        for (const [property, expected] of Object.entries(expectedOrganizationValues)) {
+            if (organization[property] !== expected) {
+                throw new Error(`${relativePath} has an unexpected organization ${property}`);
+            }
+        }
+        if (organization.logo?.['@id'] !== `${publicOrigin}/#logo`
+            || organization.founder?.['@id'] !== `${publicOrigin}/#founder`
+            || organization.contactPoint?.['@id'] !== `${publicOrigin}/#contact-point`) {
+            throw new Error(`${relativePath} has incomplete organization entity references`);
+        }
+        if (JSON.stringify(organization.sameAs) !== JSON.stringify(['https://g.page/r/CQg5gRyJ4mdoEAE/'])) {
+            throw new Error(`${relativePath} has unexpected sameAs profiles`);
+        }
+        const areaNames = organization.areaServed?.map(area => area.name) || [];
+        for (const expectedArea of [
+            'United States',
+            'Westchester County, New York',
+            "New York's Hudson Valley",
+            'Fairfield County, Connecticut'
+        ]) {
+            if (!areaNames.includes(expectedArea)) {
+                throw new Error(`${relativePath} is missing approved service area: ${expectedArea}`);
+            }
+        }
+        for (const language of ['English', 'Serbian', 'Macedonian']) {
+            if (!organization.knowsLanguage?.includes(language)) {
+                throw new Error(`${relativePath} is missing approved language: ${language}`);
+            }
+        }
+
+        const founder = schemaNodes.find(node => node['@id'] === `${publicOrigin}/#founder`);
+        if (!founder || founder.name !== 'Marija Sparano' || founder.jobTitle !== 'Founder & CEO') {
+            throw new Error(`${relativePath} has incomplete founder schema`);
+        }
+        const webPageId = relativePath === 'index.html'
+            ? `${publicOrigin}/#webpage`
+            : `${canonical}#webpage`;
+        const webPage = schemaNodes.find(node => node['@id'] === webPageId);
+        if (!webPage || !schemaHasType(webPage, 'WebPage')
+            || webPage.name !== title
+            || webPage.description !== description
+            || webPage.about?.['@id'] !== organizationId) {
+            throw new Error(`${relativePath} has incomplete or inconsistent WebPage schema`);
+        }
+
+        if (relativePath !== 'index.html') {
+            const breadcrumbId = `${canonical}#breadcrumb`;
+            const breadcrumb = schemaNodes.find(node => node['@id'] === breadcrumbId);
+            if (!breadcrumb || !schemaHasType(breadcrumb, 'BreadcrumbList')
+                || webPage.breadcrumb?.['@id'] !== breadcrumbId) {
+                throw new Error(`${relativePath} has incomplete breadcrumb schema`);
+            }
+        }
+
+        if (relativePath === 'services.html') {
+            const services = schemaNodes.filter(node => schemaHasType(node, 'Service'));
+            if (services.length !== 5 || services.some(service => service.provider?.['@id'] !== organizationId)) {
+                throw new Error('services.html must define five services provided by the stable entity');
+            }
+        }
+
+        if (relativePath === 'contact.html') {
+            const faq = schemaNodes.find(node => schemaHasType(node, 'FAQPage'));
+            if (!faq || faq.mainEntity?.length !== 4) {
+                throw new Error('contact.html must define the four visible FAQs');
+            }
+            for (const question of faq.mainEntity) {
+                const answer = question.acceptedAnswer?.text;
+                if (!question.name || !answer || !content.includes(question.name) || !content.includes(answer)) {
+                    throw new Error('contact.html FAQ schema must match visible questions and answers');
+                }
+            }
+        }
+    }
+
+    const resources = fs.readFileSync(path.join(outputRoot, 'resources.html'), 'utf8');
+    if (/tax calculators|tax organizers|withholding estimators|rental property calculators|free tax tools/i.test(resources)) {
+        throw new Error('resources.html claims resources that are not visible on the page');
+    }
+}
+
 function verifyRequiredBehavior(outputRoot) {
     const headers = fs.readFileSync(path.join(outputRoot, '_headers'), 'utf8');
     const contactHtml = fs.readFileSync(path.join(outputRoot, 'contact.html'), 'utf8');
@@ -344,6 +569,7 @@ async function checkArtifact(projectRoot, outputRoot) {
     }
 
     verifyTextContent(outputRoot, artifactFiles);
+    verifyMetadataAndSchema(outputRoot);
     verifyRequiredBehavior(outputRoot);
 
     const routes = JSON.parse(fs.readFileSync(path.join(outputRoot, '_routes.json'), 'utf8'));

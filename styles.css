@@ -408,6 +408,7 @@
             transition: all 0.3s ease;
             padding: 5px 0;
             font-size: 19px;
+            overflow-wrap: anywhere;
         }
 
         .footer-section a:hover {
