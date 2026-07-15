@@ -620,6 +620,9 @@ function verifyRequiredBehavior(outputRoot) {
     if (!headers.includes('https://formspree.io')) {
         throw new Error('CSP must preserve Formspree access');
     }
+    if (!headers.includes('https://static.cloudflareinsights.com')) {
+        throw new Error('CSP must allow the enabled Cloudflare Web Analytics beacon');
+    }
     if (!contactHtml.includes('id="contactForm"') || !contactJs.includes('https://formspree.io/f/')) {
         throw new Error('Formspree contact-form wiring is incomplete');
     }

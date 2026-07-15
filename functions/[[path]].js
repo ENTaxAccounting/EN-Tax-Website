@@ -1,6 +1,6 @@
 const securityHeaders = {
     'Cache-Control': 'no-store, max-age=0',
-    'Content-Security-Policy': "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self'; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://formspree.io; frame-ancestors 'none'; form-action 'self' https://formspree.io;",
+    'Content-Security-Policy': "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com; style-src 'self'; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://formspree.io; frame-ancestors 'none'; form-action 'self' https://formspree.io;",
     'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
     'Referrer-Policy': 'strict-origin-when-cross-origin',
     'X-Content-Type-Options': 'nosniff',
