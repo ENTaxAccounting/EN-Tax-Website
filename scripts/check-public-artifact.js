@@ -727,6 +727,21 @@ function verifyPerformanceAndAccessibility(outputRoot, artifactFiles) {
     const indexCss = fs.readFileSync(path.join(outputRoot, 'index.css'), 'utf8');
     const mainJs = fs.readFileSync(path.join(outputRoot, 'main.js'), 'utf8');
     const styles = fs.readFileSync(path.join(outputRoot, 'styles.css'), 'utf8');
+    const firstHeroPicture = indexHtml.match(
+        /<picture\b[^>]*\bclass=["'][^"']*\bhero-first-picture\b[^"']*["'][^>]*>([\s\S]*?)<\/picture>/i
+    );
+    if (!firstHeroPicture) {
+        throw new Error('Homepage first hero frame must use a responsive picture');
+    }
+    if (!/<source\b(?=[^>]*\bmedia=["']\(max-width: 768px\)["'])(?=[^>]*\bsrcset=["']images\/backgrounds\/city-small\.webp["'])[^>]*>/i.test(firstHeroPicture[1])) {
+        throw new Error('Homepage first hero frame must provide the small responsive source');
+    }
+    if (!/<img\b(?=[^>]*\bsrc=["']images\/backgrounds\/city-large\.webp["'])(?=[^>]*\bwidth=["']1536["'])(?=[^>]*\bheight=["']1024["'])(?=[^>]*\bloading=["']eager["'])(?=[^>]*\bfetchpriority=["']high["'])[^>]*>/i.test(firstHeroPicture[1])) {
+        throw new Error('Homepage first hero image must provide dimensions, eager loading, and high fetch priority');
+    }
+    if (/\.hero-bg-image:nth-child\(1\)\s*\{[^}]*\bbackground-image\s*:/i.test(indexCss)) {
+        throw new Error('Homepage first hero frame must not duplicate the picture as a CSS background');
+    }
     if (!/class=["'][^"']*\bfamily-photo\b[^"']*["'][^>]*\bloading=["']lazy["']/i.test(indexHtml)) {
         throw new Error('Homepage portrait must be lazy-loaded');
     }

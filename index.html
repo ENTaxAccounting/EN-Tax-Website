@@ -155,7 +155,12 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-backgrounds" aria-hidden="true">
-            <div class="hero-bg-image active is-loaded" data-image-small="images/backgrounds/city-small.webp" data-image-large="images/backgrounds/city-large.webp"></div>
+            <div class="hero-bg-image active" data-image-small="images/backgrounds/city-small.webp" data-image-large="images/backgrounds/city-large.webp">
+                <picture class="hero-first-picture">
+                    <source media="(max-width: 768px)" srcset="images/backgrounds/city-small.webp">
+                    <img src="images/backgrounds/city-large.webp" width="1536" height="1024" alt="" loading="eager" fetchpriority="high" decoding="async">
+                </picture>
+            </div>
             <div class="hero-bg-image" data-image-small="images/backgrounds/flowers-small.webp" data-image-large="images/backgrounds/flowers-large.webp"></div>
             <div class="hero-bg-image" data-image-small="images/backgrounds/lady-liberty-small.webp" data-image-large="images/backgrounds/lady-liberty-large.webp"></div>
             <div class="hero-bg-image" data-image-small="images/backgrounds/lighthouse-small.webp" data-image-large="images/backgrounds/lighthouse-large.webp"></div>

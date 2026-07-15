@@ -1,6 +1,6 @@
 # E&N Website Production Roadmap
 
-Last updated: 2026-07-14
+Last updated: 2026-07-15
 
 ## Objective
 
@@ -372,6 +372,27 @@ Implementation:
 Acceptance: both search-engine dashboards report the five extensionless canonical pages indexed without crawl or canonical errors; the sitemap contains each canonical page exactly once with a valid modification date; clean builds and deliberate invalid-sitemap tests pass.
 
 Commit: `Improve sitemap freshness signals`
+
+Next prompt:
+
+> Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and review production search health in Plan mode. Show me the plan before implementing. Use Search Console/Bing findings and current site data to propose one bounded maintenance package; complete, verify, commit, and push only after I approve it.
+
+### [x] MP-2 — Homepage Hero LCP Rendering
+
+Dependencies: completed production search-health review and owner approval of the bounded maintenance package.
+
+Status: completed July 15, 2026. The homepage now renders its first carousel frame as a responsive, high-priority image instead of a CSS background while preserving the established crop, overlay, carousel, reduced-motion behavior, and page content.
+
+Implementation:
+
+- Render the first homepage hero frame with the existing small and large WebP assets in a responsive `<picture>`.
+- Provide intrinsic image dimensions, eager loading, and high fetch priority for the LCP image.
+- Remove the first frame's redundant CSS background declarations while preserving subsequent background slides.
+- Extend the public-artifact check to enforce the complete first-frame image contract and reject a duplicate CSS background.
+
+Acceptance: clean builds, JavaScript syntax checks, deliberate invalid-hero tests, and owner visual review pass; local mobile Lighthouse scores at least 95 performance with LCP at most 2.5 seconds, CLS 0, and accessibility and SEO scores of 100.
+
+Commit: `Improve homepage hero rendering`
 
 Next prompt:
 
