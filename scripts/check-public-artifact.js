@@ -742,6 +742,19 @@ function verifyPerformanceAndAccessibility(outputRoot, artifactFiles) {
     if (/\.hero-bg-image:nth-child\(1\)\s*\{[^}]*\bbackground-image\s*:/i.test(indexCss)) {
         throw new Error('Homepage first hero frame must not duplicate the picture as a CSS background');
     }
+    const baseHeroRule = indexCss.match(/(?:^|})\s*\.hero-bg-image\s*\{([^}]*)\}/i);
+    if (!baseHeroRule) {
+        throw new Error('Homepage must define the base hero frame styles');
+    }
+    if (/\btransition(?:-property)?\s*:[^;}]*(?:\bopacity\b|\ball\b)/i.test(baseHeroRule[1])) {
+        throw new Error('Homepage base hero frames must not transition opacity before rotation');
+    }
+    if (!/\.hero-backgrounds\.rotation-ready\s+\.hero-bg-image\s*\{[^}]*\btransition\s*:\s*opacity\s+2s\s+ease-in-out\s*;/i.test(indexCss)) {
+        throw new Error('Homepage hero opacity transition must be scoped to the rotation-ready state');
+    }
+    if (!/carousel\.classList\.add\(\s*['"]rotation-ready['"]\s*\);\s*rotateTo\(next\);/i.test(indexJs)) {
+        throw new Error('Homepage carousel must enable transitions immediately before its first rotation');
+    }
     if (!/class=["'][^"']*\bfamily-photo\b[^"']*["'][^>]*\bloading=["']lazy["']/i.test(indexHtml)) {
         throw new Error('Homepage portrait must be lazy-loaded');
     }

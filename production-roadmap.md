@@ -398,6 +398,27 @@ Next prompt:
 
 > Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and review production search health in Plan mode. Show me the plan before implementing. Use Search Console/Bing findings and current site data to propose one bounded maintenance package; complete, verify, commit, and push only after I approve it.
 
+### [x] MP-3 — Remove Initial Hero LCP Fade Delay
+
+Dependencies: completed `MP-2` hero rendering and owner approval of the bounded maintenance package.
+
+Status: completed July 15, 2026. Two production mobile Lighthouse runs scored 84 and 87 performance with LCP at 4.04 and 3.70 seconds; each attributed about 2.0 seconds to hero element-render delay. The initial hero frame now appears without that opacity transition while later scheduled carousel changes retain the established two-second crossfade. Three post-change local mobile runs scored 99 performance, 100 accessibility, and 100 SEO with LCP at 1.883, 1.879, and 1.878 seconds, CLS 0, and hero element-render delay at 145, 85, and 93 milliseconds.
+
+Implementation:
+
+- Remove the opacity transition from the base hero-frame rule.
+- Enable the existing two-second transition only when the carousel reaches its first scheduled rotation.
+- Preserve the responsive first-frame picture, eight-second rotation schedule, subsequent lazy image loading, visibility handling, and reduced-motion behavior.
+- Extend the public-artifact check to reject an initial/base hero opacity transition and require the scoped transition plus its JavaScript activation.
+
+Acceptance: clean builds, JavaScript syntax checks, deliberate invalid-transition tests, and mobile/desktop visual checks pass; three local mobile Lighthouse audits have median performance of at least 95, median LCP at most 2.5 seconds, CLS 0, and accessibility and SEO scores of 100. Field Core Web Vitals remain an owner-track follow-up.
+
+Commit: `Remove homepage LCP fade delay`
+
+Next prompt:
+
+> Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and review production search health in Plan mode. Show me the plan before implementing. Use Search Console/Bing findings and current site data to propose one bounded maintenance package; complete, verify, commit, and push only after I approve it.
+
 ## Recommended Parallel Sequence
 
 | Development session | Owner work that can happen simultaneously |

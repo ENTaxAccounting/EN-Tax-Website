@@ -1,7 +1,8 @@
 (function() {
+    const carousel = document.querySelector('.hero-backgrounds');
     const bgImages = Array.from(document.querySelectorAll('.hero-bg-image'));
     const textItems = Array.from(document.querySelectorAll('.hero-text-item'));
-    if (bgImages.length === 0 || bgImages.length !== textItems.length) return;
+    if (!carousel || bgImages.length === 0 || bgImages.length !== textItems.length) return;
 
     const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const smallViewportQuery = window.matchMedia('(max-width: 768px)');
@@ -62,7 +63,10 @@
 
         rotationTimer = window.setTimeout(async () => {
             const loaded = await (nextReady || preloadSlide(next));
-            if (!isPaused && !document.hidden && loaded) rotateTo(next);
+            if (!isPaused && !document.hidden && loaded) {
+                carousel.classList.add('rotation-ready');
+                rotateTo(next);
+            }
             scheduleRotation();
         }, rotationInterval);
     }
