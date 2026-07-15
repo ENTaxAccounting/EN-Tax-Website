@@ -43,8 +43,8 @@ Goal: make `https://www.entaxaccounting.com` the only public hostname, preserve 
 9. Test in a private/incognito window:
 
    - `http://entaxaccounting.com/`
-   - `https://entaxaccounting.com/services.html`
-   - `https://entaxaccounting.com/resources.html?test=1`
+   - `https://entaxaccounting.com/services`
+   - `https://entaxaccounting.com/resources?test=1`
    - `https://www.entaxaccounting.com/`
 
    The first three should finish on the same path/query at the `www` HTTPS hostname. The fourth should remain on `www`.
@@ -111,7 +111,15 @@ Goal: verify ownership, submit the sitemap, see why pages are or are not indexed
 
 ### C. Inspect current pages
 
-Wait until `WP-D1` is deployed, then use the exact canonical URLs listed in its completion report—do not guess whether `.html` or extensionless URLs were chosen.
+Use these exact canonical production URLs:
+
+- `https://www.entaxaccounting.com/`
+- `https://www.entaxaccounting.com/services`
+- `https://www.entaxaccounting.com/resources`
+- `https://www.entaxaccounting.com/reviews`
+- `https://www.entaxaccounting.com/contact`
+
+The root-level `.html` names are repository source filenames, not canonical production URLs. Do not submit or inspect the `.html` variants unless diagnosing their redirects.
 
 For each canonical URL:
 
@@ -228,35 +236,28 @@ Before handing this off:
 
 Goal: make the decisions needed before the site expands from five pages to a larger service/resource site.
 
+Status: completed July 15, 2026. Eleventy was rejected while the site remains at five pages, and no expansion beyond the current five pages is approved. The dependency-free source architecture and shared-layout artifact checks remain in place.
+
 ### A. Decide on Eleventy
 
-Recommendation: approve the lightweight Eleventy migration.
-
-What changes:
-
-- Shared navigation, footer, metadata, and schema move into reusable templates.
-- Cloudflare builds static HTML during deployment.
-- Public pages remain fast and crawlable.
-- Adding a page no longer requires copying the same header/footer into every file.
-
-Tradeoff: the repository gains Node dependencies and a build command. Codex will implement and test this in `WP-D4`; you should **not** change Cloudflare build settings now. After implementation, the expected Cloudflare values are production branch `main`, build command `npx @11ty/eleventy`, and output directory `_site`, matching [Cloudflare's Eleventy guide](https://developers.cloudflare.com/pages/framework-guides/deploy-an-eleventy-site/).
-
-Record one decision:
+Recorded decision:
 
 ```text
-Eleventy migration: APPROVED / REJECTED / NEEDS DISCUSSION
-Reason or concern:
+Eleventy migration: REJECTED
+Reason: Keep the current dependency-free architecture while the site remains at five pages. Reconsider templates before approving a larger page expansion.
 ```
+
+Do not change Cloudflare to an Eleventy build or `_site` output directory. The current build is `node scripts/build-public.js`, and Cloudflare publishes `dist/`.
 
 ### B. Approve the navigation
 
-Recommended top-level navigation:
+Future expansion is deferred. If the roadmap is explicitly reactivated, review this proposed top-level navigation:
 
 ```text
 Home | About | Services | Resources | Reviews | Contact
 ```
 
-Record changes you want. Keep service detail pages linked from the Services hub rather than placing all five in the top navigation.
+Until then, keep the current five-page navigation unchanged. If expansion is approved later, record requested changes and keep service detail pages linked from the Services hub rather than placing all five in the top navigation.
 
 ### C. Rank the services
 
@@ -274,7 +275,7 @@ Base the ranking on the clients E&N most wants, profitability, capacity, and exp
 
 ### D. Write genuine FAQs
 
-Start with the top two ranked services. Supply 3–5 questions per service in Marija's own words. Useful prompts include:
+This input is deferred until a future expansion package is explicitly reactivated. At that point, start with the top two ranked services and supply 3–5 questions per service in Marija's own words. Useful prompts include:
 
 - Who is this service best suited for?
 - What documents should a new client prepare?
@@ -288,7 +289,7 @@ Answers can be rough bullet points. Accuracy and first-hand expertise matter mor
 
 ### E. Describe the client process
 
-Fill in the real process without inventing tools or guarantees:
+This input is also deferred until a future expansion package is explicitly reactivated. When requested, fill in the real process without inventing tools or guarantees:
 
 ```text
 1. How a prospect first contacts E&N:
@@ -304,12 +305,12 @@ Fill in the real process without inventing tools or guarantees:
 
 ```text
 WP-O4 COMPLETE
-Eleventy decision:
-Approved navigation:
-Service ranking:
-FAQs prepared for:
-Client process documented: yes/no
-Open questions or concerns:
+Eleventy decision: REJECTED
+Approved navigation: Current five-page navigation retained
+Service ranking: Deferred until expansion is reactivated
+FAQs prepared for: Deferred until expansion is reactivated
+Client process documented: Deferred until expansion is reactivated
+Open questions or concerns: None for the current five-page site
 ```
 
 ## Handoff to a Development Chat
