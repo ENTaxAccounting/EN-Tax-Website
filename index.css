@@ -29,12 +29,25 @@
             opacity: 1;
         }
 
-        /* Background images — moved from inline style attributes for CSP compliance */
-        .hero-bg-image:nth-child(1) { background-image: url('images/backgrounds/city.jpg'); }
-        .hero-bg-image:nth-child(2) { background-image: url('images/backgrounds/flowers.jpg'); }
-        .hero-bg-image:nth-child(3) { background-image: url('images/backgrounds/lady-liberty.jpg'); }
-        .hero-bg-image:nth-child(4) { background-image: url('images/backgrounds/lighthouse.jpg'); }
-        .hero-bg-image:nth-child(5) { background-image: url('images/backgrounds/waterfall.jpg'); }
+        .hero-bg-image:nth-child(1) {
+            background-image: url('images/backgrounds/city-large.webp');
+        }
+
+        .hero-bg-image.is-loaded:nth-child(2) {
+            background-image: url('images/backgrounds/flowers-large.webp');
+        }
+
+        .hero-bg-image.is-loaded:nth-child(3) {
+            background-image: url('images/backgrounds/lady-liberty-large.webp');
+        }
+
+        .hero-bg-image.is-loaded:nth-child(4) {
+            background-image: url('images/backgrounds/lighthouse-large.webp');
+        }
+
+        .hero-bg-image.is-loaded:nth-child(5) {
+            background-image: url('images/backgrounds/waterfall-large.webp');
+        }
 
         .hero-content {
             justify-content: flex-start;
@@ -66,6 +79,23 @@
 
         .hero-text-item p {
             margin-bottom: 0;
+        }
+
+        .hero-toggle {
+            margin-top: 8px;
+            padding: 6px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            border-radius: 999px;
+            background: rgba(0, 51, 102, 0.7);
+            color: white;
+            font: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .hero-toggle:hover {
+            background: rgba(0, 51, 102, 0.9);
         }
 
         /* About Section */
@@ -246,7 +276,7 @@
             justify-content: space-between;
         }
 
-        .client-card h4 {
+        .client-card h3 {
             font-size: 34px;
             color: white;
             margin-bottom: 0;
@@ -278,8 +308,8 @@
             opacity: 1;
         }
 
-        .client-card:hover h4,
-        .client-card.tapped h4 {
+        .client-card:hover h3,
+        .client-card.tapped h3 {
             opacity: 0;
             transform: translateY(20px);
         }
@@ -291,7 +321,7 @@
 
         /* Tap hint — touch devices only */
         @media (hover: none) {
-            .client-card h4::after {
+            .client-card h3::after {
                 content: 'Tap to learn more';
                 display: block;
                 font-size: 12px;
@@ -302,18 +332,58 @@
                 text-transform: uppercase;
             }
 
-            .client-card.tapped h4::after {
+            .client-card.tapped h3::after {
                 display: none;
             }
         }
 
-        /* Specific background images */
-        .client-card:nth-child(1) { background-image: url('images/family.png'); }
-        .client-card:nth-child(2) { background-image: url('images/business-owner.png'); }
-        .client-card:nth-child(3) { background-image: url('images/startup.png'); }
-        .client-card:nth-child(4) { background-image: url('images/real-estate-investor.png'); }
-        .client-card:nth-child(5) { background-image: url('images/retired_couple.png'); }
-        .client-card:nth-child(6) { background-image: url('images/gig-economy.png'); }
+        .client-card.is-image-loaded:nth-child(1) {
+            background-image: url('images/family-600.webp');
+            background-image: image-set(
+                url('images/family-600.webp') 1x,
+                url('images/family-1200.webp') 2x
+            );
+        }
+
+        .client-card.is-image-loaded:nth-child(2) {
+            background-image: url('images/business-owner-600.webp');
+            background-image: image-set(
+                url('images/business-owner-600.webp') 1x,
+                url('images/business-owner-1200.webp') 2x
+            );
+        }
+
+        .client-card.is-image-loaded:nth-child(3) {
+            background-image: url('images/startup-600.webp');
+            background-image: image-set(
+                url('images/startup-600.webp') 1x,
+                url('images/startup-1200.webp') 2x
+            );
+        }
+
+        .client-card.is-image-loaded:nth-child(4) {
+            background-image: url('images/real-estate-investor-600.webp');
+            background-image: image-set(
+                url('images/real-estate-investor-600.webp') 1x,
+                url('images/real-estate-investor-1200.webp') 2x
+            );
+        }
+
+        .client-card.is-image-loaded:nth-child(5) {
+            background-image: url('images/retired-couple-600.webp');
+            background-image: image-set(
+                url('images/retired-couple-600.webp') 1x,
+                url('images/retired-couple-1200.webp') 2x
+            );
+        }
+
+        .client-card.is-image-loaded:nth-child(6) {
+            background-image: url('images/gig-economy-600.webp');
+            background-image: image-set(
+                url('images/gig-economy-600.webp') 1x,
+                url('images/gig-economy-1200.webp') 2x
+            );
+        }
 
         /* Testimonials Section */
         .testimonials-section {
@@ -442,7 +512,7 @@
             margin-bottom: 14px;
         }
 
-        .why-en-card h4 {
+        .why-en-card h3 {
             color: var(--primary-color);
             font-size: 18px;
             font-weight: 700;
@@ -478,6 +548,26 @@
         }
 
         @media (max-width: 768px) {
+            .hero-bg-image:nth-child(1) {
+                background-image: url('images/backgrounds/city-small.webp');
+            }
+
+            .hero-bg-image.is-loaded:nth-child(2) {
+                background-image: url('images/backgrounds/flowers-small.webp');
+            }
+
+            .hero-bg-image.is-loaded:nth-child(3) {
+                background-image: url('images/backgrounds/lady-liberty-small.webp');
+            }
+
+            .hero-bg-image.is-loaded:nth-child(4) {
+                background-image: url('images/backgrounds/lighthouse-small.webp');
+            }
+
+            .hero-bg-image.is-loaded:nth-child(5) {
+                background-image: url('images/backgrounds/waterfall-small.webp');
+            }
+
             .client-grid {
                 grid-template-columns: 1fr;
             }
@@ -486,7 +576,7 @@
                 height: 300px;
             }
 
-            .client-card h4 {
+            .client-card h3 {
                 font-size: 26px;
             }
 

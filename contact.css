@@ -1,9 +1,15 @@
         /* Hero — contact page uses background-image on .hero directly (no .hero-bg-image) */
         .hero {
-            background-image: url('images/backgrounds/contact-us.jpg');
+            background-image: url('images/backgrounds/contact-us-large.webp');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                background-image: url('images/backgrounds/contact-us-small.webp');
+            }
         }
 
         .hero::before {

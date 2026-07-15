@@ -22,6 +22,29 @@
             font-size: 16px;
         }
 
+        .skip-link {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 2000;
+            padding: 12px 18px;
+            border-radius: 6px;
+            background: var(--primary-color);
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            transform: translateY(-200%);
+            transition: transform 0.2s ease;
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
+        }
+
+        main:focus {
+            outline: none;
+        }
+
         /* Professional Background */
         .main-bg {
             position: fixed;
@@ -133,10 +156,10 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        /* Focus indicator for keyboard navigation */
-        *:focus-visible {
-            outline: 2px solid var(--secondary-color);
+        :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+            outline: 3px solid var(--secondary-color);
             outline-offset: 2px;
+            box-shadow: 0 0 0 5px var(--primary-color);
         }
 
         .menu-toggle {
@@ -154,24 +177,6 @@
             background: var(--primary-color);
             margin: 3px 0;
             transition: 0.3s;
-        }
-
-        /* Dropdown Styles */
-        .dropdown {
-            position: relative;
-        }
-
-        @media (max-width: 1024px) {
-            .dropdown > a::after {
-                content: ' ▼';
-                font-size: 12px;
-                transition: transform 0.3s ease;
-                display: inline-block;
-            }
-
-            .dropdown.active > a::after {
-                transform: rotate(180deg);
-            }
         }
 
         /* Hero Section */
@@ -506,4 +511,18 @@
             .nav-links a { font-size: 17px; }
             .logo-text { font-size: 22px; }
             .nav-cta { padding: 8px 20px; font-size: 17px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
         }

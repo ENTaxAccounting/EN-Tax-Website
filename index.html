@@ -25,7 +25,7 @@
     <meta name="twitter:image" content="https://www.entaxaccounting.com/images/og-image.png">
     <meta name="twitter:image:alt" content="E&N Tax & Accounting — Personal Service, Professional Results">
 
-    <link rel="icon" type="image/png" href="images/E_N_LOGO.png">
+    <link rel="icon" type="image/webp" href="images/e-n-logo-140.webp">
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D0XKT34FRR"></script>
     <script async src="analytics.js"></script>
@@ -115,22 +115,26 @@
         ]
     }
     </script>
+    <link rel="preload" as="image" href="images/backgrounds/city-small.webp" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="images/backgrounds/city-large.webp" media="(min-width: 769px)" fetchpriority="high">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
     <!-- Professional Background -->
     <div class="main-bg"></div>
     
     <!-- Header -->
     <header>
-        <nav>
+        <nav aria-label="Primary navigation">
             <a href="index.html" class="logo">
-                <img src="images/E_N_LOGO.png" alt="E&N Tax & Accounting">
+                <img src="images/e-n-logo-140.webp" srcset="images/e-n-logo-140.webp 140w, images/e-n-logo-280.webp 280w" sizes="(max-width: 1024px) 52px, 70px" width="280" height="280" alt="E&N Tax & Accounting" decoding="async">
                 <span class="logo-text">E&N Tax & Accounting</span>
             </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">About</a></li>
+                <li><a href="index.html" aria-current="page">About</a></li>
                 <li><a href="services.html">Services</a></li>
 
                 <li><a href="resources.html">Resources</a></li>
@@ -138,42 +142,44 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <a href="contact.html" class="nav-cta">Book Consultation</a>
-            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
             </button>
         </nav>
     </header>
 
+    <main id="main-content" tabindex="-1">
+
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-backgrounds">
-            <div class="hero-bg-image active"></div>
-            <div class="hero-bg-image"></div>
-            <div class="hero-bg-image"></div>
-            <div class="hero-bg-image"></div>
-            <div class="hero-bg-image"></div>
+        <div class="hero-backgrounds" aria-hidden="true">
+            <div class="hero-bg-image active is-loaded" data-image-small="images/backgrounds/city-small.webp" data-image-large="images/backgrounds/city-large.webp"></div>
+            <div class="hero-bg-image" data-image-small="images/backgrounds/flowers-small.webp" data-image-large="images/backgrounds/flowers-large.webp"></div>
+            <div class="hero-bg-image" data-image-small="images/backgrounds/lady-liberty-small.webp" data-image-large="images/backgrounds/lady-liberty-large.webp"></div>
+            <div class="hero-bg-image" data-image-small="images/backgrounds/lighthouse-small.webp" data-image-large="images/backgrounds/lighthouse-large.webp"></div>
+            <div class="hero-bg-image" data-image-small="images/backgrounds/waterfall-small.webp" data-image-large="images/backgrounds/waterfall-large.webp"></div>
         </div>
         <div class="hero-content">
             <div class="hero-text-wrapper">
-                <div class="hero-text-item active">
+                <div class="hero-text-item active" aria-hidden="false">
                     <h1>Tax & Accounting Services for Real People</h1>
                     <p>Serving individuals, families, and small businesses — virtually, nationwide.</p>
                 </div>
-                <div class="hero-text-item">
+                <div class="hero-text-item" aria-hidden="true">
                     <h2>Helping Your Business Bloom & Flourish</h2>
                     <p>From bookkeeping to tax prep, we bring expertise and genuine care to every client.</p>
                 </div>
-                <div class="hero-text-item">
+                <div class="hero-text-item" aria-hidden="true">
                     <h2>Where Every Client Becomes Family</h2>
                     <p>Named after twin daughters Emma and Nina — personal attention is what we do.</p>
                 </div>
-                <div class="hero-text-item">
+                <div class="hero-text-item" aria-hidden="true">
                     <h2>A Trusted Guide Through Tax Season</h2>
                     <p>Clear answers, honest pricing, and an advisor who's always in your corner.</p>
                 </div>
-                <div class="hero-text-item">
+                <div class="hero-text-item" aria-hidden="true">
                     <h2>Tax Done Simply. Done Right.</h2>
                     <p>Transparent pricing, expert preparation, and zero surprises — every time.</p>
                 </div>
@@ -182,6 +188,7 @@
                 <a href="contact.html" class="btn-cta">Book Consultation</a>
                 <a href="services.html" class="btn-cta btn-secondary">View Services</a>
             </div>
+            <button class="hero-toggle" type="button" aria-pressed="false">Pause slideshow</button>
         </div>
     </section>
 
@@ -210,7 +217,7 @@
                     <p>Whether you're a family navigating tax season, a small business owner pursuing growth, or someone planning for the future, E&N brings both professional expertise and genuine care to help you succeed. Because when you treat clients like family, everyone thrives together.</p>
                 </div>
                 <div class="reveal">
-                    <img src="images/portrait.png" alt="Marija Sparano, Founder & CEO" class="family-photo">
+                    <img src="images/portrait-620.webp" srcset="images/portrait-310.webp 310w, images/portrait-620.webp 620w" sizes="(max-width: 768px) calc(100vw - 80px), 550px" width="620" height="664" alt="Marija Sparano, Founder & CEO" class="family-photo" loading="lazy" decoding="async">
                     <p class="photo-caption">Marija Sparano, Founder &amp; CEO</p>
                 </div>
             </div>
@@ -230,17 +237,17 @@
         <div class="why-en-grid">
             <div class="why-en-card reveal">
                 <div class="why-en-icon">🤝</div>
-                <h4>Personal Attention</h4>
+                <h3>Personal Attention</h3>
                 <p>You work directly with Marija — not a junior associate or a call center. Every client gets focused, one-on-one service from someone who knows your name and your situation.</p>
             </div>
             <div class="why-en-card reveal">
                 <div class="why-en-icon">💎</div>
-                <h4>Transparent Pricing</h4>
+                <h3>Transparent Pricing</h3>
                 <p>Pricing reflects the services requested and the complexity of your situation. After an initial discussion, you receive an individualized quote based on your needs.</p>
             </div>
             <div class="why-en-card reveal">
                 <div class="why-en-icon">💻</div>
-                <h4>Virtual Convenience</h4>
+                <h3>Virtual Convenience</h3>
                 <p>Meet from anywhere via video, share documents securely online, and get expert service without ever leaving home. We serve clients across the country.</p>
             </div>
         </div>
@@ -256,38 +263,38 @@
         <div class="client-grid">
             <div class="client-card reveal">
                 <div class="client-card-content">
-                    <h4>Individuals & Families</h4>
+                    <h3>Individuals & Families</h3>
                     <p>Comprehensive tax services to help families thrive and retain more of their earnings. We understand the unique challenges families face and provide personalized solutions to minimize tax burdens while maximizing deductions for education, childcare, and household expenses.</p>
                 </div>
             </div>
             <div class="client-card reveal">
                 <div class="client-card-content">
-                    <h4>Small Businesses</h4>
+                    <h3>Small Businesses</h3>
                     <p>Tax solutions and accounting services for sustainable business growth. Our expertise helps small businesses navigate complex tax regulations, optimize cash flow, and identify valuable deductions that reduce tax liability while supporting expansion goals.</p>
                 </div>
             </div>
             <div class="client-card reveal">
                 <div class="client-card-content">
-                    <h4>Startups</h4>
+                    <h3>Startups</h3>
                     <p>Building strong financial foundations for new ventures and entrepreneurs. We guide startups through entity selection, tax solutions, and compliance requirements, ensuring your innovative business starts on solid financial ground with solutions for long-term success.</p>
                 </div>
             </div>
             <div class="client-card reveal">
                 <div class="client-card-content">
-                    <h4>Real Estate Investors</h4>
+                    <h3>Real Estate Investors</h3>
                     <p>Personalized tax guidance for small portfolio real estate investors. We help navigate real estate professional status qualification, maximize short-term rental tax advantages, implement bonus depreciation solutions, and optimize de minimis safe harbor elections to significantly reduce your tax burden and accelerate wealth building.
                     </p>
                 </div>
             </div>
             <div class="client-card reveal">
                 <div class="client-card-content">
-                    <h4>Retirees</h4>
+                    <h3>Retirees</h3>
                     <p>Guiding retirees through proper reporting of retirement income including Social Security benefits, pension distributions, IRA withdrawals, and investment earnings. We ensure compliance while identifying available deductions and credits.</p>
                 </div>
             </div>
             <div class="client-card reveal">
                 <div class="client-card-content">
-                    <h4>Gig Economy Workers</h4>
+                    <h3>Gig Economy Workers</h3>
                     <p>Specialized tax solutions for freelancers and independent contractors. We understand the unique tax challenges of self-employment, helping you maximize business deductions, manage quarterly payments, and implement solutions to reduce self-employment tax burdens.</p>
                 </div>
             </div>
@@ -322,7 +329,8 @@
         </div>
     </section>
 
-    
+    </main>
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">

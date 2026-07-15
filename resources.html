@@ -25,7 +25,7 @@
     <meta name="twitter:image" content="https://www.entaxaccounting.com/images/og-image.png">
     <meta name="twitter:image:alt" content="E&N Tax & Accounting — Personal Service, Professional Results">
 
-    <link rel="icon" type="image/png" href="images/E_N_LOGO.png">
+    <link rel="icon" type="image/webp" href="images/e-n-logo-140.webp">
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D0XKT34FRR"></script>
     <script async src="analytics.js"></script>
@@ -134,38 +134,42 @@
         ]
     }
     </script>
+    <link rel="preload" as="image" href="images/backgrounds/tools-small.webp" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="images/backgrounds/tools-large.webp" media="(min-width: 769px)" fetchpriority="high">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="resources.css">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
     <!-- Professional Background -->
     <div class="main-bg"></div>
     
     <!-- Header -->
     <header>
-        <nav>
+        <nav aria-label="Primary navigation">
             <a href="index.html" class="logo">
-                <img src="images/E_N_LOGO.png" alt="E&N Tax & Accounting">
+                <img src="images/e-n-logo-140.webp" srcset="images/e-n-logo-140.webp 140w, images/e-n-logo-280.webp 280w" sizes="(max-width: 1024px) 52px, 70px" width="280" height="280" alt="E&N Tax & Accounting" decoding="async">
                 <span class="logo-text">E&N Tax & Accounting</span>
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">About</a></li>
                 <li><a href="services.html">Services</a></li>
 
-                <li class="dropdown">
-                    <a href="resources.html" class="active">Resources</a>
-                </li>
+                <li><a href="resources.html" class="active" aria-current="page">Resources</a></li>
                 <li><a href="reviews.html">Reviews</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <a href="contact.html" class="nav-cta">Book Consultation</a>
-            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
             </button>
         </nav>
     </header>
+
+    <main id="main-content" tabindex="-1">
 
     <!-- Hero Section -->
     <section class="hero">
@@ -256,6 +260,8 @@
             <a href="contact.html" class="cta-button">Book Your Consultation</a>
         </div>
     </section>
+
+    </main>
 
     <!-- Footer -->
     <footer>

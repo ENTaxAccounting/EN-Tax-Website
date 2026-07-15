@@ -201,7 +201,7 @@ Next prompt:
 
 > Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and if it passes, do WP-D3 in Plan mode. Show me the plan and wait for approval before implementing. Complete only WP-D3, verify its acceptance criteria, commit, push, and end with the exact WP-D4 prompt from the roadmap.
 
-### [ ] WP-D3 — Performance and Accessibility Baseline
+### [x] WP-D3 — Performance and Accessibility Baseline
 
 Dependencies: `WP-D2`.
 

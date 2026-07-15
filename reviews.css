@@ -1,6 +1,12 @@
         /* Hero Background Image */
         .hero-bg-image {
-            background-image: url('images/backgrounds/community.jpg');
+            background-image: url('images/backgrounds/community-large.webp');
+        }
+
+        @media (max-width: 768px) {
+            .hero-bg-image {
+                background-image: url('images/backgrounds/community-small.webp');
+            }
         }
 
         .hero-content {

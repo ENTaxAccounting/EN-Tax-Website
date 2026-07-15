@@ -165,8 +165,16 @@ function collectReferences(relativePath, content) {
     let match;
 
     if (extension === '.html') {
-        const attributePattern = /\b(?:href|src)=["']([^"']+)["']/gi;
+        const attributePattern = /\b(?:href|src|data-image-small|data-image-large)=["']([^"']+)["']/gi;
         while ((match = attributePattern.exec(content))) references.push(match[1]);
+
+        const srcsetPattern = /\bsrcset=["']([^"']+)["']/gi;
+        while ((match = srcsetPattern.exec(content))) {
+            for (const candidate of match[1].split(',')) {
+                const reference = candidate.trim().split(/\s+/)[0];
+                if (reference) references.push(reference);
+            }
+        }
 
         const publicUrlPattern = /https:\/\/www\.entaxaccounting\.com\/[^"'<\s]*/g;
         while ((match = publicUrlPattern.exec(content))) references.push(match[0]);
@@ -480,6 +488,85 @@ function verifyRequiredBehavior(outputRoot) {
     }
 }
 
+function verifyPerformanceAndAccessibility(outputRoot, artifactFiles) {
+    const baselinePublicImageBytes = 17952699;
+    const maximumImageBytes = Math.floor(baselinePublicImageBytes * 0.3);
+    const imageFiles = artifactFiles.filter(relativePath => relativePath.startsWith('images/'));
+    const imageBytes = imageFiles.reduce((total, relativePath) => (
+        total + fs.statSync(path.join(outputRoot, relativePath)).size
+    ), 0);
+
+    if (imageBytes > maximumImageBytes) {
+        throw new Error(`Public image payload ${imageBytes} bytes does not meet the 70% reduction target`);
+    }
+
+    const allowedLegacyImages = new Set(['images/E_N_LOGO.png', 'images/og-image.png']);
+    const unexpectedLegacyImages = imageFiles.filter(relativePath => (
+        /\.(?:jpe?g|png)$/i.test(relativePath) && !allowedLegacyImages.has(relativePath)
+    ));
+    if (unexpectedLegacyImages.length > 0) {
+        throw new Error(`Unoptimized production images remain: ${unexpectedLegacyImages.join(', ')}`);
+    }
+
+    for (const relativePath of publicPages) {
+        const content = fs.readFileSync(path.join(outputRoot, relativePath), 'utf8');
+        const skipLinks = [...content.matchAll(
+            /<a\b(?=[^>]*\bclass=["'][^"']*\bskip-link\b[^"']*["'])(?=[^>]*\bhref=["']#main-content["'])[^>]*>/gi
+        )];
+        if (skipLinks.length !== 1) {
+            throw new Error(`${relativePath} must contain one skip link to #main-content`);
+        }
+        const mainLandmarks = [...content.matchAll(
+            /<main\b(?=[^>]*\bid=["']main-content["'])(?=[^>]*\btabindex=["']-1["'])[^>]*>/gi
+        )];
+        if (mainLandmarks.length !== 1) {
+            throw new Error(`${relativePath} must contain one focusable #main-content landmark`);
+        }
+
+        for (const imageTag of content.match(/<img\b[^>]*>/gi) || []) {
+            if (!/\bwidth=["']\d+["']/i.test(imageTag) || !/\bheight=["']\d+["']/i.test(imageTag)) {
+                throw new Error(`${relativePath} contains an image without intrinsic dimensions`);
+            }
+        }
+    }
+
+    for (const relativePath of seoPages) {
+        const content = fs.readFileSync(path.join(outputRoot, relativePath), 'utf8');
+        if (!/<nav\b[^>]*\baria-label=["']Primary navigation["']/i.test(content)) {
+            throw new Error(`${relativePath} is missing the primary navigation label`);
+        }
+        if (!/<button\b(?=[^>]*\bclass=["'][^"']*\bmenu-toggle\b)(?=[^>]*\baria-controls=["']navLinks["'])[^>]*>/i.test(content)) {
+            throw new Error(`${relativePath} menu toggle must identify navLinks as its controlled region`);
+        }
+        if (!/\baria-current=["']page["']/i.test(content)) {
+            throw new Error(`${relativePath} is missing aria-current on its active navigation link`);
+        }
+        if (!/<link\b(?=[^>]*\brel=["']preload["'])(?=[^>]*\bas=["']image["'])(?=[^>]*\bfetchpriority=["']high["'])[^>]*>/i.test(content)) {
+            throw new Error(`${relativePath} is missing a high-priority hero image preload`);
+        }
+    }
+
+    const indexHtml = fs.readFileSync(path.join(outputRoot, 'index.html'), 'utf8');
+    const indexJs = fs.readFileSync(path.join(outputRoot, 'index.js'), 'utf8');
+    const mainJs = fs.readFileSync(path.join(outputRoot, 'main.js'), 'utf8');
+    const styles = fs.readFileSync(path.join(outputRoot, 'styles.css'), 'utf8');
+    if (!/class=["'][^"']*\bfamily-photo\b[^"']*["'][^>]*\bloading=["']lazy["']/i.test(indexHtml)) {
+        throw new Error('Homepage portrait must be lazy-loaded');
+    }
+    if (!indexHtml.includes('class="hero-toggle"') || !indexJs.includes('prefers-reduced-motion')) {
+        throw new Error('Homepage carousel must provide a control and reduced-motion behavior');
+    }
+    if (!indexJs.includes('IntersectionObserver') || !indexJs.includes('is-image-loaded')) {
+        throw new Error('Homepage audience images must be loaded near the viewport');
+    }
+    if (!mainJs.includes("event.key === 'Escape'")) {
+        throw new Error('Mobile navigation must close with Escape');
+    }
+    if (!styles.includes('@media (prefers-reduced-motion: reduce)')) {
+        throw new Error('Shared styles must honor reduced-motion preferences');
+    }
+}
+
 function contentType(relativePath) {
     const extension = path.extname(relativePath);
     if (extension === '.html') return 'text/html; charset=utf-8';
@@ -488,6 +575,9 @@ function contentType(relativePath) {
     if (extension === '.json') return 'application/json; charset=utf-8';
     if (extension === '.xml') return 'application/xml; charset=utf-8';
     if (extension === '.txt') return 'text/plain; charset=utf-8';
+    if (extension === '.webp') return 'image/webp';
+    if (extension === '.png') return 'image/png';
+    if (extension === '.jpg' || extension === '.jpeg') return 'image/jpeg';
     return 'application/octet-stream';
 }
 
@@ -571,6 +661,7 @@ async function checkArtifact(projectRoot, outputRoot) {
     verifyTextContent(outputRoot, artifactFiles);
     verifyMetadataAndSchema(outputRoot);
     verifyRequiredBehavior(outputRoot);
+    verifyPerformanceAndAccessibility(outputRoot, artifactFiles);
 
     const routes = JSON.parse(fs.readFileSync(path.join(outputRoot, '_routes.json'), 'utf8'));
     if (JSON.stringify(routes.include) !== JSON.stringify(manifest.blockedRoutes)) {
