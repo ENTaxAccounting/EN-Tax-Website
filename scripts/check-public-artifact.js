@@ -772,8 +772,11 @@ function verifyPerformanceAndAccessibility(outputRoot, artifactFiles) {
     if (!/\.hero-backgrounds\.rotation-ready\s+\.hero-bg-image\s*\{(?=[^}]*\bopacity\s*:\s*0\s*;)(?=[^}]*\btransition\s*:\s*opacity\s+2s\s+ease-in-out\s*;)[^}]*\}/i.test(indexCss)) {
         throw new Error('Homepage rotation-ready frames must be hidden by default and use the established opacity transition');
     }
-    if (!/\.hero-bg-image\.active\s*\{[^}]*\bopacity\s*:\s*1\s*;/i.test(indexCss)) {
-        throw new Error('Homepage active hero frame must be visible before and after rotation begins');
+    if (/(?:^|})\s*\.hero-bg-image\.active\s*\{[^}]*\bopacity\s*:/i.test(indexCss)) {
+        throw new Error('Homepage first hero frame must not depend on the active opacity state before rotation');
+    }
+    if (!/\.hero-backgrounds\.rotation-ready\s+\.hero-bg-image\.active\s*\{[^}]*\bopacity\s*:\s*1\s*;/i.test(indexCss)) {
+        throw new Error('Homepage active hero frame must become visible after rotation begins');
     }
     if (!/carousel\.classList\.add\(\s*['"]rotation-ready['"]\s*\);\s*rotateTo\(next\);/i.test(indexJs)) {
         throw new Error('Homepage carousel must enable transitions immediately before its first rotation');

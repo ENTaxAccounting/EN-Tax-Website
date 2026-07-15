@@ -423,7 +423,7 @@ Next prompt:
 
 Dependencies: completed `MP-3` transition scoping, production performance review, and owner approval of the bounded maintenance package.
 
-Status: completed July 15, 2026. Three pre-change production mobile Lighthouse runs scored 85, 85, and 100 performance with LCP at 3.98, 4.02, and 1.62 seconds; the two slow runs attributed about 2.04 seconds to hero-image render delay. The first hero frame now bypasses the base hidden-frame opacity state and becomes opacity-controlled only when the first scheduled rotation begins. Three post-change local mobile runs scored 94, 99, and 99 performance with LCP at 2.964, 1.809, and 1.802 seconds, CLS 0, and accessibility, best-practices, and SEO scores of 100. Median performance was 99 and median LCP was 1.809 seconds.
+Status: completed July 15, 2026. Three pre-change production mobile Lighthouse runs scored 85, 85, and 100 performance with LCP at 3.98, 4.02, and 1.62 seconds; the two slow runs attributed about 2.04 seconds to hero-image render delay. The first hero frame now bypasses the base hidden-frame and active opacity states and becomes opacity-controlled only when the first scheduled rotation begins. Three post-change local mobile runs scored 95, 99, and 99 performance with LCP at 2.918, 1.879, and 1.884 seconds, CLS 0, and accessibility, best-practices, and SEO scores of 100. Median performance was 99, median LCP was 1.884 seconds, and hero element-render delay was 197, 81, and 112 milliseconds.
 
 Implementation:
 
