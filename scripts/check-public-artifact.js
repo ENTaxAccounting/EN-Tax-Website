@@ -495,7 +495,14 @@ function verifyMetadataAndSchema(outputRoot) {
 
 function verifyCrawlerFiles(outputRoot) {
     const sitemap = fs.readFileSync(path.join(outputRoot, 'sitemap.xml'), 'utf8');
-    const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+    const sitemapEntries = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(match => match[1]);
+    const sitemapUrls = sitemapEntries.map(entry => {
+        const locations = [...entry.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+        if (locations.length !== 1) {
+            throw new Error('Each sitemap.xml entry must contain exactly one location');
+        }
+        return locations[0];
+    });
     const expectedUrls = seoPages.map(page => canonicalUrls[page]);
 
     if (new Set(sitemapUrls).size !== sitemapUrls.length) {
@@ -507,6 +514,29 @@ function verifyCrawlerFiles(outputRoot) {
     }
     if (sitemapUrls.some(url => /\.html(?:$|[?#])/.test(url))) {
         throw new Error('sitemap.xml must not advertise redirecting .html URLs');
+    }
+    if (/<(?:changefreq|priority)>/i.test(sitemap)) {
+        throw new Error('sitemap.xml must not contain ignored changefreq or priority signals');
+    }
+
+    const today = new Date().toISOString().slice(0, 10);
+    for (const entry of sitemapEntries) {
+        const modificationDates = [...entry.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)]
+            .map(match => match[1]);
+        if (modificationDates.length !== 1) {
+            throw new Error('Each sitemap.xml entry must contain exactly one lastmod date');
+        }
+
+        const modificationDate = modificationDates[0];
+        const timestamp = Date.parse(`${modificationDate}T00:00:00Z`);
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(modificationDate)
+            || Number.isNaN(timestamp)
+            || new Date(timestamp).toISOString().slice(0, 10) !== modificationDate) {
+            throw new Error(`sitemap.xml has an invalid lastmod date: ${modificationDate}`);
+        }
+        if (modificationDate > today) {
+            throw new Error(`sitemap.xml has a future lastmod date: ${modificationDate}`);
+        }
     }
 
     const robots = fs.readFileSync(path.join(outputRoot, 'robots.txt'), 'utf8');

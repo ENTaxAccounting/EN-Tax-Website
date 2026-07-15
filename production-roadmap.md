@@ -84,9 +84,11 @@ Target: complete during `WP-D1`.
 - Confirm whether Cloudflare Crawler Hints is enabled.
 - Record screenshots or exact settings and test results.
 
-### WP-O2 — Search Engine Accounts
+### [x] WP-O2 — Search Engine Accounts
 
 Target: start immediately; complete before `WP-D9`.
+
+Status: completed and owner-confirmed on July 16, 2026. Google Search Console and Bing Webmaster Tools are verified, both report the sitemap indexed, and all five extensionless canonical URLs are indexed without canonical conflicts, manual actions, security issues, or Bing URL errors. Core Web Vitals field status has not yet been confirmed and remains part of ongoing measurement.
 
 - Verify a domain property in Google Search Console.
 - Submit `/sitemap.xml`; inspect the homepage and four current page URLs.
@@ -349,6 +351,29 @@ Acceptance: no critical crawl, schema, accessibility, performance, form, or secu
 Commit: `Complete production SEO validation`
 
 Maintenance prompt:
+
+> Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and review production search health in Plan mode. Show me the plan before implementing. Use Search Console/Bing findings and current site data to propose one bounded maintenance package; complete, verify, commit, and push only after I approve it.
+
+## Maintenance Track
+
+### [x] MP-1 — Sitemap Freshness Signals
+
+Dependencies: completed `WP-O2` dashboard verification and indexed canonical pages.
+
+Status: completed July 15, 2026. The sitemap now reports accurate significant-update dates for the five canonical pages and omits crawler hints that Google ignores. The artifact check enforces valid, non-future modification dates and rejects obsolete frequency and priority fields.
+
+Implementation:
+
+- Record the owner-confirmed Google Search Console and Bing Webmaster Tools status without credentials or private account data.
+- Add accurate `lastmod` values for all five canonical sitemap URLs.
+- Remove ignored `changefreq` and `priority` sitemap values.
+- Extend the public-artifact check to reject missing, duplicate, invalid, or future `lastmod` dates and obsolete sitemap signals.
+
+Acceptance: both search-engine dashboards report the five extensionless canonical pages indexed without crawl or canonical errors; the sitemap contains each canonical page exactly once with a valid modification date; clean builds and deliberate invalid-sitemap tests pass.
+
+Commit: `Improve sitemap freshness signals`
+
+Next prompt:
 
 > Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and review production search health in Plan mode. Show me the plan before implementing. Use Search Console/Bing findings and current site data to propose one bounded maintenance package; complete, verify, commit, and push only after I approve it.
 

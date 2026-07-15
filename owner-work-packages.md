@@ -84,6 +84,8 @@ Problems or unexpected results:
 
 Goal: verify ownership, submit the sitemap, see why pages are or are not indexed, and request fresh indexing after `WP-D1`.
 
+Status: completed and owner-confirmed on July 16, 2026. Core Web Vitals field status remains to be confirmed during ongoing measurement.
+
 ### A. Create a Google Search Console Domain property
 
 1. Sign in to [Google Search Console](https://search.google.com/search-console/) with the long-term business-owned Google account.
@@ -157,18 +159,18 @@ Also review and record:
 
 ```text
 WP-O2 STATUS
-Search Console Domain property verified: yes/no
-Verification TXT retained: yes/no
-Google sitemap status:
-Google indexed canonical URLs:
-Google canonical conflicts/errors:
-Manual actions: none/details
-Security issues: none/details
-Core Web Vitals status:
-Bing site imported/verified: yes/no
-Bing sitemap status:
-Bing URL errors:
-Date checked:
+Search Console Domain property verified: yes
+Verification TXT retained: yes
+Google sitemap status: Indexed
+Google indexed canonical URLs: https://www.entaxaccounting.com/, https://www.entaxaccounting.com/services, https://www.entaxaccounting.com/resources, https://www.entaxaccounting.com/reviews, https://www.entaxaccounting.com/contact
+Google canonical conflicts/errors: None
+Manual actions: None
+Security issues: None
+Core Web Vitals status: Not yet confirmed
+Bing site imported/verified: yes
+Bing sitemap status: Indexed
+Bing URL errors: None
+Date checked: July 16, 2026
 ```
 
 ## WP-O3 — Verified Business Fact Sheet
