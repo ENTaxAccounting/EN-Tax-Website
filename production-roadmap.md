@@ -330,9 +330,11 @@ Next prompt:
 
 > Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and if it passes, do WP-D9 in Plan mode. Show me the plan and wait for approval before implementing. Complete only WP-D9, verify its acceptance criteria, commit, push, and end with the roadmap maintenance prompt.
 
-### [ ] WP-D9 — Production Validation and Indexing Handoff
+### [x] WP-D9 — Production Validation and Indexing Handoff
 
 Dependencies: `WP-D1` through `WP-D4`; any future expansion package explicitly reactivated by the owner; `WP-O2` account access/results.
+
+Status: completed July 15, 2026. Production validation aligned the five canonical pages with Cloudflare Pages' extensionless routes, confirmed the permanent apex-to-`www` redirect, and resolved the in-scope SEO, responsive-image, CSP, form-feedback, and link-label defects found during the audit.
 
 Implementation:
 

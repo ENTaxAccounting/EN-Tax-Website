@@ -10,7 +10,7 @@ async function loadReviews() {
         const data = await res.json();
 
         if (!data.reviews || data.reviews.length === 0) {
-            container.innerHTML = '<p style="text-align:center;color:#6C757D;font-size:18px;padding:40px 0;">Reviews coming soon.</p>';
+            container.innerHTML = '<p class="reviews-empty">Reviews coming soon.</p>';
             return;
         }
 

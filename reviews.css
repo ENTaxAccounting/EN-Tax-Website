@@ -48,6 +48,13 @@
             margin-top: 60px;
         }
 
+        .reviews-empty {
+            color: #6C757D;
+            font-size: 18px;
+            padding: 40px 0;
+            text-align: center;
+        }
+
         /* Individual review card */
         .review-card {
             background: var(--text-light);

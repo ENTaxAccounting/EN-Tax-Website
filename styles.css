@@ -69,6 +69,10 @@
             transition: all 0.3s ease;
         }
 
+        header.scrolled {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
         nav {
             margin: 0 auto;
             padding: 5px 40px;

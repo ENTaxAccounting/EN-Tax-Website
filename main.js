@@ -59,11 +59,7 @@ window.addEventListener('scroll', function() {
     requestAnimationFrame(function() {
         reveal();
         const header = document.querySelector('header');
-        if (header) {
-            header.style.boxShadow = window.scrollY > 50
-                ? '0 4px 20px rgba(0,0,0,0.1)'
-                : '0 2px 8px rgba(0,0,0,0.08)';
-        }
+        if (header) header.classList.toggle('scrolled', window.scrollY > 50);
         scrollTicking = false;
     });
     scrollTicking = true;

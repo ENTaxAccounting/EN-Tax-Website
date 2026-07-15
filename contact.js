@@ -3,7 +3,9 @@ document.getElementById('contactForm').addEventListener('submit', async function
     e.preventDefault();
 
     const btn = this.querySelector('.submit-btn');
+    const errorMsg = document.getElementById('form-error');
     const originalText = btn.textContent;
+    if (errorMsg) errorMsg.classList.remove('is-visible');
     btn.textContent = 'Sending…';
     btn.disabled = true;
 
@@ -15,15 +17,15 @@ document.getElementById('contactForm').addEventListener('submit', async function
         });
 
         if (response.ok) {
-            this.innerHTML = '<div style="text-align:center;padding:40px 20px"><div style="font-size:48px;margin-bottom:20px">✅</div><h3 style="color:var(--primary-color);margin-bottom:15px">Message Sent!</h3><p style="font-size:18px;color:#6C757D">Thank you for reaching out. E&amp;N Tax &amp; Accounting will be in touch within 24–48 business hours.</p></div>';
+            this.innerHTML = '<div class="form-success" role="status" tabindex="-1"><div class="form-success-icon" aria-hidden="true">✅</div><h3>Message Sent!</h3><p>Thank you for reaching out. E&amp;N Tax &amp; Accounting will be in touch within 24–48 business hours.</p></div>';
+            this.querySelector('.form-success').focus();
         } else {
             throw new Error('Server error');
         }
     } catch (err) {
         btn.textContent = originalText;
         btn.disabled = false;
-        const errorMsg = document.getElementById('form-error');
-        if (errorMsg) errorMsg.style.display = 'block';
+        if (errorMsg) errorMsg.classList.add('is-visible');
     }
 });
 

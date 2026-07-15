@@ -16,19 +16,27 @@ const publicPages = [
     '404.html'
 ];
 const seoPages = publicPages.filter(page => page !== '404.html');
+const pageRoutes = {
+    'index.html': '/',
+    'services.html': '/services',
+    'resources.html': '/resources',
+    'reviews.html': '/reviews',
+    'contact.html': '/contact'
+};
+const routeFiles = new Map(Object.entries(pageRoutes).map(([file, route]) => [route, file]));
 const navigationItems = [
-    ['index.html', 'About'],
-    ['services.html', 'Services'],
-    ['resources.html', 'Resources'],
-    ['reviews.html', 'Reviews'],
-    ['contact.html', 'Contact']
+    ['/', 'About', 'index.html'],
+    ['/services', 'Services', 'services.html'],
+    ['/resources', 'Resources', 'resources.html'],
+    ['/reviews', 'Reviews', 'reviews.html'],
+    ['/contact', 'Contact', 'contact.html']
 ];
 const canonicalUrls = {
     'index.html': `${publicOrigin}/`,
-    'services.html': `${publicOrigin}/services.html`,
-    'resources.html': `${publicOrigin}/resources.html`,
-    'reviews.html': `${publicOrigin}/reviews.html`,
-    'contact.html': `${publicOrigin}/contact.html`
+    'services.html': `${publicOrigin}/services`,
+    'resources.html': `${publicOrigin}/resources`,
+    'reviews.html': `${publicOrigin}/reviews`,
+    'contact.html': `${publicOrigin}/contact`
 };
 const organizationId = `${publicOrigin}/#organization`;
 const socialImageUrl = `${publicOrigin}/images/og-image.png`;
@@ -159,11 +167,12 @@ function normalizeReference(reference, sourceFile) {
     }
 
     localReference = localReference.split('#')[0].split('?')[0];
-    if (localReference === '/') return 'index.html';
-
     const decoded = decodeURIComponent(localReference);
-    if (decoded.startsWith('/')) return decoded.slice(1);
-    return path.posix.normalize(path.posix.join(path.posix.dirname(sourceFile), decoded));
+    const route = decoded.startsWith('/')
+        ? decoded
+        : `/${path.posix.normalize(path.posix.join(path.posix.dirname(sourceFile), decoded))}`;
+    if (routeFiles.has(route)) return routeFiles.get(route);
+    return route.slice(1);
 }
 
 function collectReferences(relativePath, content) {
@@ -242,6 +251,15 @@ function verifyTextContent(outputRoot, artifactFiles) {
             if (commentedMarkup) {
                 throw new Error(`Commented-out markup remains in ${relativePath}`);
             }
+
+            const redirectingPageUrl = /(?:https:\/\/www\.entaxaccounting\.com\/|href=["']\/?)(?:index|services|resources|reviews|contact)\.html\b/i;
+            if (redirectingPageUrl.test(content)) {
+                throw new Error(`${relativePath} references a redirecting .html page URL`);
+            }
+        }
+
+        if ((extension === '.html' || extension === '.js') && /(?:\bstyle=["']|\.style\.)/i.test(content)) {
+            throw new Error(`CSP-incompatible inline styling remains in ${relativePath}`);
         }
 
         for (const reference of collectReferences(relativePath, content)) {
@@ -328,6 +346,12 @@ function verifyMetadataAndSchema(outputRoot) {
         if (!description || descriptions.has(description)) {
             throw new Error(`${relativePath} has a missing or duplicate meta description`);
         }
+        if (title.length > 70) throw new Error(`${relativePath} title exceeds 70 characters`);
+        if (description.length < 70 || description.length > 160) {
+            throw new Error(`${relativePath} meta description must contain 70–160 characters`);
+        }
+        const headings = [...content.matchAll(/<h1\b[^>]*>/gi)];
+        if (headings.length !== 1) throw new Error(`${relativePath} must contain exactly one h1`);
         titles.add(title);
         descriptions.add(description);
 
@@ -469,6 +493,32 @@ function verifyMetadataAndSchema(outputRoot) {
     }
 }
 
+function verifyCrawlerFiles(outputRoot) {
+    const sitemap = fs.readFileSync(path.join(outputRoot, 'sitemap.xml'), 'utf8');
+    const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+    const expectedUrls = seoPages.map(page => canonicalUrls[page]);
+
+    if (new Set(sitemapUrls).size !== sitemapUrls.length) {
+        throw new Error('sitemap.xml contains duplicate URLs');
+    }
+    if (sitemapUrls.length !== expectedUrls.length
+        || expectedUrls.some(url => !sitemapUrls.includes(url))) {
+        throw new Error('sitemap.xml must contain each canonical page URL exactly once');
+    }
+    if (sitemapUrls.some(url => /\.html(?:$|[?#])/.test(url))) {
+        throw new Error('sitemap.xml must not advertise redirecting .html URLs');
+    }
+
+    const robots = fs.readFileSync(path.join(outputRoot, 'robots.txt'), 'utf8');
+    const sitemapDirective = `Sitemap: ${publicOrigin}/sitemap.xml`;
+    if (countExact(robots, sitemapDirective) !== 1) {
+        throw new Error('robots.txt must contain exactly one canonical sitemap directive');
+    }
+    if (!robots.includes('User-agent: *\nAllow: /')) {
+        throw new Error('robots.txt must allow general crawling');
+    }
+}
+
 function normalizeSharedMarkup(markup, stripActiveState = false) {
     let normalized = markup;
     if (stripActiveState) {
@@ -525,13 +575,13 @@ function verifySharedLayout(outputRoot) {
         }
 
         for (let index = 0; index < navigationItems.length; index += 1) {
-            const [expectedHref, expectedLabel] = navigationItems[index];
+            const [expectedHref, expectedLabel, expectedPage] = navigationItems[index];
             const attributes = links[index][1];
             const label = links[index][2].trim();
             const href = attributes.match(/\bhref=["']([^"']+)["']/i)?.[1];
             const isCurrent = /\baria-current=["']page["']/i.test(attributes);
             const hasActiveClass = /\bclass=["'][^"']*\bactive\b[^"']*["']/i.test(attributes);
-            const shouldBeCurrent = expectedHref === relativePath;
+            const shouldBeCurrent = expectedPage === relativePath;
 
             if (href !== expectedHref || label !== expectedLabel) {
                 throw new Error(`${relativePath} has unexpected navigation item ${index + 1}`);
@@ -681,7 +731,7 @@ function contentType(relativePath) {
 function createArtifactServer(outputRoot) {
     return http.createServer((request, response) => {
         const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
-        const relativePath = pathname === '/' ? 'index.html' : pathname.slice(1);
+        const relativePath = routeFiles.get(pathname) || pathname.slice(1);
         const candidatePath = path.resolve(outputRoot, relativePath);
         const isPrivatePlatformFile = privatePlatformFiles.has(relativePath);
         const isInsideOutput = candidatePath.startsWith(`${path.resolve(outputRoot)}${path.sep}`);
@@ -718,11 +768,11 @@ async function verifyLocalResponses(outputRoot, artifactFiles) {
 
     try {
         const port = server.address().port;
-        const publicRoutes = ['/', ...artifactFiles
+        const publicArtifactRoutes = [...new Set([...Object.values(pageRoutes), ...artifactFiles
             .filter(file => !privatePlatformFiles.has(file))
-            .map(file => `/${file}`)];
+            .map(file => `/${file}`)])];
 
-        for (const route of publicRoutes) {
+        for (const route of publicArtifactRoutes) {
             const response = await requestStatus(port, route);
             if (response.status !== 200) throw new Error(`Expected 200 for ${route}, received ${response.status}`);
         }
@@ -757,6 +807,7 @@ async function checkArtifact(projectRoot, outputRoot) {
 
     verifyTextContent(outputRoot, artifactFiles);
     verifyMetadataAndSchema(outputRoot);
+    verifyCrawlerFiles(outputRoot);
     verifySharedLayout(outputRoot);
     verifyRequiredBehavior(outputRoot);
     verifyPerformanceAndAccessibility(outputRoot, artifactFiles);
