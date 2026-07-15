@@ -34,10 +34,10 @@ By implementation volume, roughly 75–85% can be handled by Codex. The remainin
 | Generic titles and incomplete social metadata | Weak relevance and sharing previews | `WP-D2` |
 | Resources metadata/schema promises unavailable calculators | Trust and relevance mismatch | `WP-D2` |
 | Repeated, inconsistent business schema lacks a stable entity ID | Weak entity clarity | `WP-D2`, using `WP-O3` facts |
-| Five broad pages cover many distinct services and audiences | Insufficient search-intent depth | `WP-D5` through `WP-D7` |
+| Five broad pages cover many distinct services and audiences | Insufficient search-intent depth | `WP-D5` through `WP-D7` are unlikely future expansion and require fresh owner approval before activation |
 | Homepage audience images total about 13.5 MB before carousel assets | Slow loading and poor Core Web Vitals | `WP-D3` |
-| Navigation and footer are duplicated across pages | Drift risk as the site expands | `WP-D4` |
-| Trust, privacy, and conversion details are limited | Reduced confidence and leads | `WP-D8` |
+| Navigation and footer are duplicated across pages | Drift risk across manual edits | `WP-D4` shared-layout build validation while the site remains five static pages |
+| Trust, privacy, and conversion details are limited | Reduced confidence and leads | `WP-D8` is unlikely future expansion and requires fresh owner approval before activation |
 
 ## Session Protocol
 
@@ -221,16 +221,21 @@ Next prompt:
 
 > Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and if it passes, do WP-D4 in Plan mode. Show me the plan and wait for approval before implementing. Complete only WP-D4, verify its acceptance criteria, commit, push, and end with the exact WP-D5 prompt from the roadmap.
 
-### [ ] WP-D4 — Shared Layout Architecture
+### [x] WP-D4 — Shared Layout Architecture
 
 Dependencies: `WP-D3`; architecture decision from `WP-O4`.
 
+Decision: Eleventy rejected on July 15, 2026. The owner has not approved expanding beyond the existing five static pages.
+
+Status: completed July 15, 2026 with the approved five-page shared-layout validation alternative.
+
 Implementation:
 
-- If approved, migrate the current site to Eleventy with shared head, header, navigation, footer, analytics, and schema components while preserving public URLs and visual behavior.
-- Add repeatable data structures for page metadata and navigation.
-- Configure Cloudflare Pages build/output settings and document local commands.
-- If Eleventy is rejected, implement the approved lower-complexity alternative and document its maintenance tradeoffs.
+- Keep the dependency-free five-page source architecture and the existing Cloudflare `dist/` build/output settings.
+- Normalize the duplicated global footer markup and active navigation state across the five pages.
+- Extend the public-artifact build check to enforce consistent navigation, footer, analytics, shared asset references, and entity schema.
+- Remove the homepage slideshow pause control while retaining reduced-motion behavior.
+- Document the maintenance tradeoff: global markup remains manually duplicated, while clean builds fail on detected drift.
 
 Acceptance: production URLs and forms remain functional; generated pages match current content; clean builds are reproducible; CSP and security headers remain effective.
 
@@ -241,6 +246,8 @@ Next prompt:
 > Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and if it passes, do WP-D5 in Plan mode. Show me the plan and wait for approval before implementing. Complete only WP-D5, verify its acceptance criteria, commit, push, and end with the exact WP-D6 prompt from the roadmap.
 
 ### [ ] WP-D5 — Information Architecture and Trustworthy About Page
+
+Status: unlikely future expansion. Do not start without fresh, explicit owner approval and roadmap reactivation.
 
 Dependencies: `WP-D4`; approved navigation and biography facts from `WP-O3`/`WP-O4`.
 
@@ -261,6 +268,8 @@ Next prompt:
 
 ### [ ] WP-D6 — Individual Service Pages
 
+Status: unlikely future expansion. Do not start without fresh, explicit owner approval and roadmap reactivation.
+
 Dependencies: `WP-D5`; service facts and priorities from `WP-O3`/`WP-O4`.
 
 Implementation:
@@ -280,6 +289,8 @@ Next prompt:
 
 ### [ ] WP-D7 — Resource Center and Expert Content
 
+Status: unlikely future expansion. Do not start without fresh, explicit owner approval and roadmap reactivation.
+
 Dependencies: `WP-D6`; owner-reviewed subject matter.
 
 Implementation:
@@ -298,6 +309,8 @@ Next prompt:
 > Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and if it passes, do WP-D8 in Plan mode. Show me the plan and wait for approval before implementing. Complete only WP-D8, verify its acceptance criteria, commit, push, and end with the exact WP-D9 prompt from the roadmap.
 
 ### [ ] WP-D8 — Conversion, Trust, and Legal Pages
+
+Status: unlikely future expansion. Do not start without fresh, explicit owner approval and roadmap reactivation.
 
 Dependencies: `WP-D7`; decisions and approved drafts from `WP-O5`.
 
@@ -319,7 +332,7 @@ Next prompt:
 
 ### [ ] WP-D9 — Production Validation and Indexing Handoff
 
-Dependencies: `WP-D1` through `WP-D8`; `WP-O2` account access/results.
+Dependencies: `WP-D1` through `WP-D4`; any future expansion package explicitly reactivated by the owner; `WP-O2` account access/results.
 
 Implementation:
 
@@ -345,9 +358,9 @@ Maintenance prompt:
 | `WP-D1A` | Confirm the Cloudflare Pages build command and output directory; continue `WP-O2` |
 | `WP-D2` | Finish `WP-O3` and provide verified profiles |
 | `WP-D3` | Complete `WP-O4`; draft service FAQs |
-| `WP-D4` | Prepare `WP-O5` decisions |
-| `WP-D5`–`WP-D7` | Review biography, services, and resource accuracy |
-| `WP-D8` | Perform `WP-O6` listing cleanup |
+| `WP-D4` | Keep the current five-page architecture unless the owner later reactivates expansion |
+| `WP-D5`–`WP-D7` | Unlikely future expansion; no work without fresh owner approval |
+| `WP-D8` | Unlikely future expansion; `WP-O6` listing cleanup may continue independently |
 | `WP-D9` | Finish `WP-O2`; capture measurement baseline |
 
 ## Success Measures
@@ -360,4 +373,4 @@ Maintenance prompt:
 - Search impressions for service-intent and branded queries trend upward.
 - ChatGPT/Claude search crawlers remain allowed while training policy follows the owner's choice.
 - Consultation submissions and qualified conversion rate are measurable.
-- New pages remain consistent because shared structure and QA are repeatable.
+- Current pages remain consistent through shared-layout validation; any future page expansion requires a new architecture decision.

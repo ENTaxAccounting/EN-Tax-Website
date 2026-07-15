@@ -1,8 +1,7 @@
 (function() {
     const bgImages = Array.from(document.querySelectorAll('.hero-bg-image'));
     const textItems = Array.from(document.querySelectorAll('.hero-text-item'));
-    const toggle = document.querySelector('.hero-toggle');
-    if (bgImages.length === 0 || bgImages.length !== textItems.length || !toggle) return;
+    if (bgImages.length === 0 || bgImages.length !== textItems.length) return;
 
     const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const smallViewportQuery = window.matchMedia('(max-width: 768px)');
@@ -68,25 +67,17 @@
         }, rotationInterval);
     }
 
-    function updateToggle() {
-        toggle.setAttribute('aria-pressed', String(isPaused));
-        toggle.textContent = isPaused ? 'Play slideshow' : 'Pause slideshow';
-    }
-
     function setPaused(paused) {
         isPaused = paused;
-        updateToggle();
         if (isPaused) clearSchedule();
         else scheduleRotation();
     }
 
-    toggle.addEventListener('click', () => setPaused(!isPaused));
     document.addEventListener('visibilitychange', scheduleRotation);
     reducedMotionQuery.addEventListener('change', event => {
-        if (event.matches) setPaused(true);
+        setPaused(event.matches);
     });
 
-    updateToggle();
     scheduleRotation();
 })();
 

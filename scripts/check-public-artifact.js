@@ -16,6 +16,13 @@ const publicPages = [
     '404.html'
 ];
 const seoPages = publicPages.filter(page => page !== '404.html');
+const navigationItems = [
+    ['index.html', 'About'],
+    ['services.html', 'Services'],
+    ['resources.html', 'Resources'],
+    ['reviews.html', 'Reviews'],
+    ['contact.html', 'Contact']
+];
 const canonicalUrls = {
     'index.html': `${publicOrigin}/`,
     'services.html': `${publicOrigin}/services.html`,
@@ -462,6 +469,92 @@ function verifyMetadataAndSchema(outputRoot) {
     }
 }
 
+function normalizeSharedMarkup(markup, stripActiveState = false) {
+    let normalized = markup;
+    if (stripActiveState) {
+        normalized = normalized
+            .replace(/\s+class=["']active["']/gi, '')
+            .replace(/\s+aria-current=["']page["']/gi, '');
+    }
+    return normalized.replace(/>\s+</g, '><').trim();
+}
+
+function countExact(content, value) {
+    return content.split(value).length - 1;
+}
+
+function verifySharedLayout(outputRoot) {
+    let expectedHeader;
+    let expectedFooter;
+
+    for (const relativePath of seoPages) {
+        const content = fs.readFileSync(path.join(outputRoot, relativePath), 'utf8');
+        const header = getSingleTag(
+            content,
+            /<header\b[^>]*>[\s\S]*?<\/header>/gi,
+            'header',
+            relativePath
+        )[0];
+        const footer = getSingleTag(
+            content,
+            /<footer\b[^>]*>[\s\S]*?<\/footer>/gi,
+            'footer',
+            relativePath
+        )[0];
+        const normalizedHeader = normalizeSharedMarkup(header, true);
+        const normalizedFooter = normalizeSharedMarkup(footer);
+
+        expectedHeader ||= normalizedHeader;
+        expectedFooter ||= normalizedFooter;
+        if (normalizedHeader !== expectedHeader) {
+            throw new Error(`${relativePath} header has drifted from the shared five-page layout`);
+        }
+        if (normalizedFooter !== expectedFooter) {
+            throw new Error(`${relativePath} footer has drifted from the shared five-page layout`);
+        }
+
+        const navList = getSingleTag(
+            header,
+            /<ul\b(?=[^>]*\bclass=["'][^"']*\bnav-links\b[^"']*["'])[^>]*>[\s\S]*?<\/ul>/gi,
+            'primary navigation link list',
+            relativePath
+        )[0];
+        const links = [...navList.matchAll(/<a\b([^>]*)>([^<]+)<\/a>/gi)];
+        if (links.length !== navigationItems.length) {
+            throw new Error(`${relativePath} primary navigation must contain ${navigationItems.length} links`);
+        }
+
+        for (let index = 0; index < navigationItems.length; index += 1) {
+            const [expectedHref, expectedLabel] = navigationItems[index];
+            const attributes = links[index][1];
+            const label = links[index][2].trim();
+            const href = attributes.match(/\bhref=["']([^"']+)["']/i)?.[1];
+            const isCurrent = /\baria-current=["']page["']/i.test(attributes);
+            const hasActiveClass = /\bclass=["'][^"']*\bactive\b[^"']*["']/i.test(attributes);
+            const shouldBeCurrent = expectedHref === relativePath;
+
+            if (href !== expectedHref || label !== expectedLabel) {
+                throw new Error(`${relativePath} has unexpected navigation item ${index + 1}`);
+            }
+            if (isCurrent !== shouldBeCurrent || hasActiveClass !== shouldBeCurrent) {
+                throw new Error(`${relativePath} must mark only ${expectedHref} as the active page`);
+            }
+        }
+
+        const requiredSharedTags = [
+            '<script async src="https://www.googletagmanager.com/gtag/js?id=G-D0XKT34FRR"></script>',
+            '<script async src="analytics.js"></script>',
+            '<link rel="stylesheet" href="styles.css">',
+            '<script src="main.js"></script>'
+        ];
+        for (const tag of requiredSharedTags) {
+            if (countExact(content, tag) !== 1) {
+                throw new Error(`${relativePath} must contain exactly one shared tag: ${tag}`);
+            }
+        }
+    }
+}
+
 function verifyRequiredBehavior(outputRoot) {
     const headers = fs.readFileSync(path.join(outputRoot, '_headers'), 'utf8');
     const contactHtml = fs.readFileSync(path.join(outputRoot, 'contact.html'), 'utf8');
@@ -548,13 +641,17 @@ function verifyPerformanceAndAccessibility(outputRoot, artifactFiles) {
 
     const indexHtml = fs.readFileSync(path.join(outputRoot, 'index.html'), 'utf8');
     const indexJs = fs.readFileSync(path.join(outputRoot, 'index.js'), 'utf8');
+    const indexCss = fs.readFileSync(path.join(outputRoot, 'index.css'), 'utf8');
     const mainJs = fs.readFileSync(path.join(outputRoot, 'main.js'), 'utf8');
     const styles = fs.readFileSync(path.join(outputRoot, 'styles.css'), 'utf8');
     if (!/class=["'][^"']*\bfamily-photo\b[^"']*["'][^>]*\bloading=["']lazy["']/i.test(indexHtml)) {
         throw new Error('Homepage portrait must be lazy-loaded');
     }
-    if (!indexHtml.includes('class="hero-toggle"') || !indexJs.includes('prefers-reduced-motion')) {
-        throw new Error('Homepage carousel must provide a control and reduced-motion behavior');
+    if (indexHtml.includes('hero-toggle') || indexJs.includes('hero-toggle') || indexCss.includes('hero-toggle')) {
+        throw new Error('Homepage must not ship the removed slideshow pause control');
+    }
+    if (!indexJs.includes('prefers-reduced-motion')) {
+        throw new Error('Homepage carousel must honor reduced-motion preferences');
     }
     if (!indexJs.includes('IntersectionObserver') || !indexJs.includes('is-image-loaded')) {
         throw new Error('Homepage audience images must be loaded near the viewport');
@@ -660,6 +757,7 @@ async function checkArtifact(projectRoot, outputRoot) {
 
     verifyTextContent(outputRoot, artifactFiles);
     verifyMetadataAndSchema(outputRoot);
+    verifySharedLayout(outputRoot);
     verifyRequiredBehavior(outputRoot);
     verifyPerformanceAndAccessibility(outputRoot, artifactFiles);
 

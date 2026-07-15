@@ -368,18 +368,6 @@
             color: var(--secondary-color);
         }
 
-        /* Quick Links Grid */
-        .quick-links-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-        }
-
-        .quick-links-column {
-            display: flex;
-            flex-direction: column;
-        }
-
         /* Mobile media queries specific to services */
         @media (max-width: 1024px) {
             .services-grid {
