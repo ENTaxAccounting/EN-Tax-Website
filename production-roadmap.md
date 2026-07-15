@@ -419,6 +419,27 @@ Next prompt:
 
 > Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and review production search health in Plan mode. Show me the plan before implementing. Use Search Console/Bing findings and current site data to propose one bounded maintenance package; complete, verify, commit, and push only after I approve it.
 
+### [x] MP-4 — Deterministic Homepage LCP Rendering
+
+Dependencies: completed `MP-3` transition scoping, production performance review, and owner approval of the bounded maintenance package.
+
+Status: completed July 15, 2026. Three pre-change production mobile Lighthouse runs scored 85, 85, and 100 performance with LCP at 3.98, 4.02, and 1.62 seconds; the two slow runs attributed about 2.04 seconds to hero-image render delay. The first hero frame now bypasses the base hidden-frame opacity state and becomes opacity-controlled only when the first scheduled rotation begins. Three post-change local mobile runs scored 94, 99, and 99 performance with LCP at 2.964, 1.809, and 1.802 seconds, CLS 0, and accessibility, best-practices, and SEO scores of 100. Median performance was 99 and median LCP was 1.809 seconds.
+
+Implementation:
+
+- Give the responsive first hero frame a dedicated internal class and exclude it from the initial hidden-frame rule.
+- Hide only later frames before rotation, then apply the established opacity state and two-second crossfade to every frame after rotation begins.
+- Preserve the image preload, eager and high-priority loading, responsive picture, eight-second schedule, lazy loading of later slides, visibility handling, and reduced-motion behavior.
+- Extend the public-artifact check to reject an initial opacity or transition dependency on the first frame and require the complete post-rotation visibility contract.
+
+Acceptance: clean builds, JavaScript syntax and diff checks, deliberate hidden-first-frame and missing-post-rotation-rule tests, rendered mobile and desktop audit inspection, and timer-state checks pass. Three local mobile Lighthouse audits have median performance of at least 95, median LCP at most 2.5 seconds, CLS 0, and accessibility, best-practices, and SEO scores of 100. Field Core Web Vitals remain an owner-track follow-up.
+
+Commit: `Make homepage LCP rendering deterministic`
+
+Next prompt:
+
+> Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and review production search health in Plan mode. Show me the plan before implementing. Use Search Console/Bing findings and current site data to propose one bounded maintenance package; complete, verify, commit, and push only after I approve it.
+
 ## Recommended Parallel Sequence
 
 | Development session | Owner work that can happen simultaneously |

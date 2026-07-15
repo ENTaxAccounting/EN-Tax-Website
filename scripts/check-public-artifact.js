@@ -733,6 +733,9 @@ function verifyPerformanceAndAccessibility(outputRoot, artifactFiles) {
     if (!firstHeroPicture) {
         throw new Error('Homepage first hero frame must use a responsive picture');
     }
+    if (!/<div\b(?=[^>]*\bclass=["'][^"']*\bhero-bg-image\b[^"']*["'])(?=[^>]*\bclass=["'][^"']*\bhero-first-frame\b[^"']*["'])[^>]*>\s*<picture\b[^>]*\bclass=["'][^"']*\bhero-first-picture\b/i.test(indexHtml)) {
+        throw new Error('Homepage first hero frame must use the dedicated visible-first-frame class');
+    }
     if (!/<source\b(?=[^>]*\bmedia=["']\(max-width: 768px\)["'])(?=[^>]*\bsrcset=["']images\/backgrounds\/city-small\.webp["'])[^>]*>/i.test(firstHeroPicture[1])) {
         throw new Error('Homepage first hero frame must provide the small responsive source');
     }
@@ -746,11 +749,31 @@ function verifyPerformanceAndAccessibility(outputRoot, artifactFiles) {
     if (!baseHeroRule) {
         throw new Error('Homepage must define the base hero frame styles');
     }
+    if (/\bopacity\s*:/i.test(baseHeroRule[1])) {
+        throw new Error('Homepage base hero frame rule must not hide the first frame');
+    }
     if (/\btransition(?:-property)?\s*:[^;}]*(?:\bopacity\b|\ball\b)/i.test(baseHeroRule[1])) {
         throw new Error('Homepage base hero frames must not transition opacity before rotation');
     }
-    if (!/\.hero-backgrounds\.rotation-ready\s+\.hero-bg-image\s*\{[^}]*\btransition\s*:\s*opacity\s+2s\s+ease-in-out\s*;/i.test(indexCss)) {
-        throw new Error('Homepage hero opacity transition must be scoped to the rotation-ready state');
+    if (!/\.hero-bg-image:not\(\.hero-first-frame\)\s*\{[^}]*\bopacity\s*:\s*0\s*;/i.test(indexCss)) {
+        throw new Error('Homepage must hide only later hero frames before rotation');
+    }
+    for (const rule of indexCss.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+        const selector = rule[1];
+        const declarations = rule[2];
+        if (selector.includes('.hero-first-frame')
+            && !selector.includes(':not(.hero-first-frame)')
+            && !selector.includes('.rotation-ready')
+            && (/\bopacity\s*:/i.test(declarations)
+                || /\btransition(?:-property)?\s*:[^;}]*(?:\bopacity\b|\ball\b)/i.test(declarations))) {
+            throw new Error('Homepage first hero frame must not depend on initial opacity or transition styles');
+        }
+    }
+    if (!/\.hero-backgrounds\.rotation-ready\s+\.hero-bg-image\s*\{(?=[^}]*\bopacity\s*:\s*0\s*;)(?=[^}]*\btransition\s*:\s*opacity\s+2s\s+ease-in-out\s*;)[^}]*\}/i.test(indexCss)) {
+        throw new Error('Homepage rotation-ready frames must be hidden by default and use the established opacity transition');
+    }
+    if (!/\.hero-bg-image\.active\s*\{[^}]*\bopacity\s*:\s*1\s*;/i.test(indexCss)) {
+        throw new Error('Homepage active hero frame must be visible before and after rotation begins');
     }
     if (!/carousel\.classList\.add\(\s*['"]rotation-ready['"]\s*\);\s*rotateTo\(next\);/i.test(indexJs)) {
         throw new Error('Homepage carousel must enable transitions immediately before its first rotation');
