@@ -1,6 +1,6 @@
 # E&N Website Production Roadmap
 
-Last updated: 2026-07-15
+Last updated: 2026-09-30
 
 ## Objective
 
@@ -355,6 +355,15 @@ Maintenance prompt:
 > Read `production-roadmap.md` and `AGENTS.md`, run the Session Protocol preflight, and review production search health in Plan mode. Show me the plan before implementing. Use Search Console/Bing findings and current site data to propose one bounded maintenance package; complete, verify, commit, and push only after I approve it.
 
 ## Maintenance Track
+
+### [ ] Homepage Gusto and QuickBooks Certification Badges
+
+Status: planned September 30, 2026; awaiting official certification images from Marija.
+
+- Add the two certification badges to the homepage trust bar directly below the hero, alongside the existing Google review rating.
+- Use the supplied official badge artwork and exact credential names; keep the strip compact and readable on desktop and mobile.
+- Link each badge to a verified public credential or professional profile if available. Otherwise, display it as a non-clickable image with descriptive alt text; a profile link is optional.
+- Implement after the assets are supplied and the credentials are confirmed. No public website changes are part of this planning task.
 
 ### [x] MP-1 — Sitemap Freshness Signals
 

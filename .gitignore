@@ -41,3 +41,7 @@ TODO.md
 SITE_NOTES.md
 CLAUDE.md
 auth.js
+
+# === LOCAL IMAGE BACKUPS ===
+# Full-size source images (not served on the site)
+images/high-rez-original/
