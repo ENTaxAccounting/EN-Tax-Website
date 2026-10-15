@@ -2,16 +2,25 @@
   "data_id": "0x6b42b467cd063325:0x6867e2891c813908",
   "business_name": "E&N Tax and Accounting LLC",
   "overall_rating": 5,
-  "total_reviews": 16,
-  "last_fetched": "2026-10-15T04:13:29.334Z",
+  "total_reviews": 17,
+  "last_fetched": "2026-10-15T11:14:19.465Z",
   "reviews": [
+    {
+      "author_name": "Louis Levitt",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjXf4Nh2WtCt4v2WCbFuzkWFoe32VmyUTgfGiIQsOL9niiUZHS13=s120-c-rp-mo-br100",
+      "rating": 5,
+      "text": "Treats you like extended family. Very organized and clear communication. Great experience so far.",
+      "time": 1792060138,
+      "relative_time_description": "45 minutes ago",
+      "review_id": "https://www.google.com/maps/contrib/117944977344693755376?hl=en-US"
+    },
     {
       "author_name": "Duke Bojadziev",
       "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUCkZ63N3pXoZOq4gtvJzkNHE2U9djI8PMLVfHD6AOqX2o__HV2=s120-c-rp-mo-br100",
       "rating": 5,
       "text": "Excellent experience! Professional, reliable, and a pleasure to work with. Thank you so much for your help and support. I highly recommend your services!",
       "time": 1791968408,
-      "relative_time_description": "19 hours ago",
+      "relative_time_description": "a day ago",
       "review_id": "https://www.google.com/maps/contrib/111306335925275669411?hl=en-US"
     },
     {
